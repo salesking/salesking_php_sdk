@@ -1,0 +1,487 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>phpDocumentor » \Salesking</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">phpDocumentor</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/SalesKing%20PHP%20SDK.html"><i class="icon-folder-open"></i> SalesKing PHP SDK</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">0</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#__construct" title="__construct :: Constructor method which is used to set some config stuff"><span class="description">Constructor method which is used to set some config stuff</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#getAccessToken" title="getAccessToken :: get the current AccessToken"><span class="description">get the current AccessToken</span><pre>getAccessToken()</pre></a></li>
+<li class="method public "><a href="#getAppID" title="getAppID :: get the current app id"><span class="description">get the current app id</span><pre>getAppID()</pre></a></li>
+<li class="method public "><a href="#getAppSecret" title="getAppSecret :: get the current app secret"><span class="description">get the current app secret</span><pre>getAppSecret()</pre></a></li>
+<li class="method public "><a href="#getAppUrl" title="getAppUrl :: get current app url"><span class="description">get current app url</span><pre>getAppUrl()</pre></a></li>
+<li class="method public "><a href="#getObject" title="getObject :: Returns a new SaleskingObject"><span class="description">Returns a new SaleskingObject</span><pre>getObject()</pre></a></li>
+<li class="method public "><a href="#getSkUrl" title="getSkUrl :: get current Salesking API URL"><span class="description">get current Salesking API URL</span><pre>getSkUrl()</pre></a></li>
+<li class="method public "><a href="#request" title="request :: Make a request against the Salesking API"><span class="description">Make a request against the Salesking API</span><pre>request()</pre></a></li>
+<li class="method public "><a href="#requestAccessToken" title="requestAccessToken :: request accesstoken from Salesking API"><span class="description">request accesstoken from Salesking API</span><pre>requestAccessToken()</pre></a></li>
+<li class="method public "><a href="#requestAuthorizationURL" title="requestAuthorizationURL :: Generate an Authorization URL"><span class="description">Generate an Authorization URL</span><pre>requestAuthorizationURL()</pre></a></li>
+<li class="method public "><a href="#setAccessToken" title="setAccessToken :: Set a new accessToken"><span class="description">Set a new accessToken</span><pre>setAccessToken()</pre></a></li>
+<li class="method public "><a href="#setAppID" title="setAppID :: set a new app id"><span class="description">set a new app id</span><pre>setAppID()</pre></a></li>
+<li class="method public "><a href="#setAppSecret" title="setAppSecret :: Set a new app secret"><span class="description">Set a new app secret</span><pre>setAppSecret()</pre></a></li>
+<li class="method public "><a href="#setAppUrl" title="setAppUrl :: set a new app URL"><span class="description">set a new app URL</span><pre>setAppUrl()</pre></a></li>
+<li class="method public "><a href="#setSkUrl" title="setSkUrl :: Set a new Salesking API URL"><span class="description">Set a new Salesking API URL</span><pre>setSkUrl()</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties</li>
+<li class="property public "><a href="#%24accessToken" title="$accessToken :: access token"><span class="description">access token</span><pre>$accessToken</pre></a></li>
+<li class="property public "><a href="#%24app_id" title="$app_id :: app id"><span class="description">app id</span><pre>$app_id</pre></a></li>
+<li class="property public "><a href="#%24app_secret" title="$app_secret :: app secret"><span class="description">app secret</span><pre>$app_secret</pre></a></li>
+<li class="property public "><a href="#%24app_url" title="$app_url :: app url"><span class="description">app url</span><pre>$app_url</pre></a></li>
+<li class="property public "><a href="#%24curl_options" title="$curl_options :: common curl options"><span class="description">common curl options</span><pre>$curl_options</pre></a></li>
+<li class="property public "><a href="#%24sk_url" title="$sk_url :: api url"><span class="description">api url</span><pre>$sk_url</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-constant"></i> Constants</li>
+<li class="constant  "><a href="#VERSION" title="VERSION :: current SDK Version"><span class="description">current SDK Version</span><pre>VERSION</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CSalesking" id="\Salesking"></a><div href="../classes/Salesking.html" class="element class">
+<p class="short_description">Salesking API interface</p>
+<div class="details">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>since</th>
+<td>1.0.0</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="..//packages/SalesKing%20PHP%20SDK.html">SalesKing PHP SDK</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="__construct" id="__construct"></a><div class="element clickable method public __construct" data-toggle="collapse" data-target=".__construct .collapse">
+<h2>Constructor method which is used to set some config stuff</h2>
+<pre>__construct(\$config $config) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.0.0</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$config</h4>
+<code>\$config</code><p>array</p></div>
+</div></div>
+</div>
+<a name="getAccessToken" id="getAccessToken"></a><div class="element clickable method public getAccessToken" data-toggle="collapse" data-target=".getAccessToken .collapse">
+<h2>get the current AccessToken</h2>
+<pre>getAccessToken() : null | string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.0.0</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>null</code><code>string</code>access token</div>
+</div></div>
+</div>
+<a name="getAppID" id="getAppID"></a><div class="element clickable method public getAppID" data-toggle="collapse" data-target=".getAppID .collapse">
+<h2>get the current app id</h2>
+<pre>getAppID() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.0.0</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>application id</div>
+</div></div>
+</div>
+<a name="getAppSecret" id="getAppSecret"></a><div class="element clickable method public getAppSecret" data-toggle="collapse" data-target=".getAppSecret .collapse">
+<h2>get the current app secret</h2>
+<pre>getAppSecret() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.0.0</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>application secret</div>
+</div></div>
+</div>
+<a name="getAppUrl" id="getAppUrl"></a><div class="element clickable method public getAppUrl" data-toggle="collapse" data-target=".getAppUrl .collapse">
+<h2>get current app url</h2>
+<pre>getAppUrl() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.0.0</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>application url</div>
+</div></div>
+</div>
+<a name="getObject" id="getObject"></a><div class="element clickable method public getObject" data-toggle="collapse" data-target=".getObject .collapse">
+<h2>Returns a new SaleskingObject</h2>
+<pre>getObject(\$type $type) : <a href="../classes/SaleskingObject.html">\SaleskingObject</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.0.0</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$type</h4>
+<code>\$type</code><p>string object type</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/SaleskingObject.html">\SaleskingObject</a></code></div>
+</div></div>
+</div>
+<a name="getSkUrl" id="getSkUrl"></a><div class="element clickable method public getSkUrl" data-toggle="collapse" data-target=".getSkUrl .collapse">
+<h2>get current Salesking API URL</h2>
+<pre>getSkUrl() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.0.0</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>salesking subdomain url</div>
+</div></div>
+</div>
+<a name="request" id="request"></a><div class="element clickable method public request" data-toggle="collapse" data-target=".request .collapse">
+<h2>Make a request against the Salesking API</h2>
+<pre>request(null $url, string $method, null $data) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.0.0</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$url</h4>
+<code>null</code><p>the url entpoint including a starting /</p>
+</div>
+<div class="subelement argument">
+<h4>$method</h4>
+<code>string</code><p>the HTTP Method (GET; POST; PUT; DELETE)</p>
+</div>
+<div class="subelement argument">
+<h4>$data</h4>
+<code>null</code><p>The json_encoded data to send with to the api</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/SaleskingException.html">\SaleskingException</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>Result with message body and status code</div>
+</div></div>
+</div>
+<a name="requestAccessToken" id="requestAccessToken"></a><div class="element clickable method public requestAccessToken" data-toggle="collapse" data-target=".requestAccessToken .collapse">
+<h2>request accesstoken from Salesking API</h2>
+<pre>requestAccessToken($code) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.0.0</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$code</h4>
+<code></code>
+</div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/SaleskingException.html">\SaleskingException</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>AccessToken</div>
+</div></div>
+</div>
+<a name="requestAuthorizationURL" id="requestAuthorizationURL"></a><div class="element clickable method public requestAuthorizationURL" data-toggle="collapse" data-target=".requestAuthorizationURL .collapse">
+<h2>Generate an Authorization URL</h2>
+<pre>requestAuthorizationURL(string $scope) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.0.0</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$scope</h4>
+<code>string</code><p>required scope</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>authorization url</div>
+</div></div>
+</div>
+<a name="setAccessToken" id="setAccessToken"></a><div class="element clickable method public setAccessToken" data-toggle="collapse" data-target=".setAccessToken .collapse">
+<h2>Set a new accessToken</h2>
+<pre>setAccessToken($accessToken) : <a href="../classes/Salesking.html">\Salesking</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.0.0</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$accessToken</h4>
+<code></code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Salesking.html">\Salesking</a></code></div>
+</div></div>
+</div>
+<a name="setAppID" id="setAppID"></a><div class="element clickable method public setAppID" data-toggle="collapse" data-target=".setAppID .collapse">
+<h2>set a new app id</h2>
+<pre>setAppID($app_id) : <a href="../classes/Salesking.html">\Salesking</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.0.0</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$app_id</h4>
+<code></code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Salesking.html">\Salesking</a></code></div>
+</div></div>
+</div>
+<a name="setAppSecret" id="setAppSecret"></a><div class="element clickable method public setAppSecret" data-toggle="collapse" data-target=".setAppSecret .collapse">
+<h2>Set a new app secret</h2>
+<pre>setAppSecret($app_secret) : <a href="../classes/Salesking.html">\Salesking</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.0.0</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$app_secret</h4>
+<code></code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Salesking.html">\Salesking</a></code></div>
+</div></div>
+</div>
+<a name="setAppUrl" id="setAppUrl"></a><div class="element clickable method public setAppUrl" data-toggle="collapse" data-target=".setAppUrl .collapse">
+<h2>set a new app URL</h2>
+<pre>setAppUrl($app_url) : <a href="../classes/Salesking.html">\Salesking</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.0.0</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$app_url</h4>
+<code></code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Salesking.html">\Salesking</a></code></div>
+</div></div>
+</div>
+<a name="setSkUrl" id="setSkUrl"></a><div class="element clickable method public setSkUrl" data-toggle="collapse" data-target=".setSkUrl .collapse">
+<h2>Set a new Salesking API URL</h2>
+<pre>setSkUrl($sk_url) : <a href="../classes/Salesking.html">\Salesking</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.0.0</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$sk_url</h4>
+<code></code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Salesking.html">\Salesking</a></code></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a name="%24accessToken" id="$accessToken"> </a><div class="element clickable property public $accessToken" data-toggle="collapse" data-target=".$accessToken .collapse">
+<h2>access token</h2>
+<pre>$accessToken : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.0.0</td>
+</tr></table>
+</div></div>
+</div>
+<a name="%24app_id" id="$app_id"> </a><div class="element clickable property public $app_id" data-toggle="collapse" data-target=".$app_id .collapse">
+<h2>app id</h2>
+<pre>$app_id : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.0.0</td>
+</tr></table>
+</div></div>
+</div>
+<a name="%24app_secret" id="$app_secret"> </a><div class="element clickable property public $app_secret" data-toggle="collapse" data-target=".$app_secret .collapse">
+<h2>app secret</h2>
+<pre>$app_secret : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.0.0</td>
+</tr></table>
+</div></div>
+</div>
+<a name="%24app_url" id="$app_url"> </a><div class="element clickable property public $app_url" data-toggle="collapse" data-target=".$app_url .collapse">
+<h2>app url</h2>
+<pre>$app_url : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.0.0</td>
+</tr></table>
+</div></div>
+</div>
+<a name="%24curl_options" id="$curl_options"> </a><div class="element clickable property public $curl_options" data-toggle="collapse" data-target=".$curl_options .collapse">
+<h2>common curl options</h2>
+<pre>$curl_options : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.0.0</td>
+</tr></table>
+</div></div>
+</div>
+<a name="%24sk_url" id="$sk_url"> </a><div class="element clickable property public $sk_url" data-toggle="collapse" data-target=".$sk_url .collapse">
+<h2>api url</h2>
+<pre>$sk_url : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.0.0</td>
+</tr></table>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-constant"></i> Constants</h3>
+<a name="VERSION" id="VERSION"> </a><div class="element clickable constant  VERSION" data-toggle="collapse" data-target=".VERSION .collapse">
+<h2>current SDK Version</h2>
+<pre>VERSION </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>const</th>
+<td>VERSION current SDK version</td>
+</tr>
+<tr>
+<th>since</th>
+<td>1.0.0</td>
+</tr>
+</table>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a2</a> and<br>
+            generated on 2012-04-23T17:40:40+02:00.<br></footer></div>
+</div>
+</body>
+</html>

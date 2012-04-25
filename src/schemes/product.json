@@ -1,0 +1,105 @@
+{ "type":"object",
+  "title": "product",
+  "description": "A product in SK",
+  "properties":{
+    "id":{
+      "description": "uuid of the product.",
+      "identity":true,
+      "readonly":true,
+      "type":"string"
+    },
+    "number":{
+      "description": "Unique number assigned by you or if empty SK product number schema.",
+      "type":"string"
+    },
+    "name":{
+      "description": "The name of the product",
+      "type":"string",
+      "required":true
+    },
+    "description":{
+      "description": "Product description",
+      "type":"string"
+    },
+    "price":{
+      "description": "Net price of a single product",
+      "type":"number"
+    },
+    "tax":{
+      "description": "Tax percentage for this product.",
+      "type":"number"
+    },
+    "quantity_unit":{
+      "description": "Unit like kg, days, month.",
+      "type":"string"
+    },
+    "created_at":{
+      "description": "Date the object was created in SK. Never changes afterwards",
+      "format":"date-time",
+      "readonly":true,
+      "type":"string"
+    },
+    "updated_at":{
+      "description": "Date the object was edited in SK.",
+      "format":"date-time",
+      "readonly":true,
+      "type":"string"
+    },
+    "team_id":{
+      "description": "A team uuid. If set only the team and its parent teams can see the record.",
+      "type":"string"
+    },
+    "lock_version": {
+      "description": "Increased on every edit, so SK can detect/prevent a concurrent edit by another user. First save wins.",
+      "type":"integer"
+    }
+  },
+  "links":[
+    { "rel": "self",
+      "href": "products/{id}"
+    },
+    { "rel": "instances",
+      "href": "products",
+      "properties" : {
+        "page":{
+          "title" : "Page",
+          "description": "In paginated results set the page to look for",
+          "type":"number"
+        },
+        "per_page":{
+          "title" : "Per page",
+          "description": "Results per page. Default is 10, max is 100",
+          "type":"number"
+        },
+        "filter[q]":{
+          "title" : "Search",
+          "description": "Searches in number, name, description, price",
+          "type":"string"
+        },        
+        "sort_by":{
+          "title" : "Sort by",
+          "description": "Sort the results by the given field => number",
+          "enum":["name","number","price", "created_at", "updated_at"],
+          "type": "string"
+        },
+        "sort":{
+          "title" : "Sort",
+          "enum":["ASC","DESC"],
+          "description": "Sort the results in ASC or DESC"
+        }
+      }
+    },
+    { "rel": "destroy",
+      "href": "products/{id}",
+      "method": "DELETE"
+    },
+    { "rel": "update",
+      "href": "products/{id}",
+      "method": "PUT"
+    },
+    { "rel": "create",
+      "href": "products",
+      "method": "POST"
+    }
+  ]
+}

@@ -1,0 +1,821 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project version="2.0.0a2" title="">
+  <file path="object.php" hash="57bf98f2962568634b02627cb8eb8425" package="SalesKing PHP SDK">
+    <docblock line="2">
+      <description><![CDATA[This file brings in the Salesking Object class]]></description>
+      <long-description><![CDATA[]]></long-description>
+      <tag line="2" name="version" description="1.0.0"/>
+      <tag line="2" name="package" description="SalesKing PHP SDK"/>
+      <tag line="2" name="license" description="GNU General Public License version 2 or later; see LICENSE"/>
+      <tag line="2" name="copyright" description="Copyright (C) 2012 David Jardin"/>
+      <tag line="2" name="link" description="http://www.salesking.eu" link="http://www.salesking.eu"/>
+    </docblock>
+    <class final="false" abstract="false" namespace="default" line="20" package="SalesKing PHP SDK">
+      <name>SaleskingObject</name>
+      <full_name>\SaleskingObject</full_name>
+      <extends/>
+      <docblock line="15">
+        <description><![CDATA[Salesking SDK file for read/write access to objects]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="15" name="since" description="1.0.0"/>
+        <tag line="15" name="package" description="SalesKing PHP SDK"/>
+      </docblock>
+      <property final="false" static="false" visibility="protected" line="27" package="Default">
+        <name>$data</name>
+        <default><![CDATA[array ()]]></default>
+        <docblock line="22">
+          <description><![CDATA[object data]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="22" name="var" description="data" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="22" name="since" description="1.0.0"/>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="protected" line="34" package="Default">
+        <name>$type</name>
+        <default><![CDATA[null]]></default>
+        <docblock line="29">
+          <description><![CDATA[object type]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="29" name="var" description="objecttype" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="29" name="since" description="1.0.0"/>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="protected" line="41" package="Default">
+        <name>$schema</name>
+        <default><![CDATA[null]]></default>
+        <docblock line="36">
+          <description><![CDATA[object schema]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="36" name="var" description="schema definition" type="mixed">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="36" name="since" description="1.0.0"/>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="public" line="49" package="Default">
+        <name>$api</name>
+        <default><![CDATA[null]]></default>
+        <docblock line="44">
+          <description><![CDATA[parent API object]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="44" name="var" description="parent object" type="\Salesking">
+            <type by_reference="false">\Salesking</type>
+          </tag>
+          <tag line="44" name="since" description="1.0.0"/>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="57" package="">
+        <name>__construct</name>
+        <type>function</type>
+        <docblock line="51">
+          <description><![CDATA[Constructor method which is used to set some config stuff and load the schema file]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="51" name="since" description="1.0.0"/>
+          <tag line="51" name="param" description="API object" type="\Salesking" variable="$api">
+            <type by_reference="false">\Salesking</type>
+          </tag>
+          <tag line="51" name="param" description="configuration array" type="array" variable="$config">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="57">
+          <name>$api</name>
+          <default><![CDATA[]]></default>
+          <type>Salesking</type>
+        </argument>
+        <argument line="57">
+          <name>$config</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="74" package="">
+        <name>__set</name>
+        <type>function</type>
+        <docblock line="67">
+          <description><![CDATA[magic setter function to set object data]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="67" name="param" description="" type="string" variable="$property">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="67" name="param" description="" type="mixed" variable="$value">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="67" name="throws" description="" type="\SaleskingException">
+            <type by_reference="false">\SaleskingException</type>
+          </tag>
+          <tag line="67" name="since" description="1.0.0"/>
+        </docblock>
+        <argument line="74">
+          <name>$property</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="74">
+          <name>$value</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="99" package="">
+        <name>validate</name>
+        <type>function</type>
+        <docblock line="92">
+          <description><![CDATA[Validate input values for the specified object property]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="92" name="param" description="" type="string" variable="$property">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="92" name="param" description="" type="mixed" variable="$value">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="92" name="return" description="" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+          <tag line="92" name="since" description="1.0.0"/>
+        </docblock>
+        <argument line="99">
+          <name>$property</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="99">
+          <name>$value</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="172" package="">
+        <name>__get</name>
+        <type>function</type>
+        <docblock line="166">
+          <description><![CDATA[magic getter function to get object properties]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="166" name="param" description="" type="string" variable="$property">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="166" name="return" description="" type="mixed">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="166" name="since" description="1.0.0"/>
+        </docblock>
+        <argument line="172">
+          <name>$property</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="187" package="">
+        <name>__toString</name>
+        <type>function</type>
+        <docblock line="182">
+          <description><![CDATA[converts object data to an JSON encoded string]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="182" name="return" description="JSON-encoded object data" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="182" name="since" description="1.0.0"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="200" package="">
+        <name>bind</name>
+        <type>function</type>
+        <docblock line="192">
+          <description><![CDATA[helper function to bind data to object]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="192" name="param" description="" type="array|object" variable="$data">
+            <type by_reference="false">array</type>
+            <type by_reference="false">object</type>
+          </tag>
+          <tag line="192" name="param" description="array(&quot;company&quot; =&gt; &quot;organisation&quot;) maps value of company to organisation" type="array" variable="$map">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="192" name="return" description="" type="\SaleskingObject">
+            <type by_reference="false">\SaleskingObject</type>
+          </tag>
+          <tag line="192" name="throws" description="" type="\SaleskingException">
+            <type by_reference="false">\SaleskingException</type>
+          </tag>
+          <tag line="192" name="since" description="1.0.0"/>
+        </docblock>
+        <argument line="200">
+          <name>$data</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="200">
+          <name>$map</name>
+          <default><![CDATA[array()]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="259" package="">
+        <name>getType</name>
+        <type>function</type>
+        <docblock line="254">
+          <description><![CDATA[Fetch object type]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="254" name="return" description="object type" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="254" name="since" description="1.0.0"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="271" package="">
+        <name>getData</name>
+        <type>function</type>
+        <docblock line="264">
+          <description><![CDATA[Fetch object data]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="264" name="param" description="" type="string" variable="$type">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="264" name="internal" description="param string $type define function return type (array, object)"/>
+          <tag line="264" name="since" description="1.0.0"/>
+          <tag line="264" name="return" description="object data" type="array|object">
+            <type by_reference="false">array</type>
+            <type by_reference="false">object</type>
+          </tag>
+        </docblock>
+        <argument line="271">
+          <name>$type</name>
+          <default><![CDATA["array"]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="304" package="">
+        <name>save</name>
+        <type>function</type>
+        <docblock line="298">
+          <description><![CDATA[Saves the current object to Salesking]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="298" name="return" description="response" type="mixed">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="298" name="throws" description="" type="\SaleskingException">
+            <type by_reference="false">\SaleskingException</type>
+          </tag>
+          <tag line="298" name="since" description="1.0.0"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="360" package="">
+        <name>load</name>
+        <type>function</type>
+        <docblock line="354">
+          <description><![CDATA[load object data from Salesking]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="354" name="return" description="" type="\SaleskingObject">
+            <type by_reference="false">\SaleskingObject</type>
+          </tag>
+          <tag line="354" name="throws" description="" type="\SaleskingException">
+            <type by_reference="false">\SaleskingException</type>
+          </tag>
+          <tag line="354" name="since" description="1.0.0"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="392" package="">
+        <name>delete</name>
+        <type>function</type>
+        <docblock line="386">
+          <description><![CDATA[Deletes the current object]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="386" name="return" description="response" type="mixed">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="386" name="throws" description="" type="\SaleskingException">
+            <type by_reference="false">\SaleskingException</type>
+          </tag>
+          <tag line="386" name="since" description="1.0.0"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="423" package="">
+        <name>getEndpoint</name>
+        <type>function</type>
+        <docblock line="417">
+          <description><![CDATA[Get Salesking API endpoint for a specific task]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="417" name="param" description="" type="string" variable="$rel">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="417" name="return" description="endpoint information" type="object">
+            <type by_reference="false">object</type>
+          </tag>
+          <tag line="417" name="since" description="1.0.0"/>
+        </docblock>
+        <argument line="423">
+          <name>$rel</name>
+          <default><![CDATA["self"]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="default" line="442" package="">
+        <name>loadSchema</name>
+        <type>function</type>
+        <docblock line="436">
+          <description><![CDATA[load object properties from schema file]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="436" name="throws" description="" type="\SaleskingException">
+            <type by_reference="false">\SaleskingException</type>
+          </tag>
+          <tag line="436" name="return" description="this" type="object">
+            <type by_reference="false">object</type>
+          </tag>
+          <tag line="436" name="since" description="1.0.0"/>
+        </docblock>
+      </method>
+    </class>
+  </file>
+  <file path="salesking.php" hash="a08b7b720be0b1f32ed92cb50bee2b76" package="SalesKing PHP SDK">
+    <docblock line="2">
+      <description><![CDATA[This file brings in the 2 basic salesking classes]]></description>
+      <long-description><![CDATA[]]></long-description>
+      <tag line="2" name="version" description="1.0.0"/>
+      <tag line="2" name="package" description="SalesKing PHP SDK"/>
+      <tag line="2" name="license" description="GNU General Public License version 2 or later; see LICENSE"/>
+      <tag line="2" name="copyright" description="Copyright (C) 2012 David Jardin"/>
+      <tag line="2" name="link" description="http://www.salesking.eu" link="http://www.salesking.eu"/>
+    </docblock>
+    <include line="11" type="Require Once" package="SalesKing PHP SDK">
+      <name>object.php</name>
+      <docblock line="2">
+        <description><![CDATA[This file brings in the 2 basic salesking classes]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="2" name="version" description="1.0.0"/>
+        <tag line="2" name="package" description="SalesKing PHP SDK"/>
+        <tag line="2" name="license" description="GNU General Public License version 2 or later; see LICENSE"/>
+        <tag line="2" name="copyright" description="Copyright (C) 2012 David Jardin"/>
+        <tag line="2" name="link" description="http://www.salesking.eu" link="http://www.salesking.eu"/>
+      </docblock>
+    </include>
+    <class final="false" abstract="false" namespace="default" line="23" package="SalesKing PHP SDK">
+      <name>SaleskingException</name>
+      <full_name>\SaleskingException</full_name>
+      <extends>\Exception</extends>
+      <docblock line="18">
+        <description><![CDATA[SaleskingException class]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="18" name="since" description="1.0.0"/>
+        <tag line="18" name="package" description="SalesKing PHP SDK"/>
+      </docblock>
+      <property final="false" static="false" visibility="protected" line="29" package="Default">
+        <name>$code</name>
+        <default><![CDATA[null]]></default>
+        <docblock line="24">
+          <description><![CDATA[internal error code]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="24" name="var" description="internal error code" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="24" name="since" description="1.0.0"/>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="protected" line="36" package="Default">
+        <name>$message</name>
+        <default><![CDATA[null]]></default>
+        <docblock line="31">
+          <description><![CDATA[error message]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="31" name="var" description="error message" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="31" name="since" description="1.0.0"/>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="protected" line="43" package="Default">
+        <name>$errors</name>
+        <default><![CDATA[null]]></default>
+        <docblock line="38">
+          <description><![CDATA[additional error information]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="38" name="var" description="additional error information (http response code, api errors messages..)" type="mixed">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="38" name="since" description="1.0.0"/>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="52" package="">
+        <name>__construct</name>
+        <type>function</type>
+        <docblock line="45">
+          <description><![CDATA[constructs a new salesking exception]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="45" name="param" description="error code" type="string" variable="$code">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="45" name="param" description="error message" type="string" variable="$message">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="45" name="param" description="additional error information" type="mixed" variable="$errors">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="45" name="since" description="1.0.0"/>
+        </docblock>
+        <argument line="52">
+          <name>$code</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="52">
+          <name>$message</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="52">
+          <name>$errors</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="65" package="">
+        <name>getErrors</name>
+        <type>function</type>
+        <docblock line="60">
+          <description><![CDATA[Return additional error information]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="60" name="return" description="" type="mixed">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="60" name="since" description="1.0.0"/>
+        </docblock>
+      </method>
+    </class>
+    <class final="false" abstract="false" namespace="default" line="76" package="SalesKing PHP SDK">
+      <name>Salesking</name>
+      <full_name>\Salesking</full_name>
+      <extends/>
+      <docblock line="71">
+        <description><![CDATA[Salesking API interface]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="71" name="since" description="1.0.0"/>
+        <tag line="71" name="package" description="SalesKing PHP SDK"/>
+      </docblock>
+      <constant namespace="default" line="82" package="Default">
+        <name>VERSION</name>
+        <value><![CDATA["1.0.0"]]></value>
+        <docblock line="77">
+          <description><![CDATA[current SDK Version]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="77" name="const" description="VERSION current SDK version"/>
+          <tag line="77" name="since" description="1.0.0"/>
+        </docblock>
+      </constant>
+      <property final="false" static="false" visibility="public" line="89" package="Default">
+        <name>$curl_options</name>
+        <default><![CDATA[array(
+        CURLOPT_CONNECTTIMEOUT => 10,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_TIMEOUT        => 60,
+        CURLOPT_USERAGENT      => 'salesking-sdk-1.0',
+        CURLOPT_SSL_VERIFYPEER => false
+    )]]></default>
+        <docblock line="84">
+          <description><![CDATA[common curl options]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="84" name="var" description="some common curl options" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="84" name="since" description="1.0.0"/>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="public" line="102" package="Default">
+        <name>$accessToken</name>
+        <default><![CDATA[null]]></default>
+        <docblock line="97">
+          <description><![CDATA[access token]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="97" name="var" description="access token" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="97" name="since" description="1.0.0"/>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="public" line="109" package="Default">
+        <name>$sk_url</name>
+        <default><![CDATA[null]]></default>
+        <docblock line="104">
+          <description><![CDATA[api url]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="104" name="var" description="sk api url" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="104" name="since" description="1.0.0"/>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="public" line="116" package="Default">
+        <name>$app_id</name>
+        <default><![CDATA[null]]></default>
+        <docblock line="111">
+          <description><![CDATA[app id]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="111" name="var" description="salesking app id" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="111" name="since" description="1.0.0"/>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="public" line="123" package="Default">
+        <name>$app_secret</name>
+        <default><![CDATA[null]]></default>
+        <docblock line="118">
+          <description><![CDATA[app secret]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="118" name="var" description="salesking app secret" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="118" name="since" description="1.0.0"/>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="public" line="130" package="Default">
+        <name>$app_url</name>
+        <default><![CDATA[null]]></default>
+        <docblock line="125">
+          <description><![CDATA[app url]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="125" name="var" description="salesking app url" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="125" name="since" description="1.0.0"/>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="137" package="">
+        <name>__construct</name>
+        <type>function</type>
+        <docblock line="132">
+          <description><![CDATA[Constructor method which is used to set some config stuff]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="132" name="param" description="array" type="\$config" variable="$config">
+            <type by_reference="false">\$config</type>
+          </tag>
+          <tag line="132" name="since" description="1.0.0"/>
+        </docblock>
+        <argument line="137">
+          <name>$config</name>
+          <default><![CDATA[array()]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="165" package="">
+        <name>getAppID</name>
+        <type>function</type>
+        <docblock line="160">
+          <description><![CDATA[get the current app id]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="160" name="return" description="application id" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="160" name="since" description="1.0.0"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="176" package="">
+        <name>setAppID</name>
+        <type>function</type>
+        <docblock line="170">
+          <description><![CDATA[set a new app id]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="170" name="param" description="" type="" variable="$app_id"/>
+          <tag line="170" name="return" description="" type="\Salesking">
+            <type by_reference="false">\Salesking</type>
+          </tag>
+          <tag line="170" name="since" description="1.0.0"/>
+        </docblock>
+        <argument line="176">
+          <name>$app_id</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="187" package="">
+        <name>getAppSecret</name>
+        <type>function</type>
+        <docblock line="182">
+          <description><![CDATA[get the current app secret]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="182" name="return" description="application secret" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="182" name="since" description="1.0.0"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="198" package="">
+        <name>setAppSecret</name>
+        <type>function</type>
+        <docblock line="192">
+          <description><![CDATA[Set a new app secret]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="192" name="param" description="" type="" variable="$app_secret"/>
+          <tag line="192" name="return" description="" type="\Salesking">
+            <type by_reference="false">\Salesking</type>
+          </tag>
+          <tag line="192" name="since" description="1.0.0"/>
+        </docblock>
+        <argument line="198">
+          <name>$app_secret</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="209" package="">
+        <name>getAppUrl</name>
+        <type>function</type>
+        <docblock line="204">
+          <description><![CDATA[get current app url]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="204" name="return" description="application url" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="204" name="since" description="1.0.0"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="220" package="">
+        <name>setAppUrl</name>
+        <type>function</type>
+        <docblock line="214">
+          <description><![CDATA[set a new app URL]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="214" name="param" description="" type="" variable="$app_url"/>
+          <tag line="214" name="return" description="" type="\Salesking">
+            <type by_reference="false">\Salesking</type>
+          </tag>
+          <tag line="214" name="since" description="1.0.0"/>
+        </docblock>
+        <argument line="220">
+          <name>$app_url</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="231" package="">
+        <name>getSkUrl</name>
+        <type>function</type>
+        <docblock line="226">
+          <description><![CDATA[get current Salesking API URL]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="226" name="return" description="salesking subdomain url" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="226" name="since" description="1.0.0"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="242" package="">
+        <name>setSkUrl</name>
+        <type>function</type>
+        <docblock line="236">
+          <description><![CDATA[Set a new Salesking API URL]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="236" name="param" description="" type="" variable="$sk_url"/>
+          <tag line="236" name="return" description="" type="\Salesking">
+            <type by_reference="false">\Salesking</type>
+          </tag>
+          <tag line="236" name="since" description="1.0.0"/>
+        </docblock>
+        <argument line="242">
+          <name>$sk_url</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="253" package="">
+        <name>getAccessToken</name>
+        <type>function</type>
+        <docblock line="248">
+          <description><![CDATA[get the current AccessToken]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="248" name="return" description="access token" type="null|string">
+            <type by_reference="false">null</type>
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="248" name="since" description="1.0.0"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="264" package="">
+        <name>setAccessToken</name>
+        <type>function</type>
+        <docblock line="258">
+          <description><![CDATA[Set a new accessToken]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="258" name="param" description="" type="" variable="$accessToken"/>
+          <tag line="258" name="return" description="" type="\Salesking">
+            <type by_reference="false">\Salesking</type>
+          </tag>
+          <tag line="258" name="since" description="1.0.0"/>
+        </docblock>
+        <argument line="264">
+          <name>$accessToken</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="276" package="">
+        <name>getObject</name>
+        <type>function</type>
+        <docblock line="270">
+          <description><![CDATA[Returns a new SaleskingObject]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="270" name="param" description="string object type" type="\$type" variable="$type">
+            <type by_reference="false">\$type</type>
+          </tag>
+          <tag line="270" name="return" description="" type="\SaleskingObject">
+            <type by_reference="false">\SaleskingObject</type>
+          </tag>
+          <tag line="270" name="since" description="1.0.0"/>
+        </docblock>
+        <argument line="276">
+          <name>$type</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="294" package="">
+        <name>request</name>
+        <type>function</type>
+        <docblock line="285">
+          <description><![CDATA[Make a request against the Salesking API]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="285" name="param" description="the url entpoint including a starting /" type="null" variable="$url">
+            <type by_reference="false">null</type>
+          </tag>
+          <tag line="285" name="param" description="the HTTP Method (GET; POST; PUT; DELETE)" type="string" variable="$method">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="285" name="param" description="The json_encoded data to send with to the api" type="null" variable="$data">
+            <type by_reference="false">null</type>
+          </tag>
+          <tag line="285" name="return" description="Result with message body and status code" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="285" name="throws" description="" type="\SaleskingException">
+            <type by_reference="false">\SaleskingException</type>
+          </tag>
+          <tag line="285" name="since" description="1.0.0"/>
+        </docblock>
+        <argument line="294">
+          <name>$url</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+        <argument line="294">
+          <name>$method</name>
+          <default><![CDATA["GET"]]></default>
+          <type/>
+        </argument>
+        <argument line="294">
+          <name>$data</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="339" package="">
+        <name>requestAuthorizationURL</name>
+        <type>function</type>
+        <docblock line="333">
+          <description><![CDATA[Generate an Authorization URL]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="333" name="param" description="required scope" type="string" variable="$scope">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="333" name="return" description="authorization url" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="333" name="since" description="1.0.0"/>
+        </docblock>
+        <argument line="339">
+          <name>$scope</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="354" package="">
+        <name>requestAccessToken</name>
+        <type>function</type>
+        <docblock line="347">
+          <description><![CDATA[request accesstoken from Salesking API]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="347" name="param" description="" type="" variable="$code"/>
+          <tag line="347" name="return" description="AccessToken" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="347" name="throws" description="" type="\SaleskingException">
+            <type by_reference="false">\SaleskingException</type>
+          </tag>
+          <tag line="347" name="since" description="1.0.0"/>
+        </docblock>
+        <argument line="354">
+          <name>$code</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <package name="" full_name=""/>
+  <package name="Default" full_name="Default"/>
+  <package name="SalesKing PHP SDK" full_name="SalesKing PHP SDK"/>
+  <namespace name="default" full_name="default"/>
+  <marker count="0">todo</marker>
+  <marker count="0">fixme</marker>
+  <deprecated count="0"/>
+</project>
