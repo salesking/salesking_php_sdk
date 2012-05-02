@@ -46,6 +46,34 @@ class SaleskingTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Salesking::__construct
+     */
+    public function test__construct()
+    {
+        // test object initialization without parameters
+        $thrown = false;
+        try {
+            new Salesking();
+        }
+        catch (SaleskingException $e)
+        {
+            if($e->getCode() == "INITLIBRARY_MISSINGCONF" AND $e->getMessage() == "Could not initialize library - missing configuration parameters"){
+                $thrown = true;
+            }
+        }
+        $this->assertTrue($thrown);
+
+        // test object initialization with parameters
+        $this->assertInstanceOf("Salesking",new Salesking(array(
+            "accessToken" => "accessToken",
+            "sk_url" => "sk_url",
+            "app_url" => "app_url",
+            "app_id" => "app_id",
+            "app_secret" => "app_secret"
+        )));
+    }
+
+    /**
      * @covers Salesking::getAppID
      */
     public function testGetAppID()
@@ -185,8 +213,18 @@ class SaleskingTest extends PHPUnit_Framework_TestCase
             $this->object->getObject("client")
         );
 
-        $this->setExpectedException("SaleskingException","Could not find schema file.","SCHEMA_NOTFOUND");
-        $this->object->getObject("notexisting");
+        //get notexisting object
+        $thrown = false;
+        try {
+            $this->object->getObject("notexisting");
+        }
+        catch (SaleskingException $e)
+        {
+            if($e->getCode() == "SCHEMA_NOTFOUND" AND $e->getMessage() == "Could not find schema file."){
+                $thrown = true;
+            }
+        }
+        $this->assertTrue($thrown);
     }
 
     /**

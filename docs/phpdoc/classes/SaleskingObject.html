@@ -65,9 +65,8 @@
 <li class="method public "><a href="#getType" title="getType :: Fetch object type"><span class="description">Fetch object type</span><pre>getType()</pre></a></li>
 <li class="method public "><a href="#load" title="load :: load object data from Salesking"><span class="description">load object data from Salesking</span><pre>load()</pre></a></li>
 <li class="method public "><a href="#save" title="save :: Saves the current object to Salesking"><span class="description">Saves the current object to Salesking</span><pre>save()</pre></a></li>
+<li class="method public "><a href="#setType" title="setType :: set object type"><span class="description">set object type</span><pre>setType()</pre></a></li>
 <li class="method public "><a href="#validate" title="validate :: Validate input values for the specified object property"><span class="description">Validate input values for the specified object property</span><pre>validate()</pre></a></li>
-<li class="nav-header protected">» Protected</li>
-<li class="method protected "><a href="#loadSchema" title="loadSchema :: load object properties from schema file"><span class="description">load object properties from schema file</span><pre>loadSchema()</pre></a></li>
 <li class="nav-header">
 <i class="icon-custom icon-property"></i> Properties</li>
 <li class="property public "><a href="#%24api" title="$api :: parent API object"><span class="description">parent API object</span><pre>$api</pre></a></li>
@@ -236,6 +235,11 @@
 <h4>$rel</h4>
 <code>string</code>
 </div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/SaleskingException.html">\SaleskingException</a></code></th>
+<td></td>
+</tr></table>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>object</code>endpoint information</div>
@@ -258,7 +262,7 @@
 </div>
 <a name="load" id="load"></a><div class="element clickable method public load" data-toggle="collapse" data-target=".load .collapse">
 <h2>load object data from Salesking</h2>
-<pre>load() : <a href="../classes/SaleskingObject.html">\SaleskingObject</a></pre>
+<pre>load(string $id) : <a href="../classes/SaleskingObject.html">\SaleskingObject</a></pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="span8">
 <p class="long_description"></p>
@@ -266,6 +270,10 @@
 <th>since</th>
 <td>1.0.0</td>
 </tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$id</h4>
+<code>string</code><p>object id</p></div>
 <h3>Exceptions</h3>
 <table class="table table-bordered"><tr>
 <th><code><a href="../classes/SaleskingException.html">\SaleskingException</a></code></th>
@@ -295,6 +303,18 @@
 <code>mixed</code>response</div>
 </div></div>
 </div>
+<a name="setType" id="setType"></a><div class="element clickable method public setType" data-toggle="collapse" data-target=".setType .collapse">
+<h2>set object type</h2>
+<pre>setType(string $type) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$type</h4>
+<code>string</code><p>object type</p></div>
+</div></div>
+</div>
 <a name="validate" id="validate"></a><div class="element clickable method public validate" data-toggle="collapse" data-target=".validate .collapse">
 <h2>Validate input values for the specified object property</h2>
 <pre>validate(string $property, mixed $value) : bool</pre>
@@ -316,26 +336,6 @@
 </div>
 <h3>Returns</h3>
 <div class="subelement response"><code>bool</code></div>
-</div></div>
-</div>
-<a name="loadSchema" id="loadSchema"></a><div class="element clickable method protected loadSchema" data-toggle="collapse" data-target=".loadSchema .collapse">
-<h2>load object properties from schema file</h2>
-<pre>loadSchema() : object</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="span8">
-<p class="long_description"></p>
-<table class="table table-bordered"><tr>
-<th>since</th>
-<td>1.0.0</td>
-</tr></table>
-<h3>Exceptions</h3>
-<table class="table table-bordered"><tr>
-<th><code><a href="../classes/SaleskingException.html">\SaleskingException</a></code></th>
-<td></td>
-</tr></table>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>object</code>this</div>
 </div></div>
 </div>
 <h3>
@@ -395,7 +395,7 @@
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a2</a> and<br>
-            generated on 2012-04-23T17:40:40+02:00.<br></footer></div>
+            generated on 2012-04-30T19:43:37+02:00.<br></footer></div>
 </div>
 </body>
 </html>

@@ -8,11 +8,13 @@
  * @link        http://www.salesking.eu
  */
 
+
 // load library file
 require_once("../../src/salesking.php");
 
 // create a configuration array
 $config = array(
+    "accessToken" => "6b7156f3f6d34c4c0f76fac9996d4511",
     "sk_url" => "https://demo.dev.salesking.eu",
     "app_url" => "http://example.org",
     "app_id" => "dddd3f77ba915b44",
@@ -22,10 +24,20 @@ $config = array(
 // create a new salesking object
 $sdk = new Salesking($config);
 
-if(isset($_GET['code'])){
-    print_r( $sdk->requestAccessToken($_GET['code']) );
+// fetch a new client object
+try {
+    $clients = $sdk->getCollection(array("type" => "client","autoload" => true));
 }
-else
+catch(SaleskingException $e) {
+    // error handling because schema file isn't available
+    die("no schema");
+}
+
+try{
+    $clients->sort("ASC")->sortby("number")->q("salesking")->load();
+}
+catch(SaleskingException $e)
 {
-    echo "<a href='".$sdk->requestAuthorizationURL("api/clients offline_access")."'>Grant access</a>";
+    print_r($e->getErrors());
 }
+?>

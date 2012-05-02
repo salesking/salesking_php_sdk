@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
 <meta charset="utf-8">
-<title>phpDocumentor » Default</title>
+<title>phpDocumentor » \SaleskingHelper</title>
 <meta name="author" content="Mike van Riel">
 <meta name="description" content="">
 <link href="../css/template.css" rel="stylesheet" media="all">
@@ -49,18 +49,89 @@
                         </div></noscript>
 <div class="row">
 <div class="span4">
-<div class="btn-group view pull-right" data-toggle="buttons-radio">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
 <button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
 </div>
 <ul class="side-nav nav nav-list">
 <li class="nav-header">
-<i class="icon-map-marker"></i> Packages</li>
-<li>
-<span class="empty-package"><i class="icon-folder-close"></i>Default</span><ul class="nav nav-list nav-packages"></ul>
-</li>
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#loadSchema" title="loadSchema :: load object properties from schema file"><span class="description">load object properties from schema file</span><pre>loadSchema()</pre></a></li>
+<li class="method public "><a href="#pluralize" title="pluralize :: helper method to pluralize object titles"><span class="description">helper method to pluralize object titles</span><pre>pluralize()</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties</li>
+<li class="nav-header protected">» Protected</li>
+<li class="property protected "><a href="#%24plurals" title="$plurals :: keeps some special pluralization cases"><span class="description">keeps some special pluralization cases</span><pre>$plurals</pre></a></li>
 </ul>
 </div>
-<div class="span8 package-contents"></div>
+<div class="span8">
+<a name="%5CSaleskingHelper" id="\SaleskingHelper"></a><div href="../classes/SaleskingHelper.html" class="element class">
+<p class="short_description">Salesking SDK file for helper stuff</p>
+<div class="details">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>since</th>
+<td>1.0.0</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="..//packages/SalesKing%20PHP%20SDK.html">SalesKing PHP SDK</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="loadSchema" id="loadSchema"></a><div class="element clickable method public loadSchema" data-toggle="collapse" data-target=".loadSchema .collapse">
+<h2>load object properties from schema file</h2>
+<pre>loadSchema(string $type) : <a href="../classes/SaleskingCollection.html">\SaleskingCollection</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.0.0</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$type</h4>
+<code>string</code><p>object type</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/SaleskingException.html">\SaleskingException</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/SaleskingCollection.html">\SaleskingCollection</a></code></div>
+</div></div>
+</div>
+<a name="pluralize" id="pluralize"></a><div class="element clickable method public pluralize" data-toggle="collapse" data-target=".pluralize .collapse">
+<h2>helper method to pluralize object titles</h2>
+<pre>pluralize(\$type $type) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$type</h4>
+<code>\$type</code><p>object type</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a name="%24plurals" id="$plurals"> </a><div class="element clickable property protected $plurals" data-toggle="collapse" data-target=".$plurals .collapse">
+<h2>keeps some special pluralization cases</h2>
+<pre>$plurals : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>

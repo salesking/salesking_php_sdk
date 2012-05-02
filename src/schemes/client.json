@@ -205,22 +205,26 @@
         "filter[created_at_from]":{
           "title" : "From date",
           "description": "Objects with a creation date after the date, including given datetime. ISO 8601 format YYY-MM-DDThh:mm:ss+z",
-          "type" : "date-time"
+          "type" : "string",
+          "format" : "date-time"
         },
         "filter[created_at_to]":{
           "title" : "To date",
           "description": "Objects with a creation date before the date, including given datetime. ISO 8601 format YYY-MM-DDThh:mm:ss+z",
-          "type" : "date-time"
+          "type" : "string",
+          "format" : "date-time"
         },
         "filter[birthday_from]":{
           "title" : "From birthday date",
           "description": "Contacts with a birthday after and on the date. Leave the birthday-to date blank to only search on this day.",
-          "type" : "date"
+          "type" : "string",
+          "format" : "date"
         },
         "filter[birthday_to]":{
           "title" : "To birthday date",
           "description": "Contacts with a birthday date before and on the date.",
-          "type" : "date"
+          "type" : "string",
+          "format" : "date"
         },
         "filter[creator_ids]":{
           "title" : "Creator",
@@ -230,7 +234,7 @@
         "filter[number]":{
           "title" : "By number",
           "description": "Search by number where the number is matched from the start: %number",
-          "type" : "date"
+          "type" : "string"
         },
         "filter[languages]":{
           "title" : "Languages",

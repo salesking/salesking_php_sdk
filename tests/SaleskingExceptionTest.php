@@ -44,5 +44,17 @@ class SaleskingExceptionTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals("ERRORS",$this->object->getErrors());
     }
+
+    /**
+     * @covers SaleskingException::__construct
+     */
+    public function test__construct()
+    {
+        $exception = new SaleskingException("CODE","MESSAGE","ERRORS");
+        $this->assertEquals("ERRORS",$exception->getErrors());
+        $this->assertEquals("MESSAGE",$exception->getMessage());
+        $this->assertEquals("CODE",$exception->getCode());
+
+    }
 }
 ?>

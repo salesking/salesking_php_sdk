@@ -54,14 +54,14 @@ class SaleskingObject {
      * @param Salesking $api API object
      * @param array $config configuration array
      */
-    public function __construct(Salesking $api, $config)
+    public function __construct(Salesking $api, array $config)
     {
         // set static properties
         $this->type = $config['type'];
         $this->api = $api;
 
         // load schema from json file
-        $this->loadSchema();
+        $this->schema = SaleskingHelper::loadSchema($this->type);
     }
 
     /**
@@ -82,7 +82,7 @@ class SaleskingObject {
             {
                 throw new SaleskingException(
                     "SET_PROPERTYVALIDATION",
-                    "invalid property value. Property: ".$property." - Value:".$value,
+                    "invalid property value. Property: ".$property." - Value: ".$value,
                     array("property" => $property, "value" => $value)
                 );
             }
@@ -107,7 +107,6 @@ class SaleskingObject {
             //validate property type
             switch ($this->schema->properties->$property->type) {
                 case "string":
-                    //@todo is there any special validation required over here??
                     break;
                 case "integer":
                     if(is_object($value) or is_array($value))
@@ -121,7 +120,11 @@ class SaleskingObject {
                     }
                     break;
                 case "number":
-                    //@todo check wheather salesking can handle those kinda strange values
+                    if(is_object($value) or is_array($value))
+                    {
+                        return false;
+                    }
+
                     if(!is_numeric($value) AND $value != "")
                     {
                         return false;
@@ -158,7 +161,10 @@ class SaleskingObject {
             {
                 switch ($this->schema->properties->$property->format) {
                     case "date":
-                        //@todo which date format is accepted??
+                        if(!preg_match('/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/',$value) AND $value != "")
+                        {
+                            return false;
+                        }
                         break;
                     case "date-time":
                         //@todo which date-tme format is accepted??
@@ -271,16 +277,27 @@ class SaleskingObject {
     }
 
     /**
+     * set object type
+     * @param string $type object type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+        $this->schema = SaleskingHelper::loadSchema($this->type);
+    }
+
+    /**
      * Fetch object data
-     * @param string $type
+     * @param string $format data format
      * @internal param string $type define function return type (array, object)
      * @since 1.0.0
      * @return array|object object data
+     * @throws SaleskingException
      */
-    public function getData($type = "array")
+    public function getData($format = "array")
     {
         //return object data depending on selected type
-        switch($type)
+        switch($format)
         {
             case "array":
                 return $this->data;
@@ -298,7 +315,7 @@ class SaleskingObject {
             break;
 
             default:
-                throw new SaleskingException("GETDATA_TYPE","Invalid type");
+                throw new SaleskingException("GETDATA_FORMAT","Invalid format");
             break;
 
         }
@@ -364,13 +381,18 @@ class SaleskingObject {
      * load object data from Salesking
      * @return SaleskingObject
      * @throws SaleskingException
+     * @param string $id object id
      * @since 1.0.0
      */
-    public function load()
+    public function load($id = null)
     {
         $type = $this->getType();
-
         $endpoint = $this->getEndpoint("self");
+
+        if($id != null)
+        {
+            $this->id = $id;
+        }
 
         if($this->id)
         {
@@ -382,7 +404,7 @@ class SaleskingObject {
                     break;
 
                 default:
-                    throw new SaleskingException("LOAD_ERROR","Fetching failed, an error occured",$response);
+                    throw new SaleskingException("LOAD_ERROR","Fetching failed, an error happend",$response);
                     break;
             }
         }
@@ -413,7 +435,7 @@ class SaleskingObject {
                     break;
 
                 default:
-                    throw new SaleskingException("DELETE_ERROR","Deleting failed, an error occured",$response);
+                    throw new SaleskingException("DELETE_ERROR","Deleting failed, an error happend",$response);
                     break;
             }
         }
@@ -427,6 +449,7 @@ class SaleskingObject {
      * Get Salesking API endpoint for a specific task
      * @param string $rel
      * @return object endpoint information
+     * @throws SaleskingException
      * @since 1.0.0
      */
     public function getEndpoint($rel = "self")
@@ -439,39 +462,6 @@ class SaleskingObject {
         else
         {
             throw new SaleskingException("ENDPOINT_NOTFOUND","invalid endpoint");
-        }
-    }
-
-    /**
-     * load object properties from schema file
-     * @throws SaleskingException
-     * @return object this
-     * @since 1.0.0
-     */
-    protected function loadSchema()
-    {
-        // set schema filename
-        $file = dirname(__FILE__)."/schemes/".$this->type.".json";
-
-        // check if the schema file exists
-        if(file_exists($file))
-        {
-            //load schema, decode it and assign it to schema property
-            $this->schema = json_decode(file_get_contents($file));
-
-            //set link relation as key name to make it easier to call these
-            foreach($this->schema->links as $key => $link)
-            {
-                $this->schema->links[$link->rel] = $link;
-                unset($this->schema->links[$key]);
-            }
-
-            return $this;
-        }
-        else
-        {
-            //couldn't find file, seems like our object doesn't exist
-            throw new SaleskingException("SCHEMA_NOTFOUND","Could not find schema file.");
         }
     }
 

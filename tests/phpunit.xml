@@ -7,18 +7,16 @@
         convertWarningsToExceptions="true"
         forceCoversAnnotation="false"
         mapTestClassNameToCoveredClassName="false"
-        printerClass="PHPUnit_TextUI_ResultPrinter"
         processIsolation="false"
         stopOnError="false"
         stopOnFailure="false"
         stopOnIncomplete="false"
         stopOnSkipped="false"
-        testSuiteLoaderClass="PHPUnit_Runner_StandardTestSuiteLoader"
         strict="false"
         verbose="false">
         <testsuites>
             <testsuite name="Salesking SDK Test">
-                <directory>./*Test.php files</directory>
+                <directory suffix="Test.php">./</directory>
             </testsuite>
         </testsuites>
 </phpunit>

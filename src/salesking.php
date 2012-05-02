@@ -9,6 +9,8 @@
  */
 
 require_once("object.php");
+require_once("collection.php");
+require_once("helper.php");
 
 // make sure that curl is available
 if(!function_exists("curl_init")) {
@@ -143,7 +145,7 @@ class Salesking {
             OR !array_key_exists("app_id",$config)
             OR !array_key_exists("app_secret",$config))
         {
-            throw new SaleskingException("INITLIBRARY_MISSINGCONF","Could not initialize library - missing configuration paramaters");
+            throw new SaleskingException("INITLIBRARY_MISSINGCONF","Could not initialize library - missing configuration parameters");
         }
 
         // set static properties
@@ -284,15 +286,33 @@ class Salesking {
     }
 
     /**
+     * Returns a new SaleskingCollection object
+     * @param $type string object type
+     * @return SaleskingCollection
+     * @since 1.0.0
+     */
+    public function getCollection($config)
+    {
+        if(!is_array($config))
+        {
+            $config = array(
+                "type" => $type
+            );
+        }
+
+        return new SaleskingCollection($this,$config);
+    }
+
+    /**
      * Make a request against the Salesking API
-     * @param null $url the url entpoint including a starting /
+     * @param null $url the url endpoint including a starting /
      * @param string $method the HTTP Method (GET; POST; PUT; DELETE)
      * @param null $data The json_encoded data to send with to the api
      * @return array Result with message body and status code
      * @throws SaleskingException
      * @since 1.0.0
      */
-    public function request($url = null,$method = "GET",$data = null)
+    public function request($url,$method = "GET", $data = null)
     {
         $curl = curl_init();
 
@@ -317,7 +337,7 @@ class Salesking {
 
         //a really bad curl error occured
         if ($result === false) {
-            $e = new SaleskingAPIException("REQUEST_CURLERROR","A curl error occured",array("code" => curl_errno($curl), "message" => curl_error($curl)));
+            $e = new SaleskingException("REQUEST_CURLERROR","A curl error occured",array("code" => curl_errno($curl), "message" => curl_error($curl)));
             curl_close($curl);
             throw $e;
         }
@@ -336,7 +356,7 @@ class Salesking {
     * @return string authorization url
     * @since 1.0.0
     */
-    public function requestAuthorizationURL($scope)
+    public function requestAuthorizationURL( $scope)
     {
         return $this->sk_url . "/oauth/authorize?" .
             "client_id=". $this->app_id .
@@ -351,7 +371,7 @@ class Salesking {
      * @throws SaleskingException
      * @since 1.0.0
      */
-    public function requestAccessToken($code)
+    public function requestAccessToken( $code)
     {
         $url = "/oauth/token?"
             . "client_id=". $this->app_id

@@ -13,12 +13,12 @@
 require_once("../../src/salesking.php");
 
 // create a configuration array
-// you have to register your app FIRST
 $config = array(
-    "sk_url" => "https://YOUR-SUBDOMAIN.dev.salesking.eu",
-    "app_url" => "http://localhost:8888/php-sdk/docs/examples/oauth.php",
-    "app_id" => "YOUR-APP-ID",
-    "app_secret" => "YOUR-APP-ID"
+    "accessToken" => "3ea22ee1f78aacc199ce9646a59eec68",
+    "sk_url" => "https://demo.dev.salesking.eu",
+    "app_url" => "http://example.org",
+    "app_id" => "dddd3f77ba915b44",
+    "app_secret" => "43c3e1cf85eebc28211f34739833591f"
 );
 
 // create a new salesking object
@@ -39,7 +39,9 @@ try {
     $client->last_name= "Max";
     $client->first_name ="Mustermann";
     $client->phone_home="123";
+
 }
+
 catch (SaleskingException $e)
 {
     // error handling when setting an undefinied property or wrong value
