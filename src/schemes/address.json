@@ -77,5 +77,6 @@
       "description": "When set an existing address will be deleted. This switch is only used when addresses are passed-in nested inside their parent object(a contact).",
       "type":"boolean"
     }
-  }
+  },
+  "links":[]
 }
