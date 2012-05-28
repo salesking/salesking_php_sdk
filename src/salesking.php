@@ -373,14 +373,7 @@ class Salesking {
      */
     public function requestAccessToken( $code)
     {
-        $url = "/oauth/token?"
-            . "client_id=". $this->app_id
-            . "&redirect_uri="
-            . urlencode($this->app_url)
-            . "&client_secret="
-            . $this->app_secret . "&code=" . $code;
-
-        $response = $this->request($url);
+        $response = $this->request( accessTokenUrl($code) );
 
         if($response['code'] == "200")
         {
@@ -388,5 +381,21 @@ class Salesking {
         }
 
         throw new SaleskingException("REQUESTTOKEN_ERROR","Could not fetch access_token",$response);
+    }
+
+    /**
+     * Construct accesstoken URI
+     * @param $code
+     * @return string AccessToken
+     * @throws SaleskingException
+     * @since 1.0.0
+     */
+    public function accessTokenUrl( $code)
+    {
+        return $this->sk_url . "/oauth/token?"
+            . "client_id=". $this->app_id
+            . "&redirect_uri=" . urlencode($this->app_url)
+            . "&client_secret=" . $this->app_secret
+            . "&code=" . $code;
     }
 }

@@ -245,10 +245,31 @@ class SaleskingTest extends PHPUnit_Framework_TestCase
     public function testRequestAuthorizationURL()
     {
         $this->assertEquals(
-            $this->object->sk_url . "/oauth/authorize?" . "client_id=". $this->object->app_id . "&scope=" . urlencode("scope"). "&redirect_uri=" . urlencode($this->object->app_url),
+            $this->object->sk_url . "/oauth/authorize?"
+                                . "client_id=". $this->object->app_id
+                                . "&scope=" . urlencode("scope")
+                                . "&redirect_uri=" . urlencode($this->object->app_url),
             $this->object->requestAuthorizationURL("scope")
         );
     }
+
+    /**
+     * @covers Salesking::accessTokenUrl
+     */
+    public function testAccessTokenUrl()
+    {
+        $some_code = "Some_long_code_returned_from_authorize";
+        $this->assertEquals(
+            $this->object->sk_url . "/oauth/token?"
+                                  . "client_id=". $this->object->app_id
+                                  . "&redirect_uri=" . urlencode($this->object->app_url)
+                                  . "&client_secret=" . $this->object->app_secret
+                                  . "&code=" . $some_code,
+            $this->object->accessTokenUrl($some_code)
+        );
+    }
+
+
 
     /**
      * @covers Salesking::requestAccessToken
