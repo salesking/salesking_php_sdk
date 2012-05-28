@@ -8,7 +8,6 @@
  */
 
 require_once (dirname(__FILE__).'/../src/salesking.php');
-require_once (dirname(__FILE__).'/../src/object.php');
 
 /**
  * Test class for SaleskingObject.
