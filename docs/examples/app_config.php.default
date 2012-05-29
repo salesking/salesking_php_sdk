@@ -1,0 +1,17 @@
+<?php
+/**
+ * Copy this file and add your SalesKing App credentials to run the examples
+ */
+function app_config()
+{
+    return array(
+        "sk_url" => "https://YOUR-SUB-DOMAIN.dev.salesking.eu",
+        //URL of this app, make sure it is also set inside SK when registering the app
+        "app_url" => "http://localhost:8000/oauth.php",
+        "app_id" => "dddd3f77ba915b44",
+        "app_secret" => "43c3e1cf85eebc28211f34739833591f",
+        // those are the rights your app is requesting
+        "app_scope" => "api/clients offline_access"
+
+    );
+}

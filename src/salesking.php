@@ -119,6 +119,13 @@ class Salesking {
     public $app_id = null;
 
     /**
+     * app scope
+     * @var string salesking app scope
+     * @since 1.0.0
+     */
+    public $app_scope = null;
+
+    /**
      * app secret
      * @var string salesking app secret
      * @since 1.0.0
@@ -153,11 +160,11 @@ class Salesking {
         $this->app_url = $config['app_url'];
         $this->app_id = $config['app_id'];
         $this->app_secret = $config['app_secret'];
+        if (array_key_exists("app_scope",$config))
+            $this->app_scope = $config['app_scope'];
 
         if(array_key_exists("accessToken",$config))
-        {
             $this->accessToken = $config['accessToken'];
-        }
     }
 
     /**
@@ -312,22 +319,22 @@ class Salesking {
      * @throws SaleskingException
      * @since 1.0.0
      */
-    public function request($url,$method = "GET", $data = null)
+    public function request($url, $method = "GET", $data = null)
     {
-        $curl = curl_init();
+        # add base url if not present
+        if(strpos($url,$this->sk_url ) !== 0 )
+            $url = $this->sk_url.$url;
 
-        //create options
+        $curl = curl_init();
         $options = $this->curl_options;
         $options[CURLOPT_POSTFIELDS] = $data;
-        $options[CURLOPT_URL] =  $this->sk_url.$url;
+        $options[CURLOPT_URL] = $url;
         $options[CURLOPT_CUSTOMREQUEST] = $method;
         $options[CURLOPT_HTTPHEADER] = array("Content-type: application/json");
 
         // set accessToken
         if($this->accessToken)
-        {
             $options[CURLOPT_HTTPHEADER][] = "Authorization: Bearer ".$this->accessToken;
-        }
 
         //set options to curl handler
         curl_setopt_array($curl, $options);
@@ -352,15 +359,15 @@ class Salesking {
 
     /**
     * Generate an Authorization URL
-    * @param string $scope required scope
+    * @param string $scope optional scope, if not set uses app_scope
     * @return string authorization url
     * @since 1.0.0
     */
-    public function requestAuthorizationURL( $scope)
+    public function requestAuthorizationURL( $scope=false)
     {
         return $this->sk_url . "/oauth/authorize?" .
             "client_id=". $this->app_id .
-            "&scope=" . urlencode($scope).
+            "&scope=" . urlencode( $scope ? $scope : $this->app_scope ).
             "&redirect_uri=" . urlencode($this->app_url);
     }
 
@@ -373,18 +380,17 @@ class Salesking {
      */
     public function requestAccessToken( $code)
     {
-        $response = $this->request( accessTokenUrl($code) );
-
+        $response = $this->request( $this->accessTokenUrl($code) );
         if($response['code'] == "200")
         {
             return $response['body'];
         }
 
-        throw new SaleskingException("REQUESTTOKEN_ERROR","Could not fetch access_token",$response);
+        throw new SaleskingException("REQUESTTOKEN_ERROR","Could not fetch access_token",$response . "\n");
     }
 
     /**
-     * Construct accesstoken URI
+     * Construct accesstoken URL
      * @param $code
      * @return string AccessToken
      * @throws SaleskingException
@@ -392,7 +398,7 @@ class Salesking {
      */
     public function accessTokenUrl( $code)
     {
-        return $this->sk_url . "/oauth/token?"
+        return $this->sk_url. "/oauth/token?"
             . "client_id=". $this->app_id
             . "&redirect_uri=" . urlencode($this->app_url)
             . "&client_secret=" . $this->app_secret

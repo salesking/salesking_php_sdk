@@ -10,22 +10,17 @@
 
 // load library file
 require_once("../../src/salesking.php");
+require_once("app_config.php");
 
-// create a configuration array
-$config = array(
-    "sk_url" => "https://demo.dev.salesking.eu",
-    "app_url" => "http://example.org",
-    "app_id" => "dddd3f77ba915b44",
-    "app_secret" => "43c3e1cf85eebc28211f34739833591f"
-);
-
-// create a new salesking object
-$sdk = new Salesking($config);
+// create salesking object with app configuration
+$sdk = new Salesking(app_config());
 
 if(isset($_GET['code'])){
+    //echo ($sdk->accessTokenUrl($_GET['code']));
     print_r( $sdk->requestAccessToken($_GET['code']) );
 }
 else
 {
-    echo "<a href='".$sdk->requestAuthorizationURL("api/clients offline_access")."'>Grant access</a>";
+    echo ("<h2>Go to Authorize APP </h2>\n");
+    echo "<a href='".$sdk->requestAuthorizationURL()."'>Grant access</a>";
 }
