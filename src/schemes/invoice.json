@@ -1,6 +1,6 @@
 { "type":"object",
   "title": "invoice",
-  "description": "An invoice",  
+  "description": "An invoice",
   "properties":{
     "id":{
       "description": "UUID assigned by SK",
@@ -173,12 +173,14 @@
         "filter[from]":{
           "title" : "From date",
           "description": "Objects with a date after the date",
-          "type" : "date"
+          "format" : "date",
+          "type" : "string"
         },
         "filter[to]":{
           "title" : "To date",
           "description": "Objects with date before the date",
-          "type" : "date"
+          "format" : "date",
+          "type" : "string"
         },
         "filter[languages]":{
           "title" : "Languages",
