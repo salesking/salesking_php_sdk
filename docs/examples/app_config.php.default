@@ -2,7 +2,7 @@
 /**
  * Copy this file and add your SalesKing App credentials to run the examples
  */
-function app_config()
+function sk_app_config()
 {
     return array(
         "sk_url" => "https://YOUR-SUB-DOMAIN.dev.salesking.eu",

@@ -11,18 +11,10 @@
 
 // load library file
 require_once("../../src/salesking.php");
-
-// create a configuration array
-$config = array(
-    "accessToken" => "6b7156f3f6d34c4c0f76fac9996d4511",
-    "sk_url" => "https://demo.dev.salesking.eu",
-    "app_url" => "http://example.org",
-    "app_id" => "dddd3f77ba915b44",
-    "app_secret" => "43c3e1cf85eebc28211f34739833591f"
-);
+require_once("app_config.php");
 
 // create a new salesking object
-$sdk = new Salesking($config);
+$sdk = new Salesking(sk_app_config());
 
 // fetch a new client object
 try {

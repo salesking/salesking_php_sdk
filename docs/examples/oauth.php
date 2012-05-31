@@ -13,7 +13,7 @@ require_once("../../src/salesking.php");
 require_once("app_config.php");
 
 // create salesking object with app configuration
-$sdk = new Salesking(app_config());
+$sdk = new Salesking(sk_app_config());
 
 if(isset($_GET['code'])){
     //echo ($sdk->accessTokenUrl($_GET['code']));
