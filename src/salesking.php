@@ -137,7 +137,7 @@ class Salesking {
      * @var string salesking app url
      * @since 1.0.0
      */
-    public $app_url = null;
+    public $redirect_url = null;
 
     /**
      * Constructor method which is used to set some config stuff
@@ -147,7 +147,7 @@ class Salesking {
     public function __construct($config = array())
     {
         //make sure that all required variables are available
-        if(!array_key_exists("app_url",$config)
+        if(!array_key_exists("redirect_url",$config)
             OR !array_key_exists("sk_url",$config)
             OR !array_key_exists("app_id",$config)
             OR !array_key_exists("app_secret",$config))
@@ -157,7 +157,7 @@ class Salesking {
 
         // set static properties
         $this->sk_url = $config['sk_url'];
-        $this->app_url = $config['app_url'];
+        $this->redirect_url = $config['redirect_url'];
         $this->app_id = $config['app_id'];
         $this->app_secret = $config['app_secret'];
         if (array_key_exists("app_scope",$config))
@@ -212,24 +212,24 @@ class Salesking {
     }
 
     /**
-     * get current app url
+     * get current redirect url
      * @return string application url
      * @since 1.0.0
      */
-    public function getAppUrl()
+    public function getRedirectUrl()
     {
-        return $this->app_url;
+        return $this->redirect_url;
     }
 
     /**
-     * set a new app URL
-     * @param $app_url
+     * set a new redirect URL
+     * @param $redirect_url
      * @return Salesking
      * @since 1.0.0
      */
-    public function setAppUrl($app_url)
+    public function setRedirectUrl($redirect_url)
     {
-        $this->app_url = $app_url;
+        $this->redirect_url = $redirect_url;
         return $this;
     }
 
@@ -323,7 +323,9 @@ class Salesking {
     {
         # add base url if not present
         if(strpos($url,$this->sk_url ) !== 0 )
+        {
             $url = $this->sk_url.$url;
+        }
 
         $curl = curl_init();
         $options = $this->curl_options;
@@ -368,7 +370,7 @@ class Salesking {
         return $this->sk_url . "/oauth/authorize?" .
             "client_id=". $this->app_id .
             "&scope=" . urlencode( $scope ? $scope : $this->app_scope ).
-            "&redirect_uri=" . urlencode($this->app_url);
+            "&redirect_uri=" . urlencode($this->redirect_url);
     }
 
     /**
@@ -400,7 +402,7 @@ class Salesking {
     {
         return $this->sk_url. "/oauth/token?"
             . "client_id=". $this->app_id
-            . "&redirect_uri=" . urlencode($this->app_url)
+            . "&redirect_uri=" . urlencode($this->redirect_url)
             . "&client_secret=" . $this->app_secret
             . "&code=" . $code;
     }

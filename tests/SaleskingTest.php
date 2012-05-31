@@ -29,7 +29,7 @@ class SaleskingTest extends PHPUnit_Framework_TestCase
         $config = array(
             "accessToken" => "accessToken",
             "sk_url" => "sk_url",
-            "app_url" => "app_url",
+            "redirect_url" => "redirect_url",
             "app_id" => "app_id",
             "app_secret" => "app_secret"
         );
@@ -67,7 +67,7 @@ class SaleskingTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf("Salesking",new Salesking(array(
             "accessToken" => "accessToken",
             "sk_url" => "sk_url",
-            "app_url" => "app_url",
+            "redirect_url" => "redirect_url",
             "app_id" => "app_id",
             "app_secret" => "app_secret"
         )));
@@ -126,28 +126,28 @@ class SaleskingTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Salesking::getAppUrl
+     * @covers Salesking::getRedirectUrl
      */
-    public function testGetAppUrl()
+    public function testGetRedirectUrl()
     {
-        $this->object->app_url = "http://www.example.com";
+        $this->object->redirect_url = "http://www.example.com";
 
         $this->assertEquals(
             "http://www.example.com",
-            $this->object->getAppUrl()
+            $this->object->getRedirectUrl()
         );
     }
 
     /**
-     * @covers Salesking::setAppUrl
+     * @covers Salesking::setRedirectUrl
      */
-    public function testSetAppUrl()
+    public function testSetRedirectUrl()
     {
-        $this->object->setAppUrl("http://www.example.com");
+        $this->object->setRedirectUrl("http://www.example.com");
 
         $this->assertEquals(
             "http://www.example.com",
-            $this->object->app_url
+            $this->object->redirect_url
         );
     }
 
@@ -156,11 +156,11 @@ class SaleskingTest extends PHPUnit_Framework_TestCase
      */
     public function testGetSkUrl()
     {
-        $this->object->app_url = "https://test.dev.salesking.eu";
+        $this->object->sk_url = "https://test.dev.salesking.eu";
 
         $this->assertEquals(
             "https://test.dev.salesking.eu",
-            $this->object->getAppUrl()
+            $this->object->getSkUrl()
         );
     }
 
@@ -248,7 +248,7 @@ class SaleskingTest extends PHPUnit_Framework_TestCase
             $this->object->sk_url . "/oauth/authorize?"
                                 . "client_id=". $this->object->app_id
                                 . "&scope=" . urlencode("scope")
-                                . "&redirect_uri=" . urlencode($this->object->app_url),
+                                . "&redirect_uri=" . urlencode($this->object->redirect_url),
             $this->object->requestAuthorizationURL("scope")
         );
     }
@@ -262,7 +262,7 @@ class SaleskingTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(
             $this->object->sk_url . "/oauth/token?"
                                   . "client_id=". $this->object->app_id
-                                  . "&redirect_uri=" . urlencode($this->object->app_url)
+                                  . "&redirect_uri=" . urlencode($this->object->redirect_url)
                                   . "&client_secret=" . $this->object->app_secret
                                   . "&code=" . $some_code,
             $this->object->accessTokenUrl($some_code)
