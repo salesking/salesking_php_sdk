@@ -388,7 +388,7 @@ class Salesking {
             return $response['body'];
         }
 
-        throw new SaleskingException("REQUESTTOKEN_ERROR","Could not fetch access_token",$response . "\n");
+        throw new SaleskingException("REQUESTTOKEN_ERROR","Could not fetch access_token",$response);
     }
 
     /**
