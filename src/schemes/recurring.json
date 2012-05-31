@@ -40,7 +40,7 @@
       "required":true
     },
     "payment_method":{
-      "description": "How the invoce is beeing payed. Used in new payments.",
+      "description": "How the document is beeing payed. Used in new payments.",
       "enum":["cash","bank_transfer","credit_card","paypal","direct_debit","cheque", "moneybookers", "premium_sms"],
       "type":"string"
     },
