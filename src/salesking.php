@@ -140,9 +140,16 @@ class Salesking {
     public $redirect_url = null;
 
     /**
+     * debugging switch
+     * @var boolean debugging switch
+     * @since 1.0.1
+     */
+
+    /**
      * Constructor method which is used to set some config stuff
      * @param $config array
      * @since 1.0.0
+     * @throws SaleskingException
      */
     public function __construct($config = array())
     {
@@ -160,11 +167,22 @@ class Salesking {
         $this->redirect_url = $config['redirect_url'];
         $this->app_id = $config['app_id'];
         $this->app_secret = $config['app_secret'];
+
+        // set some more properties when they exist - check first to avoid php notices
         if (array_key_exists("app_scope",$config))
+        {
             $this->app_scope = $config['app_scope'];
+        }
 
         if(array_key_exists("accessToken",$config))
+        {
             $this->accessToken = $config['accessToken'];
+        }
+
+        if(array_key_exists("debug",$config))
+        {
+            $this->debug = $config['debug'];
+        }
     }
 
     /**
@@ -294,7 +312,7 @@ class Salesking {
 
     /**
      * Returns a new SaleskingCollection object
-     * @param $type string object type
+     * @param $config mixed configuration options
      * @return SaleskingCollection
      * @since 1.0.0
      */
@@ -303,7 +321,7 @@ class Salesking {
         if(!is_array($config))
         {
             $config = array(
-                "type" => $type
+                "type" => $config
             );
         }
 
@@ -336,7 +354,9 @@ class Salesking {
 
         // set accessToken
         if($this->accessToken)
+        {
             $options[CURLOPT_HTTPHEADER][] = "Authorization: Bearer ".$this->accessToken;
+        }
 
         //set options to curl handler
         curl_setopt_array($curl, $options);
