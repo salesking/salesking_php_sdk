@@ -256,5 +256,29 @@ class SaleskingTest extends PHPUnit_Framework_TestCase
             $this->object->accessTokenUrl($some_code)
         );
     }
+
+    /**
+     * @covers Salesking::getCollection
+     */
+    public function testGetCollection()
+    {
+        $this->assertInstanceOf(
+            "SaleskingCollection",
+            $this->object->getCollection("client")
+        );
+
+        //get notexisting object
+        $thrown = false;
+        try {
+            $this->object->getCollection("notexisting");
+        }
+        catch (SaleskingException $e)
+        {
+            if($e->getCode() == "SCHEMA_NOTFOUND" AND $e->getMessage() == "Could not find schema file."){
+                $thrown = true;
+            }
+        }
+        $this->assertTrue($thrown);
+    }
 }
 ?>
