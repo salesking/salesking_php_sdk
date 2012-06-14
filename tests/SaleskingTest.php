@@ -228,18 +228,6 @@ class SaleskingTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Salesking::request
-     * @todo Implement testRequest().
-     */
-    public function testRequest()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
      * @covers Salesking::requestAuthorizationURL
      */
     public function testRequestAuthorizationURL()
@@ -266,20 +254,6 @@ class SaleskingTest extends PHPUnit_Framework_TestCase
                                   . "&client_secret=" . $this->object->app_secret
                                   . "&code=" . $some_code,
             $this->object->accessTokenUrl($some_code)
-        );
-    }
-
-
-
-    /**
-     * @covers Salesking::requestAccessToken
-     * @todo Implement testRequestAccessToken().
-     */
-    public function testRequestAccessToken()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
         );
     }
 }
