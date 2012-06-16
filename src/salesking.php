@@ -142,8 +142,9 @@ class Salesking {
     /**
      * debugging switch
      * @var boolean debugging switch
-     * @since 1.0.1
+     * @since 1.0.0
      */
+    public $debug = null;
 
     /**
      * Constructor method which is used to set some config stuff
@@ -363,6 +364,15 @@ class Salesking {
 
         //execute curl request
         $result['body'] = json_decode(curl_exec($curl));
+
+        // output debugging information
+        if($this->debug == true) {
+            print "<pre>";
+            print_r(curl_getinfo($curl));  // get error info
+            echo "\n\ncURL error number:" .curl_errno($curl); // print error info
+            echo "\n\ncURL error:" . curl_error($curl);
+            print "</pre>\n";
+        }
 
         //a really bad curl error occured
         if ($result === false) {
