@@ -85,14 +85,44 @@ class SaleskingLiveTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers Salesking::request
-     * @todo Implement testRequest().
      */
     public function testRequest()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        // lets create a object which then gets used to do all kinds of requests
+        $client = $this->object->getObject("client");
+        $client->organisation = "salesking";
+        $client->last_name= "Joe";
+        $client->first_name ="Example";
+        $client->phone_home="123";
+
+        // create a new object
+        try {
+            $client->save();
+        }
+        catch (SaleskingException $e) {
+            $this->fail("Could not create client object");
+        }
+
+        //assert that the client was created successfull and has a valid id now
+        $this->assertTrue(22 == strlen($client->id));
+
+        // update an existing object
+        $client->gender = "male";
+
+        try {
+            $client->save();
+        }
+        catch (SaleskingException $e) {
+            $this->fail("Could not update client object");
+        }
+
+        // delete an object
+        try {
+            $client->delete();
+        }
+        catch (SaleskingException $e) {
+            $this->fail("Could not delete client object");
+        }
     }
 }
 ?>

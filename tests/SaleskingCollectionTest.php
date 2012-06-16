@@ -376,7 +376,6 @@ class SaleskingCollectionTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers SaleskingCollection::getCurrentPage
-     * @todo   Implement testGetCurrentPage().
      */
     public function testGetCurrentPage()
     {
