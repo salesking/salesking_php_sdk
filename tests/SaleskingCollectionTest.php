@@ -92,6 +92,24 @@ class SaleskingCollectionTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers SaleskingCollection::__construct
+     */
+    public function test__construct()
+    {
+        $thrown = false;
+        try
+        {
+            new SaleskingCollection();
+        }
+        catch (PHPUnit_Framework_Error $e)
+        {
+            $thrown = true;
+        }
+        $this->assertTrue($thrown);
+
+    }
+
+    /**
      * @covers SaleskingCollection::load
      */
     public function testLoad()
