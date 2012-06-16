@@ -56,12 +56,13 @@
 <li class="nav-header">
 <i class="icon-custom icon-method"></i> Methods</li>
 <li class="method public "><a href="#__construct" title="__construct :: Constructor method which is used to set some config stuff"><span class="description">Constructor method which is used to set some config stuff</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#accessTokenUrl" title="accessTokenUrl :: Construct accesstoken URL"><span class="description">Construct accesstoken URL</span><pre>accessTokenUrl()</pre></a></li>
 <li class="method public "><a href="#getAccessToken" title="getAccessToken :: get the current AccessToken"><span class="description">get the current AccessToken</span><pre>getAccessToken()</pre></a></li>
 <li class="method public "><a href="#getAppID" title="getAppID :: get the current app id"><span class="description">get the current app id</span><pre>getAppID()</pre></a></li>
 <li class="method public "><a href="#getAppSecret" title="getAppSecret :: get the current app secret"><span class="description">get the current app secret</span><pre>getAppSecret()</pre></a></li>
-<li class="method public "><a href="#getAppUrl" title="getAppUrl :: get current app url"><span class="description">get current app url</span><pre>getAppUrl()</pre></a></li>
 <li class="method public "><a href="#getCollection" title="getCollection :: Returns a new SaleskingCollection object"><span class="description">Returns a new SaleskingCollection object</span><pre>getCollection()</pre></a></li>
 <li class="method public "><a href="#getObject" title="getObject :: Returns a new SaleskingObject"><span class="description">Returns a new SaleskingObject</span><pre>getObject()</pre></a></li>
+<li class="method public "><a href="#getRedirectUrl" title="getRedirectUrl :: get current redirect url"><span class="description">get current redirect url</span><pre>getRedirectUrl()</pre></a></li>
 <li class="method public "><a href="#getSkUrl" title="getSkUrl :: get current Salesking API URL"><span class="description">get current Salesking API URL</span><pre>getSkUrl()</pre></a></li>
 <li class="method public "><a href="#request" title="request :: Make a request against the Salesking API"><span class="description">Make a request against the Salesking API</span><pre>request()</pre></a></li>
 <li class="method public "><a href="#requestAccessToken" title="requestAccessToken :: request accesstoken from Salesking API"><span class="description">request accesstoken from Salesking API</span><pre>requestAccessToken()</pre></a></li>
@@ -69,15 +70,17 @@
 <li class="method public "><a href="#setAccessToken" title="setAccessToken :: Set a new accessToken"><span class="description">Set a new accessToken</span><pre>setAccessToken()</pre></a></li>
 <li class="method public "><a href="#setAppID" title="setAppID :: set a new app id"><span class="description">set a new app id</span><pre>setAppID()</pre></a></li>
 <li class="method public "><a href="#setAppSecret" title="setAppSecret :: Set a new app secret"><span class="description">Set a new app secret</span><pre>setAppSecret()</pre></a></li>
-<li class="method public "><a href="#setAppUrl" title="setAppUrl :: set a new app URL"><span class="description">set a new app URL</span><pre>setAppUrl()</pre></a></li>
+<li class="method public "><a href="#setRedirectUrl" title="setRedirectUrl :: set a new redirect URL"><span class="description">set a new redirect URL</span><pre>setRedirectUrl()</pre></a></li>
 <li class="method public "><a href="#setSkUrl" title="setSkUrl :: Set a new Salesking API URL"><span class="description">Set a new Salesking API URL</span><pre>setSkUrl()</pre></a></li>
 <li class="nav-header">
 <i class="icon-custom icon-property"></i> Properties</li>
 <li class="property public "><a href="#%24accessToken" title="$accessToken :: access token"><span class="description">access token</span><pre>$accessToken</pre></a></li>
 <li class="property public "><a href="#%24app_id" title="$app_id :: app id"><span class="description">app id</span><pre>$app_id</pre></a></li>
+<li class="property public "><a href="#%24app_scope" title="$app_scope :: app scope"><span class="description">app scope</span><pre>$app_scope</pre></a></li>
 <li class="property public "><a href="#%24app_secret" title="$app_secret :: app secret"><span class="description">app secret</span><pre>$app_secret</pre></a></li>
-<li class="property public "><a href="#%24app_url" title="$app_url :: app url"><span class="description">app url</span><pre>$app_url</pre></a></li>
 <li class="property public "><a href="#%24curl_options" title="$curl_options :: common curl options"><span class="description">common curl options</span><pre>$curl_options</pre></a></li>
+<li class="property public "><a href="#%24debug" title="$debug :: debugging switch"><span class="description">debugging switch</span><pre>$debug</pre></a></li>
+<li class="property public "><a href="#%24redirect_url" title="$redirect_url :: app url"><span class="description">app url</span><pre>$redirect_url</pre></a></li>
 <li class="property public "><a href="#%24sk_url" title="$sk_url :: api url"><span class="description">api url</span><pre>$sk_url</pre></a></li>
 <li class="nav-header">
 <i class="icon-custom icon-constant"></i> Constants</li>
@@ -115,6 +118,36 @@
 <div class="subelement argument">
 <h4>$config</h4>
 <code>\$config</code><p>array</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/SaleskingException.html">\SaleskingException</a></code></th>
+<td></td>
+</tr></table>
+</div></div>
+</div>
+<a name="accessTokenUrl" id="accessTokenUrl"></a><div class="element clickable method public accessTokenUrl" data-toggle="collapse" data-target=".accessTokenUrl .collapse">
+<h2>Construct accesstoken URL</h2>
+<pre>accessTokenUrl($code) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.0.0</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$code</h4>
+<code></code>
+</div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/SaleskingException.html">\SaleskingException</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>AccessToken</div>
 </div></div>
 </div>
 <a name="getAccessToken" id="getAccessToken"></a><div class="element clickable method public getAccessToken" data-toggle="collapse" data-target=".getAccessToken .collapse">
@@ -162,24 +195,9 @@
 <code>string</code>application secret</div>
 </div></div>
 </div>
-<a name="getAppUrl" id="getAppUrl"></a><div class="element clickable method public getAppUrl" data-toggle="collapse" data-target=".getAppUrl .collapse">
-<h2>get current app url</h2>
-<pre>getAppUrl() : string</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="span8">
-<p class="long_description"></p>
-<table class="table table-bordered"><tr>
-<th>since</th>
-<td>1.0.0</td>
-</tr></table>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>string</code>application url</div>
-</div></div>
-</div>
 <a name="getCollection" id="getCollection"></a><div class="element clickable method public getCollection" data-toggle="collapse" data-target=".getCollection .collapse">
 <h2>Returns a new SaleskingCollection object</h2>
-<pre>getCollection(\$type $config) : <a href="../classes/SaleskingCollection.html">\SaleskingCollection</a></pre>
+<pre>getCollection(\$config $config) : <a href="../classes/SaleskingCollection.html">\SaleskingCollection</a></pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="span8">
 <p class="long_description"></p>
@@ -190,7 +208,7 @@
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$config</h4>
-<code>\$type</code><p>string object type</p></div>
+<code>\$config</code><p>mixed configuration options</p></div>
 <h3>Returns</h3>
 <div class="subelement response"><code><a href="../classes/SaleskingCollection.html">\SaleskingCollection</a></code></div>
 </div></div>
@@ -211,6 +229,21 @@
 <code>\$type</code><p>string object type</p></div>
 <h3>Returns</h3>
 <div class="subelement response"><code><a href="../classes/SaleskingObject.html">\SaleskingObject</a></code></div>
+</div></div>
+</div>
+<a name="getRedirectUrl" id="getRedirectUrl"></a><div class="element clickable method public getRedirectUrl" data-toggle="collapse" data-target=".getRedirectUrl .collapse">
+<h2>get current redirect url</h2>
+<pre>getRedirectUrl() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.0.0</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>application url</div>
 </div></div>
 </div>
 <a name="getSkUrl" id="getSkUrl"></a><div class="element clickable method public getSkUrl" data-toggle="collapse" data-target=".getSkUrl .collapse">
@@ -298,7 +331,7 @@
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$scope</h4>
-<code>string</code><p>required scope</p></div>
+<code>string</code><p>optional scope, if not set uses app_scope</p></div>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>string</code>authorization url</div>
@@ -361,9 +394,9 @@
 <div class="subelement response"><code><a href="../classes/Salesking.html">\Salesking</a></code></div>
 </div></div>
 </div>
-<a name="setAppUrl" id="setAppUrl"></a><div class="element clickable method public setAppUrl" data-toggle="collapse" data-target=".setAppUrl .collapse">
-<h2>set a new app URL</h2>
-<pre>setAppUrl($app_url) : <a href="../classes/Salesking.html">\Salesking</a></pre>
+<a name="setRedirectUrl" id="setRedirectUrl"></a><div class="element clickable method public setRedirectUrl" data-toggle="collapse" data-target=".setRedirectUrl .collapse">
+<h2>set a new redirect URL</h2>
+<pre>setRedirectUrl($redirect_url) : <a href="../classes/Salesking.html">\Salesking</a></pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="span8">
 <p class="long_description"></p>
@@ -373,7 +406,7 @@
 </tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument">
-<h4>$app_url</h4>
+<h4>$redirect_url</h4>
 <code></code>
 </div>
 <h3>Returns</h3>
@@ -425,6 +458,18 @@
 </tr></table>
 </div></div>
 </div>
+<a name="%24app_scope" id="$app_scope"> </a><div class="element clickable property public $app_scope" data-toggle="collapse" data-target=".$app_scope .collapse">
+<h2>app scope</h2>
+<pre>$app_scope : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.0.0</td>
+</tr></table>
+</div></div>
+</div>
 <a name="%24app_secret" id="$app_secret"> </a><div class="element clickable property public $app_secret" data-toggle="collapse" data-target=".$app_secret .collapse">
 <h2>app secret</h2>
 <pre>$app_secret : string</pre>
@@ -437,9 +482,9 @@
 </tr></table>
 </div></div>
 </div>
-<a name="%24app_url" id="$app_url"> </a><div class="element clickable property public $app_url" data-toggle="collapse" data-target=".$app_url .collapse">
-<h2>app url</h2>
-<pre>$app_url : string</pre>
+<a name="%24curl_options" id="$curl_options"> </a><div class="element clickable property public $curl_options" data-toggle="collapse" data-target=".$curl_options .collapse">
+<h2>common curl options</h2>
+<pre>$curl_options : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="span8">
 <p class="long_description"></p>
@@ -449,9 +494,21 @@
 </tr></table>
 </div></div>
 </div>
-<a name="%24curl_options" id="$curl_options"> </a><div class="element clickable property public $curl_options" data-toggle="collapse" data-target=".$curl_options .collapse">
-<h2>common curl options</h2>
-<pre>$curl_options : array</pre>
+<a name="%24debug" id="$debug"> </a><div class="element clickable property public $debug" data-toggle="collapse" data-target=".$debug .collapse">
+<h2>debugging switch</h2>
+<pre>$debug : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.0.0</td>
+</tr></table>
+</div></div>
+</div>
+<a name="%24redirect_url" id="$redirect_url"> </a><div class="element clickable property public $redirect_url" data-toggle="collapse" data-target=".$redirect_url .collapse">
+<h2>app url</h2>
+<pre>$redirect_url : string</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="span8">
 <p class="long_description"></p>
@@ -500,7 +557,7 @@
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a2</a> and<br>
-            generated on 2012-04-30T19:43:37+02:00.<br></footer></div>
+            generated on 2012-06-16T17:07:52+02:00.<br></footer></div>
 </div>
 </body>
 </html>
