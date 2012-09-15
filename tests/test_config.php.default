@@ -1,17 +1,21 @@
 <?php
 /**
- * Copy this file and add your SalesKing App credentials to run the examples
+ * Copy this file and add your SalesKing App credentials to run the live tests
+ * Please get yourself a developer account at https://www.dev.salesking.eu/signup/php-sdk
  */
 function sk_app_config()
 {
     return array(
+        // MOST important one must be a real access token, get one with examples/oauth.php
+        "accessToken" => "someRealAccessToken"
+
         "sk_url" => "https://YOUR-SUB-DOMAIN.dev.salesking.eu",
         //URL of this app, make sure it is also set inside SK when registering the app
         "redirect_url" => "http://localhost:8000/oauth.php",
         "app_id" => "dddd3f77ba915b44",
         "app_secret" => "43c3e1cf85eebc28211f34739833591f",
         // those are the rights your app is requesting
-        "app_scope" => "api/clients offline_access"
+        "app_scope" => "api/clients offline_access",
 
     );
 }

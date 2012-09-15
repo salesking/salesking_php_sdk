@@ -41,12 +41,12 @@ class SaleskingLiveTest extends PHPUnit_Framework_TestCase
     protected function setUp()
     {
         // first, lets check weather a livetest_credentials.php exists
-        if(!file_exists(dirname(__FILE__)."/livetest_credentials.php")) {
+        if(!file_exists(dirname(__FILE__)."/test_config.php")) {
             $this->markTestSkipped("No connection credentials provided");
         }
 
         // if it exists, lets require it and set up our config object
-        require_once("livetest_credentials.php");
+        require_once("test_config.php");
         $config = sk_app_config();
 
         // now we set up curl to determine weather we're online or not and we have a valid url

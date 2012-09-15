@@ -2,3 +2,4 @@
 .DS_Store
 app_config.php
 tests/livetest_credentials.php
+tests/test_config.php
