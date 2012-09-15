@@ -385,7 +385,7 @@ class Salesking {
         }
 
         if($this->use_basic_auth){
-            $options[CURLOPT_USERPWD] = "$this->username:$this->password";
+            $options[CURLOPT_USERPWD] = "$this->user:$this->password";
             $options[CURLOPT_HTTPAUTH] = CURLAUTH_BASIC;
         }
 

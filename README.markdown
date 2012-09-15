@@ -1,5 +1,5 @@
 # SalesKing PHP SDK
-[![Build Status](https://secure.travis-ci.org/salesking/php_sdk.png?branch=master)](http://travis-ci.org/salesking/php_sdk)
+[![Build Status](https://secure.travis-ci.org/salesking/salesking_php_sdk.png)](http://travis-ci.org/salesking/salesking_php_sdk)
 
 Automate your workflow's by integrating and connecting your business with SalesKing.
 This PHP Software-Development-Kit provides solid and handy tools for building

@@ -8,14 +8,10 @@
  */
 
 require_once (dirname(__FILE__).'/../src/salesking.php');
-require_once (dirname(__FILE__).'/../src/object.php');
-require_once (dirname(__FILE__).'/../src/collection.php');
-require_once (dirname(__FILE__).'/../src/helper.php');
-
 /**
  * Test class for Salesking with real connection
  */
-class SaleskingLiveTest extends PHPUnit_Framework_TestCase
+class SaleskingLiveBasicAuthTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @var Salesking
@@ -47,7 +43,7 @@ class SaleskingLiveTest extends PHPUnit_Framework_TestCase
 
         // if it exists, lets require it and set up our config object
         require_once("test_config.php");
-        $config = sk_app_config();
+        $config = sk_basic_auth_config();
 
         // now we set up curl to determine weather we're online or not and we have a valid url
         $curl = curl_init();
@@ -70,17 +66,6 @@ class SaleskingLiveTest extends PHPUnit_Framework_TestCase
         $this->object = new Salesking($config);
     }
 
-    /**
-     * @covers Salesking::requestAccessToken
-     * @todo Implement testRequestAccessToken().
-     */
-    public function testRequestAccessToken()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
 
     /**
      * @covers Salesking::request
