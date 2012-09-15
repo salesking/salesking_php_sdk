@@ -16,7 +16,7 @@ require_once("app_config.php");
 $sdk = new Salesking(sk_app_config());
 
 if(isset($_GET['code'])){
-    //echo ($sdk->accessTokenUrl($_GET['code']));
+    echo ($sdk->accessTokenUrl($_GET['code']));
     print_r( $sdk->requestAccessToken($_GET['code']) );
 }
 else

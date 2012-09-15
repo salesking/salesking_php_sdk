@@ -110,6 +110,18 @@ class Salesking {
      * @since 1.0.0
      */
     public $sk_url = null;
+    /**
+     * user
+     * @var string user email address for SalesKing login
+     * @since 1.0.0
+     */
+    public $user = null;
+    /**
+     * password
+     * @var string password for salesking user
+     * @since 1.0.0
+     */
+    public $password = null;
 
     /**
      * app id
@@ -147,43 +159,56 @@ class Salesking {
     public $debug = null;
 
     /**
+     * use http basic auth with username password
+     * @var boolean
+     * @since 1.1.0
+     */
+    public $use_basic_auth = null;
+    /**
+     * use oAuth with app id & secret
+     * @var boolean
+     * @since 1.1.0
+     */
+    public $use_oauth = null;
+
+    /**
      * Constructor method which is used to set some config stuff
-     * @param $config array
+     * @param $config array with oAuth or HTTP Basic AUTH informations
      * @since 1.0.0
      * @throws SaleskingException
      */
     public function __construct($config = array())
     {
-        //make sure that all required variables are available
-        if(!array_key_exists("redirect_url",$config)
-            OR !array_key_exists("sk_url",$config)
-            OR !array_key_exists("app_id",$config)
-            OR !array_key_exists("app_secret",$config))
-        {
-            throw new SaleskingException("INITLIBRARY_MISSINGCONF","Could not initialize library - missing configuration parameters");
-        }
-
-        // set static properties
-        $this->sk_url = $config['sk_url'];
-        $this->redirect_url = $config['redirect_url'];
-        $this->app_id = $config['app_id'];
-        $this->app_secret = $config['app_secret'];
-
-        // set some more properties when they exist - check first to avoid php notices
-        if (array_key_exists("app_scope",$config))
-        {
-            $this->app_scope = $config['app_scope'];
-        }
-
-        if(array_key_exists("accessToken",$config))
-        {
-            $this->accessToken = $config['accessToken'];
-        }
 
         if(array_key_exists("debug",$config))
         {
             $this->debug = $config['debug'];
         }
+
+        //make sure that all required variables are available
+        if( array_key_exists("user",$config)
+            AND array_key_exists("password",$config)
+            AND array_key_exists("sk_url",$config))
+        {
+            $this->use_basic_auth = true;
+            $this->setBasicAuth($config);
+        }
+
+        if( !$this->use_basic_auth
+            AND array_key_exists("redirect_url",$config)
+            AND array_key_exists("sk_url",$config)
+            AND array_key_exists("app_id",$config)
+            AND array_key_exists("app_secret",$config))
+        {
+            $this->use_oauth = true;
+            $this->setOauth($config);
+        }
+
+        if (!$this->use_basic_auth AND !$this->use_oauth)
+        {
+            throw new SaleskingException("INITLIBRARY_MISSINGCONF","Could not initialize library - missing authentication params");
+        }
+
     }
 
     /**
@@ -354,9 +379,14 @@ class Salesking {
         $options[CURLOPT_HTTPHEADER] = array("Content-type: application/json");
 
         // set accessToken
-        if($this->accessToken)
+        if($this->use_oauth && $this->accessToken)
         {
             $options[CURLOPT_HTTPHEADER][] = "Authorization: Bearer ".$this->accessToken;
+        }
+
+        if($this->use_basic_auth){
+            $options[CURLOPT_USERPWD] = "$this->username:$this->password";
+            $options[CURLOPT_HTTPAUTH] = CURLAUTH_BASIC;
         }
 
         //set options to curl handler
@@ -389,6 +419,43 @@ class Salesking {
         return $result;
     }
 
+    /**
+     * Set config parameters needed for oAuth Logins
+     * @param array $config
+     * @return string authorization url
+     * @since 1.1.0
+     */
+    public function setOauth($config)
+    {
+        $this->sk_url = $config['sk_url'];
+        $this->redirect_url = $config['redirect_url'];
+        $this->app_id = $config['app_id'];
+        $this->app_secret = $config['app_secret'];
+
+        if (array_key_exists("app_scope",$config))
+        {
+            $this->app_scope = $config['app_scope'];
+        }
+
+        if(array_key_exists("accessToken",$config))
+        {
+            $this->accessToken = $config['accessToken'];
+        }
+
+    }
+
+    /**
+     * Set config parameters needed for http basic auth logins
+     * @param array $config
+     * @since 1.1.0
+     */
+    public function setBasicAuth($config)
+    {
+        $this->sk_url = $config['sk_url'];
+        $this->user = $config['user'];
+        $this->password = $config['password'];
+
+    }
     /**
     * Generate an Authorization URL
     * @param string $scope optional scope, if not set uses app_scope

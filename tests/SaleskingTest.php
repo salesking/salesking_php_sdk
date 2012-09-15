@@ -50,18 +50,6 @@ class SaleskingTest extends PHPUnit_Framework_TestCase
      */
     public function test__construct()
     {
-        // test object initialization without parameters
-        $thrown = false;
-        try {
-            new Salesking();
-        }
-        catch (SaleskingException $e)
-        {
-            if($e->getCode() == "INITLIBRARY_MISSINGCONF" AND $e->getMessage() == "Could not initialize library - missing configuration parameters"){
-                $thrown = true;
-            }
-        }
-        $this->assertTrue($thrown);
 
         // test object initialization with parameters
         $this->assertInstanceOf("Salesking",new Salesking(array(
@@ -71,6 +59,39 @@ class SaleskingTest extends PHPUnit_Framework_TestCase
             "app_id" => "app_id",
             "app_secret" => "app_secret"
         )));
+    }
+
+    /**
+     * @covers Salesking::__construct
+     */
+    public function test__constructMissingParams()
+    {
+        $conf = array("auth params" => "missing");
+        $thrown = false;
+        try {
+            $sk = new Salesking($conf);
+        }
+        catch (SaleskingException $e) {
+            if($e->getCode() == "INITLIBRARY_MISSINGCONF"
+               && $e->getMessage() == "Could not initialize library - missing authentication params") {
+                $thrown = true;
+            }
+        }
+        $this->assertTrue($thrown);
+    }
+
+    /**
+     * @covers Salesking::__construct
+     */
+    public function test__constructWithBasicAuth()
+    {
+        $conf = array(
+            "sk_url" => "https://test.dev.salesking.eu",
+            "user" => "demo@salesking.eu",
+            "password" => "demo");
+        $sk = new Salesking($conf);
+        $this->assertEquals( true, $sk->use_basic_auth );
+        $this->assertEquals( "demo@salesking.eu", $sk->user);
     }
 
     /**
@@ -176,6 +197,33 @@ class SaleskingTest extends PHPUnit_Framework_TestCase
             $this->object->sk_url
         );
     }
+
+    /**
+     * @covers Salesking::setBasicAuth
+     */
+    public function testSetBasicAuth()
+    {
+        $conf = array(
+            "sk_url" => "https://test.dev.salesking.eu",
+            "user" => "demo@salesking.eu",
+            "password" => "demo");
+
+        $this->object->setBasicAuth( $conf );
+
+        $this->assertEquals(
+            "https://test.dev.salesking.eu",
+            $this->object->sk_url
+        );
+        $this->assertEquals(
+            "demo@salesking.eu",
+            $this->object->user
+        );
+        $this->assertEquals(
+            "demo",
+            $this->object->password
+        );
+    }
+
 
     /**
      * @covers Salesking::getAccessToken
