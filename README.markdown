@@ -5,7 +5,44 @@ Automate your workflow's by integrating and connecting your business with SalesK
 This PHP Software-Development-Kit provides solid and handy tools for building
 SalesKing App's
 
+## Examples
+
+Run doc/examples/* AFTER registering an app on our *free developer* machine at: 
+
+[dev.salesking.eu/signup](https://www.dev.salesking.eu/signup/dev-gh)
+
+To run them in your checkout directory, use the shiny new PHP build-in webserver.
+
+    cd salesking_php_sdk/docs/examples
+    php -S localhost:8000
+
+[Tutorial: Run a PHP server in any folder on Ubuntu](http://dev.blog.salesking.eu/coding/run-php-webserver-in-any-directory-on-ubuntu/)
+
+Feel free to help us improve the demo code.
+
+## Example code
+
+Those examples use http basic auth. Please add your login credentials to the config array.
+
+Create a new client in SalesKing:
+
+    $config = array( "sk_url" => "https://MY-SUBDOMAIN.salesking.eu",
+                   "user" => "my-salesking@login-email.eu",
+                   "password" => 'yourPAsswd' );
+    $sdk = new Salesking($config);
+    $client = $sdk->getObject("client");
+    $client->organisation = "salesking";
+    $response = $client->save();
+
+Get a list of clients
+
+    $sdk = new Salesking($config);
+    $clients = $sdk->getCollection(array("type" => "client","autoload" => true));
+    $clients->sort("ASC")->sortby("number")->q("salesking")->load();
+
+
 ## Login / Authentication
+
 The SDK supports login by HTTP Basic Auth(user email+password) or oAuth2.
 
 ### HTTP Basic Auth
@@ -26,20 +63,6 @@ granting an app access and can revoke apps any time, just like Facebook or Twitt
 Developers need to register an app to get oauth credentials(key+secret). Apps are initally only visible to the creator
 and if you know the app url. If you have a great app please contact the SalesKing team to relase it for all users.
 
-## Examples
-
-Run doc/examples/* AFTER registering an app on our *free developer* machine at: 
-
-[dev.salesking.eu/signup](https://www.dev.salesking.eu/signup/dev-gh)
-
-To run them in your checkout directory, use the shiny new PHP build-in webserver.
-
-    cd salesking_php_sdk/docs/examples
-    php -S localhost:8000
-
-[Tutorial: Run a PHP server in any folder on Ubuntu](http://dev.blog.salesking.eu/coding/run-php-webserver-in-any-directory-on-ubuntu/)
-
-Feel free to help us improve the demo code.
 
 ## Tests
 
