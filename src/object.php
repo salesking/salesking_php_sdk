@@ -147,6 +147,15 @@ class SaleskingObject {
                 }
             }
 
+            //validate minimum property length
+            if(property_exists($this->schema->properties->$property,"minLength"))
+            {
+                if(strlen($value) < $this->schema->properties->$property->minLength AND $value != '')
+                {
+                    return false;
+                }
+            }
+
             //validate predefined input values
             if(property_exists($this->schema->properties->$property,"enum"))
             {

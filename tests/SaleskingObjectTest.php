@@ -39,36 +39,36 @@ class SaleskingObjectTest extends PHPUnit_Framework_TestCase
 
     public function getMockRequest($url,$method="GET",$data=null)
     {
-        if($url == "/api/clients/1ef0a371-2d8a-4478-8efd-31f5f1a96809" AND $method == "GET"){
+        if($url == "/api/clients/1ef0a371-2d8a-4478-8ef" AND $method == "GET"){
             $response["code"] = "200";
             $body = new stdClass();
-            $body->client = array("organisation" => "salesking","first_name" => "john","id" => "1ef0a371-2d8a-4478-8efd-31f5f1a96809");
+            $body->client = array("organisation" => "salesking","first_name" => "john","id" => "1ef0a371-2d8a-4478-8ef");
             $response["body"] = $body;
         }
 
-        if($url == "/api/clients/aed0eb9b-0276-4da7-ad8f-2be5704b3117" AND $method == "GET"){
+        if($url == "/api/clients/aed0eb9b-0276-4da7-ad8" AND $method == "GET"){
             $response["code"] = "404";
             $response["body"] = '';
         }
 
-        if($url == "/api/clients/1ef0a371-2d8a-4478-8efd-31f5f1a96809" AND $method == "DELETE"){
+        if($url == "/api/clients/1ef0a371-2d8a-4478-8ef" AND $method == "DELETE"){
             $response["code"] = "200";
             $response["body"] = true;
         }
 
-        if($url == "/api/clients/aed0eb9b-0276-4da7-ad8f-2be5704b3117" AND $method == "DELETE"){
+        if($url == "/api/clients/aed0eb9b-0276-4da7-ad8" AND $method == "DELETE"){
             $response["code"] = "404";
             $response["body"] = '';
         }
 
-        if($url == "/api/clients/1ef0a371-2d8a-4478-8efd-31f5f1a96809" AND $method == "PUT"){
+        if($url == "/api/clients/1ef0a371-2d8a-4478-8ef" AND $method == "PUT"){
             $response["code"] = "200";
             $body = new stdClass();
-            $body->client = array("organisation" => "salesking","first_name" => "john","id" => "1ef0a371-2d8a-4478-8efd-31f5f1a96809");
+            $body->client = array("organisation" => "salesking","first_name" => "john","id" => "1ef0a371-2d8a-4478-8ef");
             $response["body"] = $body;
         }
 
-        if($url == "/api/clients/aed0eb9b-0276-4da7-ad8f-2be5704b3117" AND $method == "PUT"){
+        if($url == "/api/clients/aed0eb9b-0276-4da7-ad8" AND $method == "PUT"){
             $response["code"] = "404";
             $response["body"] = '';
         }
@@ -76,7 +76,7 @@ class SaleskingObjectTest extends PHPUnit_Framework_TestCase
         if($url == "/api/clients" AND $method == "POST" AND $data == '{"client":{"id":"","organisation":"salesking","first_name":"john"}}'){
             $response["code"] = "201";
             $body = new stdClass();
-            $body->client = array("organisation" => "salesking","first_name" => "john","id" => "1ef0a371-2d8a-4478-8efd-31f5f1a96809");
+            $body->client = array("organisation" => "salesking","first_name" => "john","id" => "1ef0a371-2d8a-4478-8ef");
             $response["body"] = $body;
         }
 
@@ -357,12 +357,12 @@ class SaleskingObjectTest extends PHPUnit_Framework_TestCase
     public function testSave()
     {
         // simualte an successfull update
-        $this->object->id = "1ef0a371-2d8a-4478-8efd-31f5f1a96809";
+        $this->object->id = "1ef0a371-2d8a-4478-8ef";
         $this->object->save();
-        $this->assertEquals(array("organisation" => "salesking","first_name" => "john","id" => "1ef0a371-2d8a-4478-8efd-31f5f1a96809"),$this->object->getData());
+        $this->assertEquals(array("organisation" => "salesking","first_name" => "john","id" => "1ef0a371-2d8a-4478-8ef"),$this->object->getData());
 
         // simulate an error while updating
-        $this->object->id = "aed0eb9b-0276-4da7-ad8f-2be5704b3117";
+        $this->object->id = "aed0eb9b-0276-4da7-ad8";
         $thrown = false;
         try {
             $this->object->save();
@@ -377,7 +377,7 @@ class SaleskingObjectTest extends PHPUnit_Framework_TestCase
         // simulate a successfull post
         $this->object->id = "";
         $this->object->save();
-        $this->assertEquals(array("organisation" => "salesking","first_name" => "john","id" => "1ef0a371-2d8a-4478-8efd-31f5f1a96809"),$this->object->getData());
+        $this->assertEquals(array("organisation" => "salesking","first_name" => "john","id" => "1ef0a371-2d8a-4478-8ef"),$this->object->getData());
 
         // simulate an error on the api side
         $this->object->organisation = "testcompany";
@@ -400,12 +400,12 @@ class SaleskingObjectTest extends PHPUnit_Framework_TestCase
     public function testLoad()
     {
         //load existing object
-        $this->object->id = "1ef0a371-2d8a-4478-8efd-31f5f1a96809";
+        $this->object->id = "1ef0a371-2d8a-4478-8ef";
         $this->object->load();
-        $this->assertEquals(array("organisation" => "salesking","first_name" => "john","id" => "1ef0a371-2d8a-4478-8efd-31f5f1a96809"),$this->object->getData());
+        $this->assertEquals(array("organisation" => "salesking","first_name" => "john","id" => "1ef0a371-2d8a-4478-8ef"),$this->object->getData());
 
         //load not existing object
-        $this->object->id = "aed0eb9b-0276-4da7-ad8f-2be5704b3117";
+        $this->object->id = "aed0eb9b-0276-4da7-ad8";
         $thrown = false;
         try {
             $this->object->load();
@@ -418,8 +418,8 @@ class SaleskingObjectTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($thrown);
 
         //load object by directly setting ID as parameter
-        $this->object->load("1ef0a371-2d8a-4478-8efd-31f5f1a96809");
-        $this->assertEquals(array("organisation" => "salesking","first_name" => "john","id" => "1ef0a371-2d8a-4478-8efd-31f5f1a96809"),$this->object->getData());
+        $this->object->load("1ef0a371-2d8a-4478-8ef");
+        $this->assertEquals(array("organisation" => "salesking","first_name" => "john","id" => "1ef0a371-2d8a-4478-8ef"),$this->object->getData());
 
         //load object with empty id
         $this->object->id = "";
@@ -441,12 +441,12 @@ class SaleskingObjectTest extends PHPUnit_Framework_TestCase
     public function testDelete()
     {
         // assert we're trying to delete an existing object
-        $this->object->id = "1ef0a371-2d8a-4478-8efd-31f5f1a96809";
+        $this->object->id = "1ef0a371-2d8a-4478-8ef";
         $result = $this->object->delete();
         $this->assertTrue($result["body"]);
 
         // assert we're trying to delete a non exisiting object
-        $this->object->id = "aed0eb9b-0276-4da7-ad8f-2be5704b3117";
+        $this->object->id = "aed0eb9b-0276-4da7-ad8";
         $thrown = false;
         try {
             $this->object->delete();

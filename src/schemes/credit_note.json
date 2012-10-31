@@ -3,14 +3,17 @@
   "description": "A credit note",
   "properties":{
     "id":{
-      "description": "UUID assigned by SK",
+      "description":"Unique identifier - UUID",
       "identity":true,
       "readonly":true,
-      "type":"string"
+      "type":"string",
+      "maxLength": 22,
+      "minLength":22
     },
     "number":{
       "description": "Unique number assigned by SK credit note number schema. Auto-assigned when document is opened. Required unless doc status is draft.",
-      "type":"string"
+      "type":"string",
+      "maxLength": 50
     },
     "address_field":{
       "description": "Address field with the receiver. Shown in envelope window.",
@@ -38,27 +41,31 @@
     },
     "external_ref":{
       "description": "Some external reference, whatever this may be.",
-      "type":"string"
+      "type":"string",
+      "maxLength": 255
     },
     "payment_method":{
-      "description": "How the document is beeing payed. Used in new payments.",
+      "description": "How the document is being payed. Used for new payments.",
       "enum":["cash","bank_transfer","credit_card","paypal","direct_debit","cheque", "moneybookers", "premium_sms"],
       "type":"string"
     },
     "title":{
-      "description": "The headline of a document. Use SK placeholders to prevent exessive typing e.g. 'Your credit note [number]'",
-      "type":"string"
+      "description": "The headline of a document. Use SK placeholders to prevent excessive typing e.g. 'Your credit note [number]'",
+      "type":"string",
+      "maxLength": 255
     },
     "notes_before":{
-      "description": "Notes shown before the line items. Normaly contains salutation and other introductional information. SK placeholders can be used.",
-      "type":"string"
+      "description": "Notes shown before the line items. Normally contains salutation and other introductional information. SK placeholders can be used.",
+      "type":"string",
+      "format":"text"
     },
     "notes_after":{
       "description": "Notes shown after the line items. Can contain information about payments, bank account or a thank-you message. SK placeholders can be used.",
-      "type":"string"
+      "type":"string",
+      "format":"text"
     },
-    "tag_list": {
-      "description": "Space seperated list of tags.",
+    "tag_list":{
+      "description": "Space separated list of tags. Are split and saved as Tag objects on create, update.",
       "type":"string"
     },
     "language":{
@@ -80,11 +87,15 @@
     },
     "client_id":{
       "description": "The clients uuid. If a new client is assigned its language, address field, due days and cash discount are used if those fields are not set.",
-      "type":"string"
+      "type":"string",
+      "maxLength": 22,
+      "minLength":22
     },
     "team_id":{
       "description": "A team uuid. If set only the team and its parent teams can see the record.",
-      "type":"string"
+      "type":"string",
+      "maxLength": 22,
+      "minLength":22
     },
     "line_items":{
       "description": "Line items for the document",
@@ -104,11 +115,11 @@
       "type":"string"
     },
     "lock_version":{
-      "description": "Auto-incremented by SK to prevent concurrent updateing. First save wins.",
+      "description": "Auto-incremented to prevent concurrent updates. First save wins.",
       "type":"integer"
     },
     "price_total":{
-      "description": "Deprecated use net_total_base_raw",
+      "description": "Deprecated use net_total_base",
       "readonly":true,
       "type":"number"
     },
@@ -133,7 +144,7 @@
       "type":"number"
     },
     "net_total_base":{
-      "description": "Net total, 6 decimal places. Summmed items net_total_base_raw (incl discount)",
+      "description": "Net total, 6 decimal places incl. discount",
       "readonly":true,
       "type":"number"
     }
@@ -157,7 +168,7 @@
         },
         "filter[q]":{
           "title" : "Search",
-          "description": "Search in title, number, addressfield",
+          "description": "Search in title, number, address field",
           "type":"string"
         },
         "filter[number]":{
@@ -250,6 +261,9 @@
     },
     { "rel": "attachments",
       "href": "credit_notes/{id}/attachments"
+    },
+    { "rel": "payments",
+      "href": "credit_notes/{id}/payments"
     },
     { "rel": "comments",
       "href": "credit_notes/{id}/comments"

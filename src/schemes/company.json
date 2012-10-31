@@ -1,105 +1,126 @@
 { "type":"object",
   "title": "company",
-  "description": "A company is the main entity, so any data belongs to a company, identified by the current subdomain.",
-  "properties": {
-    "id": {
+  "description": "A company is the main entity, so any data belongs to a company. It is identified by the current subdomain and cannot be edited via API atm",
+  "properties":{
+    "id":{
+      "description":"Unique identifier - UUID",
       "identity":true,
       "readonly":true,
-      "type":"string"
+      "type":"string",
+      "maxLength": 22,
+      "minLength":22
     },
-    "name": {
+    "name":{
       "description": "Company name",
-      "type":"string"
+      "type":"string",
+      "maxLength": 100
     },
-    "language": {
-      "description": "Default language, used for new users",
-      "type":"string"
-    },    
-    "sub_domain": {
+    "language":{
+      "description": "Default language, used for new users. Must be a valid language available in SalesKing",
+      "type":"string",
+      "maxLength": 10
+    },
+    "sub_domain":{
       "description": "Unique subdomain identifying the company's SalesKing account.",
-      "type":"string"
+      "type":"string",
+      "maxLength": 20
     },
-    "account_link": {
+    "account_link":{
       "description": "Link to a company's SalesKing account.",
       "type":"string",
+      "format":"uri",
       "readonly":true
     },
-    "time_zone": {
+    "time_zone":{
       "description": "Default time zone, used for new users",
-      "type":"string"
+      "type":"string",
+      "maxLength": 50
     },
-    "email": {
+    "email":{
       "description": "Email address",
       "required":true,
-      "type":"string"
+      "type":"string",
+      "maxLength": 100
     },
-    "url": {
+    "url":{
       "description": "A company website",
-      "type":"string"
-    },   
-    "phone_fax": {
+      "type":"string",
+      "maxLength": 255
+    },
+    "phone_fax":{
       "description": "Fax number",
-      "type":"string"
+      "type":"string",
+      "maxLength": 30
     },
-    "phone_office": {
+    "phone_office":{
       "description": "Office phone number",
-      "type":"string"
+      "type":"string",
+      "maxLength": 30
     },
-    "phone_mobile": {
+    "phone_mobile":{
       "description": "Mobile phone number",
-      "type":"string"
+      "type":"string",
+      "maxLength": 30
     },
-    "tax_number": {
+    "tax_number":{
       "description": "Tax number, normally applies to a private person running a small business.",
-      "type":"string"
+      "type":"string",
+      "maxLength": 30
     },
-    "addresses": {
+    "addresses":{
       "description": "A company can have many addresses, sorted by date descending(new first). Default address used in placeholder is the most recent one.",
       "type":"array",
       "properties" : {"$ref":"./addresses.json#properties"}
     },
-    "vat_number": {
+    "vat_number":{
       "description": "VAT number, for a company entitled to pay value added taxes.",
-      "type":"string"
+      "type":"string",
+      "maxLength": 30
     },
-    "bank_name": {
+    "bank_name":{
       "description": "Bank name",
-      "type":"string"
+      "type":"string",
+      "maxLength": 70
     },
-    "bank_number": {
+    "bank_number":{
       "description": "Bank number",
-      "type":"string"
+      "type":"string",
+      "maxLength": 35
     },
-    "bank_account_number": {
+    "bank_account_number":{
       "description": "Bank account number.",
-      "type":"string"
+      "type":"string",
+      "maxLength": 35
     },
-    "bank_iban": {
+    "bank_iban":{
       "description": "IBAN Number of the bank account. Is validated",
-      "type":"string"
+      "type":"string",
+      "maxLength": 35
     },
-    "bank_swift": {
+    "bank_swift":{
       "description": "SWIFT BIC-  Bank Identifier Code",
-      "type":"string"
+      "type":"string",
+      "maxLength": 11
     },
-    "bank_owner": {
+    "bank_owner":{
       "description": "Bank account owner",
-      "type":"string"
+      "type":"string",
+      "maxLength": 70
     },
-    "created_at": {
+    "created_at":{
       "description": "Date the record was created in SK. Never changes afterwards.",
       "format":"date-time",
       "readonly":true,
       "type":"string"
     },
-    "updated_at": {
+    "updated_at":{
       "description": "Last date when the record was edited.",
       "format":"date-time",
       "readonly":true,
       "type":"string"
     }
   },
-  
+
   "links":[
     { "rel": "current",
       "href": "companies/current"

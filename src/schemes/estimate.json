@@ -3,14 +3,17 @@
   "description": "An estimate",
   "properties":{
     "id":{
-      "description": "UUID assigned by SK",
+      "description":"Unique identifier - UUID",
       "identity":true,
       "readonly":true,
-      "type":"string"
+      "type":"string",
+      "maxLength": 22,
+      "minLength":22
     },
     "number":{
       "description": "Unique number assigned by SK estimate number schema. Auto-assigned when estimate is opened. Required unless doc status is draft.",
-      "type":"string"
+      "type":"string",
+      "maxLength": 50
     },
     "address_field":{
       "description": "Receiver address, normally shown in envelope window. Defaults to client address_field if empty and client_id present.",
@@ -38,22 +41,26 @@
     },
     "external_ref":{
       "description": "Some external reference, whatever this may be.",
-      "type":"string"
+      "type":"string",
+      "maxLength": 255
     },
     "title":{
-      "description": "The headline of a document. Use SK placeholders to prevent exessive typing e.g. 'Your estimate [number]'",
-      "type":"string"
+      "description": "The headline of a document. Use SK placeholders to prevent excessive typing e.g. 'Your estimate [number]'",
+      "type":"string",
+      "maxLength": 255
     },
     "notes_before":{
-      "description": "Notes shown before the line items. Normaly contains salutation and other introductional information. SK placeholders can be used.",
-      "type":"string"
+      "description": "Notes shown before the line items. Normally contains salutation and other introductional information. SK placeholders can be used.",
+      "type":"string",
+      "format":"text"
     },
     "notes_after":{
       "description": "Notes shown after the line items. Can contain information about payments, bank account or a thank-you message. SK placeholders can be used.",
-      "type":"string"
+      "type":"string",
+      "format":"text"
     },
-    "tag_list": {
-      "description": "Space separated list of tags.",
+    "tag_list":{
+      "description": "Space separated list of tags. Are split and saved as Tag objects on create, update.",
       "type":"string"
     },
     "language":{
@@ -75,11 +82,15 @@
     },
     "client_id":{
       "description": "The clients uuid. If a new client is assigned its language, address field are used if those fields are not set.",
-      "type":"string"
+      "type":"string",
+      "maxLength": 22,
+      "minLength":22
     },
     "team_id":{
       "description": "A team uuid. If set only the team and its parent teams can see the record.",
-      "type":"string"
+      "type":"string",
+      "maxLength": 22,
+      "minLength":22
     },
     "line_items":{
       "description": "Line items for the document",
@@ -99,7 +110,7 @@
       "type":"string"
     },
     "lock_version":{
-      "description": "Auto-incremented to prevent concurrent updateing. First save wins and increments version.",
+      "description": "Auto-incremented to prevent concurrent updates. First save wins and increments version.",
       "type":"integer"
     },
     "gross_total":{
@@ -118,12 +129,7 @@
       "type":"number"
     },
     "net_total_base":{
-      "description": "Net total, decimals places as set in precision, default 2",
-      "readonly":true,
-      "type":"number"
-    },
-    "net_total_base_raw":{
-      "description": "Net total unrounded, 6 decimal places. Summed items net_total_base_raw (incl discount)",
+      "description": "Net total, 6 decimal places incl. discount",
       "readonly":true,
       "type":"number"
     }
@@ -147,7 +153,7 @@
         },
         "filter[q]":{
           "title" : "Search",
-          "description": "Search in title, number, addressfield",
+          "description": "Search in title, number, address field",
           "type":"string"
         },
         "filter[number]":{
@@ -231,7 +237,8 @@
       "properties" : {
         "source" : {
           "title" : "Source document id",
-          "description": "Copies the source document(excl. number,date) and returns a new draft document."
+          "description": "Copies the source document(excl. number,date) and returns a new draft document.",
+          "type" : "string"
         }
       }
     },
