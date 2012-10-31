@@ -156,20 +156,20 @@ class Salesking {
      * @var boolean debugging switch
      * @since 1.0.0
      */
-    public $debug = null;
+    public $debug = false;
 
     /**
      * use http basic auth with username password
      * @var boolean
      * @since 1.1.0
      */
-    public $use_basic_auth = null;
+    public $use_basic_auth = false;
     /**
      * use oAuth with app id & secret
      * @var boolean
      * @since 1.1.0
      */
-    public $use_oauth = null;
+    public $use_oauth = false;
 
     /**
      * Constructor method which is used to set some config stuff
@@ -385,7 +385,7 @@ class Salesking {
         }
 
         if($this->use_basic_auth){
-            $options[CURLOPT_USERPWD] = "$this->user:$this->password";
+            $options[CURLOPT_USERPWD] = $this->user.":".$this->password;
             $options[CURLOPT_HTTPAUTH] = CURLAUTH_BASIC;
         }
 
