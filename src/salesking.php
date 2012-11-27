@@ -397,11 +397,11 @@ class Salesking {
 
         // output debugging information
         if($this->debug == true) {
-            print "<pre>";
+            echo "<pre>";
             print_r(curl_getinfo($curl));  // get error info
             echo "\n\ncURL error number:" .curl_errno($curl); // print error info
             echo "\n\ncURL error:" . curl_error($curl);
-            print "</pre>\n";
+            echo "</pre>\n";
         }
 
         //a really bad curl error occured
