@@ -405,7 +405,7 @@ class Salesking {
         }
 
         //a really bad curl error occured
-        if ($result === false) {
+        if ($result === false OR curl_errno($curl)) {
             $e = new SaleskingException("REQUEST_CURLERROR","A curl error occured",array("code" => curl_errno($curl), "message" => curl_error($curl)));
             curl_close($curl);
             throw $e;
