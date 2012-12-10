@@ -146,7 +146,7 @@ class SaleskingCollection {
         if(count($filters)){
             foreach($filters as $filter => $value)
             {
-                $query[] = $filter ."=". urlencode($value);
+                $query[] = "filter[".$filter."]" ."=". urlencode($value);
             }
         }
 
