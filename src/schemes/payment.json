@@ -1,5 +1,6 @@
 { "type":"object",
   "title": "payment",
+  "name": "payment",
   "description":"An payment in SK must always be related to an object.",
   "properties":{
     "id":{
@@ -26,8 +27,21 @@
       "format":"date",
       "type":"string"
     },
-    "method":{
-      "description": "DEPRECATED use payment_method. Kicked at beginning of 08.2012"
+    "currency":{
+      "description": "Currency code as defined by the ISO 4217 standard (3-letter UPCASE: EUR, USD)",
+      "type":"string",
+      "maxLength": 3,
+      "minLength": 3
+    },
+    "exchange_rate":{
+      "description": "The exchange rate from the company currency(eg. EUR) to the document currency(USD). The rate is set on document open with the exchange rate based on the document date. If there is no rate for this day, say on weekends, the closest previous day is taken(Sunday->Friday).",
+      "readonly":true,
+      "type":"number"
+    },
+    "amount_exchanged":{
+      "description": "The exchanged amount.",
+      "readonly":true,
+      "type":"number"
     },
     "payment_method":{
       "description": "How the payment was made.",

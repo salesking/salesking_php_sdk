@@ -1,6 +1,7 @@
 { "type":"object",
   "title": "document",
-  "description": "This resource is readonly and serves as a convenient way to query documents independent of their type(invoice, order,..). The specific document type is set in each object in the result-set.",
+  "name": "document",
+  "description": "This resource is readonly and serves as a convenient way to query documents independent of their type(invoice, order,..). The specific document type is set in each object in the result-set. Internally Document is the base class for all types and special fields are defined in each child-class. Due to this some fields might be missing if you are using this meta-class in queries.",
   "properties":{
     "id":{
       "description":"Unique identifier - UUID",
@@ -11,7 +12,7 @@
       "minLength": 22
     },
     "object_type":{
-      "description": "The specific type of the document",
+      "description": "The specific type of the document singular CamelCased: Invoice, PaymentReminder",
       "type":"string"
     },
     "number":{
@@ -66,7 +67,16 @@
     "line_items":{
       "description": "Line items for the document",
       "type":"array",
-      "properties":{"$ref":"./line_items.json#properties"}
+      "items":{"$ref":"./line_items.json#properties"}
+    },
+    "items":{
+      "description": "Items for the document. Access items of all types including divider and sub_total items.",
+      "type":"array",
+      "default": "any",
+      "minItems": 0,
+      "items": [{ "$ref": "./line_item.json#properties"},
+                { "$ref":  "./divider_item.json#properties"},
+                { "$ref": "./sub_total_item.json#properties"}]
     },
     "created_at":{
       "description": "Date the object was created in SK. Never changes afterwards.",
@@ -99,7 +109,29 @@
       "description": "Net total, 6 decimal places incl. discount",
       "readonly":true,
       "type":"number"
+    },
+    "currency":{
+      "description": "Currency code as defined by the ISO 4217 standard. 3-letter UPCASE: EUR, USD",
+      "type":"string",
+      "maxLength": 3,
+      "minLength": 3
+    },
+    "exchange_rate":{
+      "description": "The exchange rate from the company currency(eg. EUR) to the document currency(USD). The rate is set on document open with the exchange rate based on the document date. If there is no rate for this day, say on weekends, the closest previous day is taken(Sunday->Friday).",
+      "readonly":true,
+      "type":"number"
+    },
+    "gross_total_exchanged":{
+      "description": "The exchanged gross total.",
+      "readonly":true,
+      "type":"number"
+    },
+    "language":{
+      "description": "Should be a valid language short-code: de-DE, fr, en-GB; like defined in your account language menu. When the document is emailed or printed, a localized version of a multi-language template(email, pdf) will be used if available. Defaults to the clients language, if empty and a client is assigned.",
+      "type":"string",
+      "maxLength": 10
     }
+
   },
   "links":[
     { "rel": "self",

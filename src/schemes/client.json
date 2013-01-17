@@ -1,5 +1,6 @@
 {"type":"object",
   "title": "client",
+  "name": "client",
   "description": "A client as seen by SalesKing",
   "properties":{
     "id":{
@@ -95,6 +96,12 @@
       "description": "Should be a valid language short-code: de-DE, fr, en-GB; like defined in your account language menu. When the client is emailed, a localized version of a multi-language template(email, pdf) will be used if available. The language will also be set for new documents.",
       "type":"string",
       "maxLength": 10
+    },
+    "currency":{
+      "description": "Currency code as defined by the ISO 4217 standard(3-letter UPCASE: EUR, USD). If set the currency is taken for new documents.",
+      "type":"string",
+      "maxLength": 3,
+      "minLength": 3
     },
     "payment_method":{
       "description": "Default payment method for used for new documemts",
@@ -206,6 +213,11 @@
           "title" : "Tags",
           "description": "Filter by a space delimited list of tags",
           "type":"string"
+        },
+        "filter[ids]":{
+          "title" : "Clients",
+          "description": "A single or a list of client uuids, comma separated",
+          "type" : "string"
         },
         "filter[created_at_from]":{
           "title" : "From date",

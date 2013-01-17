@@ -1,5 +1,6 @@
 { "type":"object",
   "title": "company",
+  "name": "company",
   "description": "A company is the main entity, so any data belongs to a company. It is identified by the current subdomain and cannot be edited via API atm",
   "properties":{
     "id":{
@@ -19,6 +20,12 @@
       "description": "Default language, used for new users. Must be a valid language available in SalesKing",
       "type":"string",
       "maxLength": 10
+    },
+    "currency":{
+      "description": "Currency code as defined by the ISO 4217 standard (3-letter UPCASE: EUR, USD)",
+      "type":"string",
+      "maxLength": 3,
+      "minLength": 3
     },
     "sub_domain":{
       "description": "Unique subdomain identifying the company's SalesKing account.",

@@ -1,5 +1,6 @@
 { "type":"object",
   "title": "recurring",
+  "name": "recurring",
   "description": "An recurring is used as an template for new invoices.",
   "properties":{
     "id":{
@@ -75,6 +76,12 @@
       "description": "Should be a valid language short-code: de-DE, fr, en-GB; like defined in your account language menu. When the document is emailed or printed, a localized version of a multi-language template(email, pdf) will be used if available. Defaults to the clients language, if empty and a client is assigned.",
       "type":"string",
       "maxLength": 10
+    },
+    "currency":{
+      "description": "Currency code as defined by the ISO 4217 standard (3-letter UPCASE: EUR, USD)",
+      "type":"string",
+      "maxLength": 3,
+      "minLength": 3
     },
     "client":{
       "description": "The client for the document. New documents cannot create a client, use client_id field to set it.",

@@ -1,5 +1,6 @@
 { "type":"object",
   "title": "email_template",
+  "name": "email_template",
   "description":"An email_template in SK",
   "properties":{
     "id":{
@@ -29,7 +30,7 @@
       "format":"text"
     },
     "kind":{
-      "description": "Kind of object receiving the email.",
+      "description": "Kind of object the template can be used for.",
       "required":true,
       "enum": ["invoice", "estimate", "credit_note", "payment_reminder", "order", "client"],
       "type":"string"
@@ -85,6 +86,16 @@
           "title" : "Sort",
           "enum":["ASC","DESC"],
           "description": "Sort the results in ASC or DESC"
+        },
+        "filter[q]":{
+          "title" : "Search wildcard",
+          "description": "Searches in name, subject, body",
+          "type":"string"
+        },
+        "filter[kind]":{
+          "title" : "Search by kind",
+          "description": "Kind of object this template can be used for: invoice, credit_note (singular lowercase classname)",
+          "type":"string"
         }
       }
     },
