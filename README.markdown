@@ -25,21 +25,21 @@ Feel free to help us improve the demo code.
 Those examples use http basic auth. Please add your login credentials to the config array.
 
 Create a new client in SalesKing:
-
+```php
     $config = array( "sk_url" => "https://MY-SUBDOMAIN.salesking.eu",
-                   "user" => "my-salesking@login-email.eu",
-                   "password" => 'yourPAsswd' );
+                     "user" => "my-salesking@login-email.eu",
+                     "password" => 'yourPass' );
     $sdk = new Salesking($config);
     $client = $sdk->getObject("client");
     $client->organisation = "salesking";
     $response = $client->save();
-
+```
 Get a list of clients
-
+```php
     $sdk = new Salesking($config);
     $clients = $sdk->getCollection(array("type" => "client","autoload" => true));
     $clients->sort("ASC")->sortby("number")->q("salesking")->load();
-
+```
 
 ## Login / Authentication
 
