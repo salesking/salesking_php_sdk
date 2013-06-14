@@ -63,16 +63,27 @@ granting an app access and can revoke apps any time, just like Facebook or Twitt
 Developers need to register an app to get oauth credentials(key+secret). Apps are initally only visible to the creator
 and if you know the app url. If you have a great app please contact the SalesKing team to relase it for all users.
 
-
 ## Tests
 
-Run the test with PHPUnit:
+Run all tests with PHPUnit:
 
     phpunit tests
 
 No PHP Unit? [See install Guide for Ubuntu](http://dev.blog.salesking.eu/coding/how-to-run-phpunit-tests-on-ubuntu/)
 
-We also have test running against a real SalesKing account. Those are skipped if no test_config.php file is found
+Run a single testfile
+
+    phpunit --colors tests/SaleskingCollectionTest.php
+
+Run a group(or single method) of tests (see @group markup in each test-function comments)
+
+    phpunit --colors --group live-invoice tests
+
+
+### Test against a real SalesKing account.
+
+Copy and edit tests/test_config.php.default
+Those live tests are skipped if no tests/test_config.php file is found or if the login data is invalid.
 
 
 Copyright (c) 2012 David Jardin, released under the MIT license

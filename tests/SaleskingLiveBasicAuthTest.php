@@ -45,7 +45,7 @@ class SaleskingLiveBasicAuthTest extends PHPUnit_Framework_TestCase
         require_once("test_config.php");
         $config = sk_basic_auth_config();
 
-        // now we set up curl to determine weather we're online or not and we have a valid url
+        // now we set up curl to determine whether we're online or not and we have a valid url
         $curl = curl_init();
         $options = $this->curl_options;
         $options[CURLOPT_URL] = $config['sk_url'];
