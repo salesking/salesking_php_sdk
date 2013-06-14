@@ -41,6 +41,11 @@ Get a list of clients
     $clients->sort("ASC")->sortby("number")->q("salesking")->load();
 ```
 
+More examples e.g. on how to create documents e.g.
+
+https://github.com/salesking/salesking_php_sdk/blob/master/tests/SaleskingLiveInvoiceTest.php#L74
+
+
 ## Login / Authentication
 
 The SDK supports login by HTTP Basic Auth(user email+password) or oAuth2.
