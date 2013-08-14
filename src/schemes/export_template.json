@@ -26,7 +26,7 @@
     "kind":{
       "description": "Kind of object the template can be used for.",
       "required":true,
-      "enum": ["invoice", "estimate", "credit_note", "payment_reminder", "order", "client", "payment", "comment", "email", "history", "product","recurring"],
+      "enum": ["invoice", "estimate", "credit_note", "payment_reminder", "order", "contact", "payment", "comment", "email", "history", "product","recurring"],
       "type":"string"
     },
     "filename":{
@@ -79,7 +79,8 @@
         "sort":{
           "title" : "Sort",
           "enum":["ASC","DESC"],
-          "description": "Sort the results in ASC or DESC"
+          "description": "Sort the results in ASC or DESC",
+          "type": "string"
         }
       }
     },

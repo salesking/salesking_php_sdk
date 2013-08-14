@@ -1,7 +1,7 @@
 {"type":"object",
-  "title": "client",
-  "name": "client",
-  "description": "A client as seen by SalesKing. This resource is DEPRECATED please use contacts instead with type-field set 'Client'",
+  "title": "contact",
+  "name": "contact",
+  "description": "A contact can be a lead, client or supplier, depending on its type field. Use the filter[type] parameter to show only contacts of a kind. Use this resource instead of clients, as they are deprecated and dropped in the future.",
   "properties":{
     "id":{
       "description":"Unique identifier - UUID",
@@ -11,8 +11,26 @@
       "maxLength": 22,
       "minLength":22
     },
+    "parent_id":{
+      "description": "ID of a parent contact.",
+      "type":"string",
+      "maxLength": 22,
+      "minLength":22
+    },
+    "type":{
+      "description": "Type of contact",
+      "enum":["Client", "Lead", "Supplier"],
+      "required" : true,
+      "type":"string",
+      "maxLength": 50
+    },
+    "is_employee":{
+      "description": "An employee gets number, organisation, tax and vat_number from its parent. If you set any of these, they are overwritten. When changing a parent-contact the fields on his direct child-employees are updated too.",
+      "type": "boolean",
+      "default": false
+    },
     "number":{
-      "description": "Unique number, auto-created by SK for new client without number.",
+      "description": "Unique number, auto-created by SK for new contacts(client, supplier) without number.",
       "type":"string",
       "maxLength": 50
     },
@@ -185,14 +203,32 @@
       "type":"string",
       "maxLength": 22,
       "minLength":22
+    },
+    "lead_source":{
+      "description": "Lead source describing where a contact came from e.g. a campaign name, website, facebook, URL",
+      "type":"text"
+    },
+    "lead_ref":{
+      "description": "Lead reference e.g. a tracking id, web-url",
+      "type":"text"
+    },
+    "lead_date":{
+      "description": "Lead date e.g. date of first contact with your company",
+      "format":"date",
+      "type":"string"
+    },
+    "converted_at":{
+      "description": "Date the contact converted from lead to client or any other contact type (supplier)",
+      "format":"date-time",
+      "type":"string"
     }
   },
   "links":[
     { "rel": "self",
-      "href": "clients/{id}"
+      "href": "contacts/{id}"
     },
     { "rel": "instances",
-      "href": "clients",
+      "href": "contacts",
       "properties" : {
         "page":{
           "title" : "Page",
@@ -215,8 +251,8 @@
           "type":"string"
         },
         "filter[ids]":{
-          "title" : "Clients",
-          "description": "A single or a list of client uuids, comma separated",
+          "title" : "Contacts",
+          "description": "A single or a list of contacts uuids, comma separated",
           "type" : "string"
         },
         "filter[created_at_from]":{
@@ -258,6 +294,12 @@
           "description": "A single or a list of language codes, comma separated",
           "type" : "string"
         },
+        "filter[type]":{
+          "title" : "Type",
+          "description": "Type of the contact: ",
+          "enum":["Client", "Lead", "Supplier"],
+          "type" : "string"
+        },
         "sort_by":{
           "title" : "Sort by",
           "description": "Sort the results by the given field => number",
@@ -267,51 +309,73 @@
         "sort":{
           "title" : "Sort",
           "enum":["ASC","DESC"],
-          "description": "Sort the results in ASC or DESC"
+          "description": "Sort the results in ASC or DESC",
+          "type": "string"
         }
       }
     },
     { "rel": "destroy",
-      "href": "clients/{id}",
+      "href": "contacts/{id}",
       "method": "DELETE"
     },
     { "rel": "update",
-      "href": "clients/{id}",
+      "href": "contacts/{id}",
       "method": "PUT"
     },
     { "rel": "create",
-      "href": "clients",
+      "href": "contacts",
       "method": "POST"
     },
     { "rel": "documents",
-      "href": "clients/{id}/documents"
+      "href": "contacts/{id}/documents"
     },
     { "rel": "attachments",
-      "href": "clients/{id}/attachments"
+      "href": "contacts/{id}/attachments"
     },
     { "rel": "invoices",
-      "href": "clients/{id}/invoices"
+      "href": "contacts/{id}/invoices"
     },
     { "rel": "estimates",
-      "href": "clients/{id}/estimates"
+      "href": "contacts/{id}/estimates"
     },
     { "rel": "orders",
-      "href": "clients/{id}/orders"
+      "href": "contacts/{id}/orders"
     },
     { "rel": "credit_notes",
-      "href": "clients/{id}/credit_notes"
+      "href": "contacts/{id}/credit_notes"
     },
     { "rel": "recurrings",
-      "href": "clients/{id}/recurrings"
+      "href": "contacts/{id}/recurrings"
     },
     { "rel": "payment_reminders",
-      "href": "clients/{id}/payment_reminders"
+      "href": "contacts/{id}/payment_reminders"
     },
     { "rel": "comments",
-      "href": "clients/{id}/comments"
+      "href": "contacts/{id}/comments"
     },
     { "rel": "emails",
-      "href": "clients/{id}/emails"
+      "href": "contacts/{id}/emails"
+    },
+    { "rel": "emails create",
+      "href": "contacts/{id}/emails",
+      "method": "POST",
+      "properties" : {
+        "template_id":{
+          "title" : "Template",
+          "description": "UUID of an email template to use. If present template fields like subject, body, attachments are used for the current email.",
+          "type":"string",
+          "maxLength": 22,
+          "minLength":22
+        },
+        "send":{
+          "title" : "Send email",
+          "description": "Schedule email for sending. Omit this parameter or set value to 0 or false(String or Integer) to keep email as draft."
+        },
+        "archived_pdf":{
+          "title" : "Attach archived pdf",
+          "description": "Adds the archived pdf from the related resource(if it has one)."
+        }
+      }
     }
   ]
 }

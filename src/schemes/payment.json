@@ -1,7 +1,7 @@
 { "type":"object",
   "title": "payment",
   "name": "payment",
-  "description":"An payment in SK must always be related to an object.",
+  "description":"An payment in SK must always be related to an document.",
   "properties":{
     "id":{
       "description":"Unique identifier - UUID",
@@ -15,6 +15,15 @@
       "description": "The payment amount",
       "required":true,
       "type":"number"
+    },
+    "cash_discount":{
+      "description": "The cash discount amount. If a client withdraws a cash discount say 2% of 100€, he pays 98€ used in amount and 2€ in cash_discount. Handled separate for correction of sales,vat accounts in bookkeeping.",
+      "type":"number"
+    },
+    "is_partial":{
+      "description": "If set the related document is NOT closed.",
+      "type":"boolean",
+      "default": false
     },
     "external_ref":{
       "description": "Reference number f.ex. issued by the bank.",
@@ -34,7 +43,7 @@
       "minLength": 3
     },
     "exchange_rate":{
-      "description": "The exchange rate from the company currency(eg. EUR) to the document currency(USD). The rate is set on document open with the exchange rate based on the document date. If there is no rate for this day, say on weekends, the closest previous day is taken(Sunday->Friday).",
+      "description": "The exchange rate from the foreign document currency(eg. USD) to the company currency(EUR). The rate is set on document open with the exchange rate based on the document date. If there is no rate for this day, say on weekends, the closest previous day is taken(Sunday->Friday).",
       "readonly":true,
       "type":"number"
     },
@@ -48,8 +57,12 @@
       "enum":["cash","bank_transfer","credit_card","paypal","direct_debit","cheque", "moneybookers", "premium_sms"],
       "type":"string"
     },
+    "late_fee":{
+      "description": "Add a late fee if an invoice has payment reminders. We create a second payment for the last reminder and close all others. Set to 0, if you want to waive the fee(has not been paid). In this case all reminders are closed and we also correct the sales+debtor account with the open fees. This is a pure setter-method used in creation!",
+      "type":"number"
+    },
     "related_object_type":{
-      "description": "Object type of the payments parent. Is the camel-cased base class name: Document for invoice, credit_note,.., Contact for client",
+      "description": "Object type of the payments parent. Is the camel-cased base class name: Document for invoice, credit_note",
       "required":true,
       "type":"string"
     },
@@ -117,7 +130,8 @@
         "sort":{
           "title" : "Sort",
           "enum":["ASC","DESC"],
-          "description": "Sort the results in ASC or DESC"
+          "description": "Sort the results in ASC or DESC",
+          "type": "string"
         }
       }
     },
@@ -127,15 +141,7 @@
     },
     { "rel": "create",
       "href": "payments",
-      "method": "POST",
-      "properties" : {
-        "new_doc_status":{
-          "title" : "New status for document",
-          "description": "Convenience method to close a document with a payment.",
-          "enum": ["open","closed"],
-          "type":"string"
-        }
-      }
+      "method": "POST"
     }
   ]
 }

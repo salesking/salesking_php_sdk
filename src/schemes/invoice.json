@@ -35,9 +35,9 @@
       "type":"string"
     },
     "status":{
-      "description": "Defaults to draft for new documents, unless otherwise stated. For new documents with status 'open' or 'closed' or doc where the status changes away from draft, following fields are set if empty: number(next in number schema), date(today), due date(due_days must be given). Only draft documents can be deleted.",
+      "description": "Defaults to draft for new documents, unless otherwise stated. For new documents with status 'open' or 'closed' or doc where the status changes away from draft, following fields are set if empty: number(next in number schema), date(today), due date(due_days must be given). Only draft documents can be deleted. Beware that the overdue-status is virtual as it depends on the real status=open and the document date.",
       "default":"draft",
-      "enum":["draft","open","closed"],
+      "enum":["draft","open","closed","overdue"],
       "type":"string"
     },
     "external_ref":{
@@ -81,12 +81,12 @@
       "minLength": 3
     },
     "exchange_rate":{
-      "description": "The exchange rate from the company currency(eg. EUR) to the document currency(USD). The rate is set on document open with the exchange rate based on the document date. If there is no rate for this day, say on weekends, the closest previous day is taken(Sunday->Friday).",
+      "description": "The exchange rate from the foreign document currency(eg. USD) to the company currency(EUR). The rate is set on document open with the exchange rate based on the document date. If there is no rate for this day, say on weekends, the closest previous day is taken(Sunday->Friday).",
       "readonly":true,
       "type":"number"
     },
     "gross_total_exchanged":{
-      "description": "The exchanged gross total.",
+      "description": "Exchanged gross total, in your company currency.",
       "readonly":true,
       "type":"number"
     },
@@ -97,16 +97,28 @@
       "properties":{"$ref":"./attachment.json#properties"}
     },
     "client":{
-      "description": "The client for the document. New documents cannot create a client, use client_id field to set it.",
+      "description": "DEPRECATED: use contact",
       "readonly":true,
       "type":"object",
       "properties":{"$ref":"./client.json#properties"}
     },
     "client_id":{
-      "description": "The clients uuid. If a new client is assigned its language, address field, due days and cash discount are used if those fields are not set.",
+      "description": "DEPRECATED: use contact_id",
       "type":"string",
       "maxLength": 22,
-      "minLength": 22
+      "minLength":22
+    },
+    "contact":{
+      "description": "The contact for the document. Use contact_id field to set a contact.",
+      "readonly":true,
+      "type":"object",
+      "properties":{"$ref":"./contact.json#properties"}
+    },
+    "contact_id":{
+      "description": "The contact uuid. When assigning a contact its language, currency, address_field (due days, cash discount) values are used for the document if those doc-fields are not set.",
+      "type":"string",
+      "maxLength": 22,
+      "minLength":22
     },
     "team_id":{
       "description": "A team uuid. If set only the team and its parent teams can see the record.",
@@ -155,7 +167,7 @@
       "type":"number"
     },
     "gross_total":{
-      "description": "Gross total of all line items, 2 decimals places",
+      "description": "Gross total of all line items, 2 decimals places in document currency.",
       "readonly":true,
       "type":"number"
     },
@@ -226,7 +238,12 @@
         },
         "filter[client_ids]":{
           "title" : "Clients",
-          "description": "A single or a list of client uuids, comma separated",
+          "description": "DEPRECATED use contact_ids",
+          "type" : "string"
+        },
+        "filter[contact_ids]":{
+          "title" : "Contacts",
+          "description": "A single or a list of contact uuids, comma separated",
           "type" : "string"
         },
         "filter[ids]":{
@@ -242,13 +259,14 @@
         "sort_by":{
           "title" : "Sort by",
           "description": "Sort the results by the given field => number",
-          "enum":["title", "number", "created_at", "updated_at", "client_id", "price_total", "price_tax", "date", "due_date"],
+          "enum":["title", "number", "created_at", "updated_at", "price_total", "price_tax", "date", "due_date"],
           "type": "string"
         },
         "sort":{
           "title" : "Sort",
           "enum":["ASC","DESC"],
-          "description": "Sort the results in ASC or DESC"
+          "description": "Sort the results in ASC or DESC",
+          "type": "string"
         }
       }
     },
@@ -266,12 +284,12 @@
       "properties" : {
         "source" : {
           "title" : "Source document id",
-          "description": "Copies the source document(excl. number,date) and returns a new draft document. If the source is an Estimate or Order only line_items, client & tags are copied, so you can pass in additional fields.",
+          "description": "Copies the source(excl. number,date) and returns a new draft document. Fields passed with the object(e.g. notes, title, address_field) are not overwritten. If the source is an Estimate or Order only line_items, contact & tags are copied.",
           "type" : "string"
         },
         "cancel" : {
           "title" : "Cancel an invoice",
-          "description": "Cancelling a document copies the source and negates its line item values. A source id must be set.",
+          "description": "Cancelling a document copies the source and negates all line item values. A source id must be set.",
           "dependencies": ["source"],
           "type":"boolean"
         }
@@ -291,6 +309,27 @@
     },
     { "rel": "emails",
       "href": "invoices/{id}/emails"
+    },
+    { "rel": "emails create",
+      "href": "invoices/{id}/emails",
+      "method": "POST",
+      "properties" : {
+        "template_id":{
+          "title" : "Template",
+          "description": "UUID of an email template to use. If present template fields like subject, body, attachments are used for the current email.",
+          "type":"string",
+          "maxLength": 22,
+          "minLength":22
+        },
+        "send":{
+          "title" : "Send email",
+          "description": "Schedule email for sending. Omit this parameter or set value to 0 or false(String or Integer) to keep email as draft."
+        },
+        "archived_pdf":{
+          "title" : "Attach archived pdf",
+          "description": "Adds the archived pdf from the related resource(if it has one)."
+        }
+      }
     },
     { "rel": "print",
       "href": "invoices/{id}/print",

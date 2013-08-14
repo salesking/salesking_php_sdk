@@ -74,7 +74,8 @@ class SaleskingLiveInvoiceTest extends PHPUnit_Framework_TestCase
   public function testCreateInvoiceFromOrder()
   {
     // lets create a client
-    $client = $this->object->getObject("client");
+    $client = $this->object->getObject("contact");
+    $client->type = "Client";
     $client->organisation = "salesking";
     $client->last_name= "Joe";
     $client->first_name ="Orderexample";
@@ -85,7 +86,7 @@ class SaleskingLiveInvoiceTest extends PHPUnit_Framework_TestCase
       $client->save();
     }
     catch (SaleskingException $e) {
-      $this->fail("Could not create client object");
+      $this->fail("Could not create contact object");
     }
 
     // a line item
@@ -96,7 +97,7 @@ class SaleskingLiveInvoiceTest extends PHPUnit_Framework_TestCase
 
     // and an order
     $order = $this->object->getObject('order');
-    $order->client_id = $client->id;
+    $order->contact_id = $client->id;
     $order->line_items = array($item->getData());
     $order->status = "open";
 

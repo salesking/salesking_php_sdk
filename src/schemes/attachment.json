@@ -24,13 +24,13 @@
       "maxLength": 255
     },
     "url":{
-      "description": "File download url. Unique and valid for 15 minutes, public accessible.",
+      "description": "DEPRECATED use attachments/ID/download",
       "readonly":true,
       "type":"string",
       "format": "uri"
     },
     "related_object_type":{
-      "description": "Object type of the attachment parent. Is the camelcased base class name: Document for invoice, credit_note,.., Contact for client",
+      "description": "Object type of the attachment parent. A base class name: Document(for invoice, credit_note) Contact, Message(for email), Template(for email, pdf template)",
       "required":true,
       "type":"string"
     },
@@ -73,6 +73,9 @@
     { "rel": "self",
       "href": "attachments/{id}"
     },
+    { "rel": "download",
+      "href": "attachments/{id}/download"
+    },
     { "rel": "instances",
       "href": "attachments",
       "properties" : {
@@ -103,6 +106,12 @@
           "format" : "date",
           "type" : "string"
         },
+        "filter[related_object_type]":{
+          "title" : "Related object type",
+          "description": "All objects belonging to the given object type. The singular base class name like: Document, Contact, Export, Message",
+          "format" : "date",
+          "type" : "string"
+        },
         "sort_by":{
           "title" : "Sort by",
           "description": "Sort the results by the given field",
@@ -112,7 +121,8 @@
         "sort":{
           "title" : "Sort",
           "enum":["ASC","DESC"],
-          "description": "Sort the results in ASC or DESC"
+          "description": "Sort the results in ASC or DESC",
+          "type": "string"
         }
       }
     },

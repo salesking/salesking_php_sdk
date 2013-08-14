@@ -37,6 +37,12 @@
       "format":"date",
       "type":"string"
     },
+    "status":{
+      "description": "Defaults to open for new reminders, unless otherwise stated. Beware that the overdue-status is virtual as it depends on the real status=open and the document due_date.",
+      "default":"open",
+      "enum":["draft","open","closed","overdue"],
+      "type":"string"
+    },
     "external_ref":{
       "description": "Some external reference, whatever this may be.",
       "type":"string",
@@ -73,12 +79,12 @@
       "minLength": 3
     },
     "exchange_rate":{
-      "description": "The exchange rate from the company currency(eg. EUR) to the document currency(USD). The rate is set on document open with the exchange rate based on the document date. If there is no rate for this day, say on weekends, the closest previous day is taken(Sunday->Friday).",
+      "description": "The exchange rate from the foreign document currency(eg. USD) to the company currency(EUR). The rate is set on document open with the exchange rate based on the document date. If there is no rate for this day, say on weekends, the closest previous day is taken(Sunday->Friday).",
       "readonly":true,
       "type":"number"
     },
     "gross_total_exchanged":{
-      "description": "The exchanged gross total.",
+      "description": "Exchanged gross total, in your company currency.",
       "readonly":true,
       "type":"number"
     },
@@ -88,14 +94,27 @@
       "type":"object",
       "properties":{"$ref":"./attachment.json#properties"}
     },
-    "client":{
-      "description": "The client for the document. Is assigned throught the related invoice",
+   "client":{
+      "description": "DEPRECATED: use contact",
       "readonly":true,
       "type":"object",
       "properties":{"$ref":"./client.json#properties"}
     },
     "client_id":{
-      "description": "The clients uuid. Is assigned throught the related invoice.",
+      "description": "DEPRECATED: use contact_id",
+      "type":"string",
+      "maxLength": 22,
+      "minLength":22
+    },
+    "contact":{
+      "description": "The contact for the document. Is assigned through the related invoice.",
+      "readonly":true,
+      "type":"object",
+      "properties":{"$ref":"./contact.json#properties"}
+    },
+    "contact_id":{
+      "description": "The contact uuid. Is assigned through the related invoice.",
+      "readonly":true,
       "type":"string",
       "maxLength": 22,
       "minLength":22
@@ -184,7 +203,12 @@
         },
         "filter[client_ids]":{
           "title" : "Clients",
-          "description": "A single or a list of client uuids, comma separated",
+          "description": "DEPRECATED use contact_ids",
+          "type" : "string"
+        },
+        "filter[contact_ids]":{
+          "title" : "Contacts",
+          "description": "A single or a list of contact uuids, comma separated",
           "type" : "string"
         },
         "filter[ids]":{
@@ -192,16 +216,22 @@
           "description": "A single or a list of document uuids, comma separated",
           "type" : "string"
         },
+        "filter[status]":{
+          "title" : "Contacts",
+          "description": "A single or a list of status, comma separated: open,closed,overdue,draft",
+          "type" : "string"
+        },
         "sort_by":{
           "title" : "Sort by",
           "description": "Sort the results by the given field => number",
-          "enum":["title", "number", "created_at", "updated_at", "client_id", "price_total", "price_tax", "date", "due_date"],
+          "enum":["title", "number", "created_at", "updated_at", "price_total", "price_tax", "date", "due_date"],
           "type": "string"
         },
         "sort":{
           "title" : "Sort",
           "enum":["ASC","DESC"],
-          "description": "Sort the results in ASC or DESC"
+          "description": "Sort the results in ASC or DESC",
+          "type": "string"
         }
       }
     },
@@ -222,6 +252,27 @@
     },
     { "rel": "emails",
       "href": "payment_reminders/{id}/emails"
+    },
+    { "rel": "emails create",
+      "href": "payment_reminders/{id}/emails",
+      "method": "POST",
+      "properties" : {
+        "template_id":{
+          "title" : "Template",
+          "description": "UUID of an email template to use. If present template fields like subject, body, attachments are used for the current email.",
+          "type":"string",
+          "maxLength": 22,
+          "minLength":22
+        },
+        "send":{
+          "title" : "Send email",
+          "description": "Schedule email for sending. Omit this parameter or set value to 0 or false(String or Integer) to keep email as draft."
+        },
+        "archived_pdf":{
+          "title" : "Attach archived pdf",
+          "description": "Adds the archived pdf from the related resource(if it has one)."
+        }
+      }
     },
     { "rel": "print",
       "href": "payment_reminders/{id}/print",
