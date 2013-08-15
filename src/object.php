@@ -28,10 +28,10 @@ class SaleskingObject {
 
     /**
      * object type
-     * @var string objecttype
+     * @var string obj_type
      * @since 1.0.0
      */
-    protected $type = null;
+    protected $obj_type = null;
 
     /**
      * object schema
@@ -57,11 +57,11 @@ class SaleskingObject {
     public function __construct(Salesking $api, array $config)
     {
         // set static properties
-        $this->type = $config['type'];
+        $this->obj_type = $config['obj_type'];
         $this->api = $api;
 
         // load schema from json file
-        $this->schema = SaleskingHelper::loadSchema($this->type);
+        $this->schema = SaleskingHelper::loadSchema($this->obj_type);
     }
 
     /**
@@ -280,19 +280,19 @@ class SaleskingObject {
      * @return string object type
      * @since 1.0.0
      */
-    public function getType()
+    public function getObjType()
     {
-        return $this->type;
+        return $this->obj_type;
     }
 
     /**
      * set object type
      * @param string $type object type
      */
-    public function setType($type)
+    public function setObjType($obj_type)
     {
-        $this->type = $type;
-        $this->schema = SaleskingHelper::loadSchema($this->type);
+        $this->obj_type = $obj_type;
+        $this->schema = SaleskingHelper::loadSchema($this->obj_type);
     }
 
     /**
@@ -338,11 +338,11 @@ class SaleskingObject {
      */
     public function save()
     {
-        $type = $this->getType();
+        $obj_type = $this->getObjType();
 
         //we have wrap our information this way because the api needs it this way
         $object = new StdClass;
-        $object->$type = $this->getData();
+        $object->$obj_type = $this->getData();
 
         // when there's already an ID, we're just updating, otherwise we're creating a new row
         if($this->id)
@@ -356,7 +356,7 @@ class SaleskingObject {
             // let's decide what to do next
             switch($response['code']) {
                 case "200":
-                    $this->bind($response['body']->$type);
+                    $this->bind($response['body']->$obj_type);
                     return $response;
                     break;
 
@@ -374,7 +374,7 @@ class SaleskingObject {
 
             switch($response['code']) {
                 case "201":
-                    $this->bind($response['body']->$type);
+                    $this->bind($response['body']->$obj_type);
                     return $response;
                     break;
 
@@ -395,7 +395,7 @@ class SaleskingObject {
      */
     public function load($id = null)
     {
-        $type = $this->getType();
+        $obj_type = $this->getObjType();
         $endpoint = $this->getEndpoint("self");
 
         if($id != null)
@@ -409,7 +409,7 @@ class SaleskingObject {
 
             switch($response['code']) {
                 case "200":
-                    return $this->bind($response['body']->$type);
+                    return $this->bind($response['body']->$obj_type);
                     break;
 
                 default:

@@ -31,31 +31,31 @@ class SaleskingHelper {
     /**
      * helper method to pluralize object titles
      * @static
-     * @param $type object type
+     * @param $obj_type object type
      * @return string
      */
-    public static function pluralize($type) {
-        if(array_key_exists($type,self::$plurals))
+    public static function pluralize($obj_type) {
+        if(array_key_exists($obj_type,self::$plurals))
         {
-            return self::$plurals[$type];
+            return self::$plurals[$obj_type];
         }
         else
         {
-            return $type . "s";
+            return $obj_type . "s";
         }
     }
 
     /**
      * load object properties from schema file
-     * @param string $type object type
+     * @param string $obj_type object type
      * @return SaleskingCollection
      * @throws SaleskingException
      * @since 1.0.0
      */
-    public static function loadSchema($type)
+    public static function loadSchema($obj_type)
     {
         // set schema filename
-        $file = dirname(__FILE__)."/schemes/".$type.".json";
+        $file = dirname(__FILE__)."/schemes/".$obj_type.".json";
 
         // check if the schema file exists
         if(file_exists($file))

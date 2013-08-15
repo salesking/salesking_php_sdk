@@ -73,39 +73,40 @@ class SaleskingLiveBasicAuthTest extends PHPUnit_Framework_TestCase
     public function testRequest()
     {
         // lets create a object which then gets used to do all kinds of requests
-        $client = $this->object->getObject("client");
-        $client->organisation = "salesking";
-        $client->last_name= "Joe";
-        $client->first_name ="Example";
-        $client->phone_home="123";
+        $contact = $this->object->getObject("contact");
+        $contact->type = "Client";
+        $contact->organisation = "salesking";
+        $contact->last_name= "Joe";
+        $contact->first_name ="Example";
+        $contact->phone_home="123";
 
         // create a new object
         try {
-            $client->save();
+            $contact->save();
         }
         catch (SaleskingException $e) {
-            $this->fail("Could not create client object");
+            $this->fail("Could not create contact object");
         }
 
-        //assert that the client was created successfull and has a valid id now
-        $this->assertTrue(22 == strlen($client->id));
+        //assert that the contact was created successfull and has a valid id now
+        $this->assertTrue(22 == strlen($contact->id));
 
         // update an existing object
-        $client->gender = "male";
+        $contact->gender = "male";
 
         try {
-            $client->save();
+            $contact->save();
         }
         catch (SaleskingException $e) {
-            $this->fail("Could not update client object");
+            $this->fail("Could not update contact object");
         }
 
         // delete an object
         try {
-            $client->delete();
+            $contact->delete();
         }
         catch (SaleskingException $e) {
-            $this->fail("Could not delete client object");
+            $this->fail("Could not delete contact object");
         }
     }
 }

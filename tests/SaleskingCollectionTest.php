@@ -35,15 +35,15 @@ class SaleskingCollectionTest extends PHPUnit_Framework_TestCase
             $this->returnCallback(array($this,'getMockGetObject'))
         );
 
-        $this->object = new SaleskingCollection($api,array("type"=>"client"));
+        $this->object = new SaleskingCollection($api,array("obj_type"=>"contact"));
     }
 
     public function getMockRequest($url,$method="GET",$data=null)
     {
-        if($url == "/api/clients?sort=ASC&per_page=100" AND $method == "GET"){
+        if($url == "/api/contacts?sort=ASC&per_page=100" AND $method == "GET"){
             $response["code"] = "200";
             $body = new stdClass();
-            $body->clients = array();
+            $body->contacts = array();
 
             $collection = new stdClass();
             $collection->current_page = 1;
@@ -53,17 +53,19 @@ class SaleskingCollectionTest extends PHPUnit_Framework_TestCase
 
             $body->collection = $collection;
 
-            $client = new stdClass();
-            $client->client = new StdClass();
-            $client->client->number = "K-01012-800";
-            $client->client->organisation = "salesking";
-            $body->clients[] = $client;
+            $contact = new stdClass();
+            $contact->contact = new StdClass();
+            $contact->contact->number = "K-01012-800";
+            $contact->contact->type = "Client";
+            $contact->contact->organisation = "salesking";
+            $body->contacts[] = $contact;
 
-            $client = new stdClass();
-            $client->client = new StdClass();
-            $client->client->number = "K-01012-900";
-            $client->client->organisation = "examplecompany";
-            $body->clients[] = $client;
+            $contact = new stdClass();
+            $contact->contact = new StdClass();
+            $contact->contact->number = "K-01012-900";
+            $contact->contact->type = "Client";
+            $contact->contact->organisation = "examplecompany";
+            $body->contacts[] = $contact;
 
             $response["body"] = $body;
         }
@@ -71,10 +73,10 @@ class SaleskingCollectionTest extends PHPUnit_Framework_TestCase
         return $response;
     }
 
-    public function getMockGetObject($type)
+    public function getMockGetObject($obj_type)
     {
         $config = array(
-            "type" => $type
+            "obj_type" => $obj_type
         );
 
         $api = $this->getMock("Salesking",array(),array(),'',false);
@@ -221,9 +223,9 @@ class SaleskingCollectionTest extends PHPUnit_Framework_TestCase
      */
     public function testGetType()
     {
-        $this->object->setType("client");
+        $this->object->setObjType("contact");
 
-        $this->assertEquals("client",$this->object->getType());
+        $this->assertEquals("contact",$this->object->getObjType());
     }
 
     /**
@@ -231,9 +233,9 @@ class SaleskingCollectionTest extends PHPUnit_Framework_TestCase
      */
     public function testSetType()
     {
-        $this->object->setType("client");
+        $this->object->setObjType("contact");
 
-        $this->assertEquals("client",$this->object->getType());
+        $this->assertEquals("contact",$this->object->getObjType());
     }
 
     /**

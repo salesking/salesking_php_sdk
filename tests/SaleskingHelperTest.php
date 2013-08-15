@@ -35,7 +35,7 @@ class SaleskingHelperTest extends PHPUnit_Framework_TestCase
      */
     public function testPluralize()
     {
-        $this->assertEquals("clients",SaleskingHelper::pluralize("client"));
+        $this->assertEquals("contacts",SaleskingHelper::pluralize("contact"));
         $this->assertEquals("companies",SaleskingHelper::pluralize("company"));
 
     }
@@ -58,6 +58,6 @@ class SaleskingHelperTest extends PHPUnit_Framework_TestCase
         }
         $this->assertTrue($thrown);
 
-        $this->assertInstanceOf("stdClass",SaleskingHelper::loadSchema("client"));
+        $this->assertInstanceOf("stdClass",SaleskingHelper::loadSchema("contact"));
     }
 }

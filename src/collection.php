@@ -33,11 +33,11 @@ class SaleskingCollection {
     protected $schema = null;
 
     /**
-     * collection type
+     * collection object type
      * @var string collection type
      * @since 1.0.0
      */
-    protected $type = null;
+    protected $obj_type = null;
 
     /**
      * use autoload function
@@ -110,9 +110,9 @@ class SaleskingCollection {
      */
     public function __construct(Salesking $api, array $config) {
         $this->api = $api;
-        $this->type = $config['type'];
+        $this->obj_type = $config['obj_type'];
 
-        $this->schema = SaleskingHelper::loadSchema($this->type);
+        $this->schema = SaleskingHelper::loadSchema($this->obj_type);
 
         //are we using the autoload function?
         if(array_key_exists("autoload",$config))
@@ -184,8 +184,8 @@ class SaleskingCollection {
         switch($response['code']) {
             case "200":
                 // get object type and pluralize it because we need it for decoding our response
-                $type = $this->getType();
-                $types = SaleskingHelper::pluralize($type);
+                $obj_type = $this->getObjType();
+                $types = SaleskingHelper::pluralize($obj_type);
 
                 // set number of total entries and pages
                 $this->total_entries = $response['body']->collection->total_entries;
@@ -195,8 +195,8 @@ class SaleskingCollection {
                 // bind data from response to objects
                 foreach($response['body']->$types as $object)
                 {
-                    $item = $this->api->getObject($type);
-                    $item->bind($object->$type);
+                    $item = $this->api->getObject($obj_type);
+                    $item->bind($object->$obj_type);
                     $this->items[] = $item;
                 }
 
@@ -384,18 +384,18 @@ class SaleskingCollection {
      * @return string collection type
      * @since 1.0.0
      */
-    public function getType() {
-        return $this->type;
+    public function getObjType() {
+        return $this->obj_type;
     }
 
     /**
      * set object type
-     * @param string $type collection type
+     * @param string $obj_type collection type
      * @since 1.0.0
      */
-    public function setType($type) {
-        $this->type = $type;
-        $this->schema = SaleskingHelper::loadSchema($this->type);
+    public function setObjType($obj_type) {
+        $this->obj_type = $obj_type;
+        $this->schema = SaleskingHelper::loadSchema($this->obj_type);
     }
 
     /**

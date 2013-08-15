@@ -18,7 +18,7 @@ $sdk = new Salesking(sk_app_config());
 
 // fetch a new client object
 try {
-    $client = $sdk->getObject("client");
+    $contact = $sdk->getObject("contact");
 }
 catch(SaleskingException $e) {
     // error handling because schema file isn't available
@@ -27,10 +27,11 @@ catch(SaleskingException $e) {
 
 // set information on client object
 try {
-    $client->organisation = "salesking";
-    $client->last_name= "Max";
-    $client->first_name ="Mustermann";
-    $client->phone_home="123";
+    $contact->type = "Client";
+    $contact->organisation = "salesking";
+    $contact->last_name= "Max";
+    $contact->first_name ="Mustermann";
+    $contact->phone_home="123";
 
 }
 
@@ -42,7 +43,7 @@ catch (SaleskingException $e)
 
 // execute the request
 try {
-    $response = $client->save();
+    $response = $contact->save();
     print_r($response);
 }
 catch (SaleskingException $e)

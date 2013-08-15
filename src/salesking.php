@@ -323,15 +323,13 @@ class Salesking {
 
     /**
      * Returns a new SaleskingObject
-     * @param $type string object type
+     * @param $obj_type string object type
      * @return SaleskingObject
      * @since 1.0.0
      */
-    public function getObject($type)
+    public function getObject($obj_type)
     {
-        $config = array(
-            "type" => $type
-        );
+        $config = array( "obj_type" => $obj_type );
 
         return new SaleskingObject($this,$config);
     }
@@ -347,7 +345,7 @@ class Salesking {
         if(!is_array($config))
         {
             $config = array(
-                "type" => $config
+                "obj_type" => $config
             );
         }
 

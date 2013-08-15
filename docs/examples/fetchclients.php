@@ -18,7 +18,7 @@ $sdk = new Salesking(sk_app_config());
 
 // fetch a new client object
 try {
-    $clients = $sdk->getCollection(array("type" => "client","autoload" => true));
+    $contacts = $sdk->getCollection(array("type" => "contact","autoload" => true));
 }
 catch(SaleskingException $e) {
     // error handling because schema file isn't available
@@ -26,7 +26,7 @@ catch(SaleskingException $e) {
 }
 
 try{
-    $clients->sort("ASC")->sortby("number")->q("salesking")->load();
+  $contacts->sort("ASC")->sortby("number")->q("salesking")->load();
 }
 catch(SaleskingException $e)
 {

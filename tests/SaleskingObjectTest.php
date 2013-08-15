@@ -34,53 +34,53 @@ class SaleskingObjectTest extends PHPUnit_Framework_TestCase
                 $this->returnCallback(array($this,'getMockRequest'))
         );
 
-        $this->object = new SaleskingObject($api,array("type"=>"client"));
+        $this->object = new SaleskingObject($api,array("obj_type"=>"contact"));
     }
 
     public function getMockRequest($url,$method="GET",$data=null)
     {
-        if($url == "/api/clients/1ef0a371-2d8a-4478-8ef" AND $method == "GET"){
+        if($url == "/api/contacts/1ef0a371-2d8a-4478-8ef" AND $method == "GET"){
             $response["code"] = "200";
             $body = new stdClass();
-            $body->client = array("organisation" => "salesking","first_name" => "john","id" => "1ef0a371-2d8a-4478-8ef");
+            $body->contact = array("organisation" => "salesking","first_name" => "john","id" => "1ef0a371-2d8a-4478-8ef", "type"=> "Client");
             $response["body"] = $body;
         }
 
-        if($url == "/api/clients/aed0eb9b-0276-4da7-ad8" AND $method == "GET"){
+        if($url == "/api/contacts/aed0eb9b-0276-4da7-ad8" AND $method == "GET"){
             $response["code"] = "404";
             $response["body"] = '';
         }
 
-        if($url == "/api/clients/1ef0a371-2d8a-4478-8ef" AND $method == "DELETE"){
+        if($url == "/api/contacts/1ef0a371-2d8a-4478-8ef" AND $method == "DELETE"){
             $response["code"] = "200";
             $response["body"] = true;
         }
 
-        if($url == "/api/clients/aed0eb9b-0276-4da7-ad8" AND $method == "DELETE"){
+        if($url == "/api/contacts/aed0eb9b-0276-4da7-ad8" AND $method == "DELETE"){
             $response["code"] = "404";
             $response["body"] = '';
         }
 
-        if($url == "/api/clients/1ef0a371-2d8a-4478-8ef" AND $method == "PUT"){
+        if($url == "/api/contacts/1ef0a371-2d8a-4478-8ef" AND $method == "PUT"){
             $response["code"] = "200";
             $body = new stdClass();
-            $body->client = array("organisation" => "salesking","first_name" => "john","id" => "1ef0a371-2d8a-4478-8ef");
+            $body->contact = array("organisation" => "salesking","first_name" => "john","id" => "1ef0a371-2d8a-4478-8ef", "type"=> "Client");
             $response["body"] = $body;
         }
 
-        if($url == "/api/clients/aed0eb9b-0276-4da7-ad8" AND $method == "PUT"){
+        if($url == "/api/contacts/aed0eb9b-0276-4da7-ad8" AND $method == "PUT"){
             $response["code"] = "404";
             $response["body"] = '';
         }
 
-        if($url == "/api/clients" AND $method == "POST" AND $data == '{"client":{"id":"","organisation":"salesking","first_name":"john"}}'){
+        if($url == "/api/contacts" AND $method == "POST" AND $data == '{"contact":{"id":"","organisation":"salesking","type":"Client"}}'){
             $response["code"] = "201";
             $body = new stdClass();
-            $body->client = array("organisation" => "salesking","first_name" => "john","id" => "1ef0a371-2d8a-4478-8ef");
+            $body->contact = array("organisation" => "salesking","first_name" => "john","id" => "1ef0a371-2d8a-4478-8ef", "type"=> "Client");
             $response["body"] = $body;
         }
-
-        if($url == "/api/clients" AND $method == "POST" AND $data == '{"client":{"id":"","organisation":"testcompany","first_name":"john"}}'){
+        # mock testSaveApiError
+        if($url == "/api/contacts" AND $method == "POST" AND $data == '{"contact":{"organisation":"testcompany","id":""}}'){
             $response["code"] = "405";
             $response["body"] = '';
         }
@@ -294,24 +294,24 @@ class SaleskingObjectTest extends PHPUnit_Framework_TestCase
     /**
      * @covers SaleskingObject::getType
      */
-    public function testGetType()
+    public function testGetObjType()
     {
         $this->assertEquals(
-            "client",
-            $this->object->getType()
+            "contact",
+            $this->object->getObjType()
         );
     }
 
     /**
      * @covers SaleskingObject::setType
      */
-    public function testSetType()
+    public function testSetObjType()
     {
-        $this->object->setType("invoice");
+        $this->object->setObjType("invoice");
 
         $this->assertEquals(
             "invoice",
-            $this->object->getType()
+            $this->object->getObjType()
         );
 
     }
@@ -354,31 +354,49 @@ class SaleskingObjectTest extends PHPUnit_Framework_TestCase
     /**
      * @covers SaleskingObject::save
      */
-    public function testSave()
+    public function testSaveUpdateSuccess()
     {
-        // simualte an successfull update
-        $this->object->id = "1ef0a371-2d8a-4478-8ef";
+      // simulate an successfull update
+      $this->object->id = "1ef0a371-2d8a-4478-8ef";
+      $this->object->save();
+      $this->assertEquals(array("organisation" => "salesking","first_name" => "john","id" => "1ef0a371-2d8a-4478-8ef", "type"=> "Client"),$this->object->getData());
+    }
+    /**
+     * @covers SaleskingObject::save
+     */
+    public function testSaveError()
+    {
+      // simulate an error while updating
+      $this->object->id = "aed0eb9b-0276-4da7-ad8";
+      $thrown = false;
+      try {
         $this->object->save();
-        $this->assertEquals(array("organisation" => "salesking","first_name" => "john","id" => "1ef0a371-2d8a-4478-8ef"),$this->object->getData());
-
-        // simulate an error while updating
-        $this->object->id = "aed0eb9b-0276-4da7-ad8";
-        $thrown = false;
-        try {
-            $this->object->save();
+      }
+      catch (SaleskingException $e) {
+        if($e->getCode() == "UPDATE_ERROR" && $e->getMessage() == "Update failed, an error occured") {
+          $thrown = true;
         }
-        catch (SaleskingException $e) {
-            if($e->getCode() == "UPDATE_ERROR" && $e->getMessage() == "Update failed, an error occured") {
-                $thrown = true;
-            }
-        }
-        $this->assertTrue($thrown);
-
+      }
+      $this->assertTrue($thrown);
+    }
+    /**
+     * @covers SaleskingObject::save
+     */
+    public function testSaveCreateSuccess()
+    {
         // simulate a successfull post
         $this->object->id = "";
+        $this->object->organisation = "salesking";
+        $this->object->type = "Client";
         $this->object->save();
-        $this->assertEquals(array("organisation" => "salesking","first_name" => "john","id" => "1ef0a371-2d8a-4478-8ef"),$this->object->getData());
+        $this->assertEquals(array("organisation" => "salesking","first_name" => "john","id" => "1ef0a371-2d8a-4478-8ef", "type"=> "Client"),$this->object->getData());
+    }
 
+    /**
+     * @covers SaleskingObject::save
+     */
+    public function testSaveApiError()
+    {
         // simulate an error on the api side
         $this->object->organisation = "testcompany";
         $this->object->id = "";
@@ -402,7 +420,7 @@ class SaleskingObjectTest extends PHPUnit_Framework_TestCase
         //load existing object
         $this->object->id = "1ef0a371-2d8a-4478-8ef";
         $this->object->load();
-        $this->assertEquals(array("organisation" => "salesking","first_name" => "john","id" => "1ef0a371-2d8a-4478-8ef"),$this->object->getData());
+        $this->assertEquals(array("organisation" => "salesking","first_name" => "john","id" => "1ef0a371-2d8a-4478-8ef","type"=> "Client"),$this->object->getData());
 
         //load not existing object
         $this->object->id = "aed0eb9b-0276-4da7-ad8";
@@ -419,7 +437,7 @@ class SaleskingObjectTest extends PHPUnit_Framework_TestCase
 
         //load object by directly setting ID as parameter
         $this->object->load("1ef0a371-2d8a-4478-8ef");
-        $this->assertEquals(array("organisation" => "salesking","first_name" => "john","id" => "1ef0a371-2d8a-4478-8ef"),$this->object->getData());
+        $this->assertEquals(array("organisation" => "salesking","first_name" => "john","id" => "1ef0a371-2d8a-4478-8ef", "type"=> "Client"),$this->object->getData());
 
         //load object with empty id
         $this->object->id = "";
@@ -480,7 +498,7 @@ class SaleskingObjectTest extends PHPUnit_Framework_TestCase
     public function testGetEndpoint()
     {
         $expected = new stdClass();
-        $expected->href = "clients/{id}";
+        $expected->href = "contacts/{id}";
         $expected->rel = "self";
 
         //get valid endpoint
