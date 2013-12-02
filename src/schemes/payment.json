@@ -1,7 +1,7 @@
 { "type":"object",
   "title": "payment",
   "name": "payment",
-  "description":"An payment in SK must always be related to an document.",
+  "description":"An payment must always be related to an document, so you must use the nested URL e.g. POST invoices/ID/payments. In this case the related_object_id/type are automatically set.",
   "properties":{
     "id":{
       "description":"Unique identifier - UUID",
@@ -31,7 +31,7 @@
       "maxLength": 255
     },
     "date":{
-      "description": "Date the payment was made.",
+      "description": "Date the payment was made. YYYY-MM-DD",
       "required":true,
       "format":"date",
       "type":"string"
@@ -43,7 +43,7 @@
       "minLength": 3
     },
     "exchange_rate":{
-      "description": "The exchange rate from the foreign document currency(eg. USD) to the company currency(EUR). The rate is set on document open with the exchange rate based on the document date. If there is no rate for this day, say on weekends, the closest previous day is taken(Sunday->Friday).",
+      "description": "The exchange rate from the foreign document currency(eg. USD) to the company currency(EUR). If the rate is empty we use the exchange rate on the document date or today if doc.date is empty. If there is no rate for this day, say on weekends, the closest previous day is taken(Sunday->Friday). If you open the doc at a later time make sure to manually refresh the rate, as we dont change it. ",
       "readonly":true,
       "type":"number"
     },
@@ -62,12 +62,12 @@
       "type":"number"
     },
     "related_object_type":{
-      "description": "Object type of the payments parent. Is the camel-cased base class name: Document for invoice, credit_note",
+      "description": "Object type of the payments parent. Is the camel-cased base class name: Document for invoice, credit_note. Is auto-set when using the nested URL POST invoices/ID/payments",
       "required":true,
       "type":"string"
     },
     "related_object_id":{
-      "description": "uuid of the payments parent object.",
+      "description": "uuid of the payments parent object. Is auto-set when using the nested URL POST invoices/ID/payments",
       "required":true,
       "type":"string",
       "maxLength": 22,
@@ -110,14 +110,14 @@
         },
         "filter[from]":{
           "title" : "From date",
-          "description": "All objects with a date after the date",
+          "description": "All objects with a date after the date. YYYY-MM-DD",
           "format" : "date",
           "type" : "string"
 
         },
         "filter[to]":{
           "title" : "To date",
-          "description": "All objects with date before the date",
+          "description": "All objects with date before the date. YYYY-MM-DD",
           "format" : "date",
           "type" : "string"
         },

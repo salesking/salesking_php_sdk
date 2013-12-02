@@ -22,7 +22,7 @@
       "type":"string"
     },
     "date":{
-      "description": "First date the recurring is issued. Not allowed to be in the past.",
+      "description": "First date the recurring is issued. Not allowed to be in the past. YYYY-MM-DD",
       "format":"date",
       "type":"string",
       "required":true
@@ -32,7 +32,7 @@
       "type":"integer"
     },
     "final_date":{
-      "description": "The last date the recurring is executed.",
+      "description": "The last date the recurring is executed. YYYY-MM-DD",
       "format":"date",
       "type":"string",
       "required":true
@@ -162,6 +162,24 @@
       "description": "Net total, 6 decimal places incl. discount",
       "readonly":true,
       "type":"number"
+    },
+    "pdf_template_id":{
+      "description": "The PDF template used for printing the invoice when auto sending. Required when auto_send'ing is enabled.",
+      "type":"string",
+      "maxLength": 22,
+      "minLength":22
+    },
+    "email_template_id":{
+      "description": "The Email template used for the email in auto sending. Required when auto_send'ing is enabled.",
+      "type":"string",
+      "maxLength": 22,
+      "minLength":22
+    },
+    "auto_send":{
+      "description": "Enable automatic sending of new invoices created from the recurring. Opens the invoice, creates a PDF and sends an email to the contact. GOTCHA's: check PDF-, Email-Template, SMTP Settings and of course the contacts email address! Since new recurrings which start today directly create new invoices, they are also SEND if auto_send is true!! If something fails, we'll send an error-email to the user who created the recurring. For success infos you can add yourself to the BCC of the email template or",
+      "default": null,
+      "type": "string",
+      "enum":["email"]
     }
   },
   "links":[
@@ -193,7 +211,7 @@
         },
         "filter[from]":{
           "title" : "From date",
-          "description": "Objects with a date after the date",
+          "description": "Objects with a date after the date. YYYY-MM-DD",
           "format" : "date",
           "type" : "string"
         },
@@ -268,10 +286,13 @@
       "properties" : {
         "source" : {
           "title" : "Source document id",
-          "description": "Copies the source(excl. number,date) and returns a new draft document. Fields passed with the object(e.g. notes, title, address_field) are not overwritten.",
+          "description": "Copies the source(excl. number,date) and returns a new draft document. You can pass any document type(e.g. invoice, order). Fields passed with the object(e.g. notes, title, address_field) are not overwritten.",
           "type" : "string"
         }
       }
+    },
+    { "rel": "invoices",
+      "href": "invoices?filter[recurring_ids]={id}"
     },
     { "rel": "attachments",
       "href": "recurrings/{id}/attachments"

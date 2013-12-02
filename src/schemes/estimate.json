@@ -21,7 +21,7 @@
       "type":"string"
     },
     "date":{
-      "description": "Date the estimate is issued. Automatically set when estimate is opened. Required for non-draft documents.",
+      "description": "Date the estimate is issued. Automatically set when estimate is opened. Required for non-draft documents. YYYY-MM-DD",
       "format":"date",
       "type":"string"
     },
@@ -30,7 +30,7 @@
       "type":"integer"
     },
     "due_date":{
-      "description": "Auto-calculated from date + due days if empty and the estimate is opened.",
+      "description": "Auto-calculated from date + due days if empty and the estimate is opened. YYYY-MM-DD",
       "format":"date",
       "type":"string"
     },
@@ -76,7 +76,7 @@
       "minLength": 3
     },
     "exchange_rate":{
-      "description": "The exchange rate from the foreign document currency(eg. USD) to the company currency(EUR). The rate is set on document open with the exchange rate based on the document date. If there is no rate for this day, say on weekends, the closest previous day is taken(Sunday->Friday).",
+      "description": "The exchange rate from the foreign document currency(eg. USD) to the company currency(EUR). If the rate is empty we use the exchange rate on the document date or today if doc.date is empty. If there is no rate for this day, say on weekends, the closest previous day is taken(Sunday->Friday). If you open the doc at a later time make sure to manually refresh the rate, as we dont change it. ",
       "readonly":true,
       "type":"number"
     },
@@ -194,6 +194,11 @@
           "description": "Search in title, number, address field",
           "type":"string"
         },
+        "filter[status]":{
+          "title" : "Status",
+          "description": "A single or a list of status, comma separated: open,closed,draft, rejected, billed",
+          "type" : "string"
+        },
         "filter[number]":{
           "title" : "Number",
           "description": "Find by exact number",
@@ -206,13 +211,13 @@
         },
         "filter[from]":{
           "title" : "From date",
-          "description": "Objects with a date after the date",
+          "description": "Objects with a date after the date. YYYY-MM-DD",
           "format" : "date",
           "type" : "string"
         },
         "filter[to]":{
           "title" : "To date",
-          "description": "Objects with date before the date",
+          "description": "Objects with date before the date. YYYY-MM-DD",
           "format" : "date",
           "type" : "string"
         },
@@ -281,7 +286,7 @@
       "properties" : {
         "source" : {
           "title" : "Source document id",
-          "description": "Copies the source(excl. number,date) and returns a new draft document. Fields passed with the object(e.g. notes, title, address_field) are not overwritten.",
+          "description": "Copies the source(excl. number,date) and returns a new draft document. You can pass any document type(e.g. invoice, order). Fields passed with the object(e.g. notes, title, address_field) are not overwritten.",
           "type" : "string"
         }
       }
