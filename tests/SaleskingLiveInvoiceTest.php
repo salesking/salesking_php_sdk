@@ -68,7 +68,8 @@ class SaleskingLiveInvoiceTest extends PHPUnit_Framework_TestCase
 
 
   /**
-   * Creates a client + order, copies the order to an invoice and opens the invoices
+   * Creates a client + Address + order, copies the order to an invoice and opens the invoices
+   * Watch it all data is beeing deleted at the end of the test!!!
    * @group live-invoice
    */
   public function testCreateInvoiceFromOrder()
@@ -76,10 +77,15 @@ class SaleskingLiveInvoiceTest extends PHPUnit_Framework_TestCase
     // lets create a client
     $client = $this->object->getObject("contact");
     $client->type = "Client";
-    $client->organisation = "salesking";
+    $client->organisation = "PHP-SDK-Testing Company";
     $client->last_name= "Joe";
     $client->first_name ="Orderexample";
     $client->phone_home="123";
+    $address = $this->object->getObject("address");
+    $address->address1= 'My Street 34';
+    $address->city = 'A City'; # required
+    $address->zip = '081569';
+    $client->addresses =array($address->getData());
 
     // create a client object object
     try {
@@ -132,7 +138,7 @@ class SaleskingLiveInvoiceTest extends PHPUnit_Framework_TestCase
     catch (SaleskingException $e) {
       $this->fail("Could not change invoice number");
     }
-    // revert added data
+    // DELETE added data
     try{
       $invoice->status = "draft";
       $invoice->save();
