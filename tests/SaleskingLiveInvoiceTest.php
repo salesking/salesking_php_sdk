@@ -219,5 +219,64 @@ class SaleskingLiveInvoiceTest extends PHPUnit_Framework_TestCase
     }
 
   }
+
+  public function testPrintInvoice()
+  {
+    // lets create a client
+    $client = $this->object->getObject("contact");
+    $client->type = "Client";
+    $client->organisation = "PHP-SDK-Testing Company";
+    $client->last_name= "Joe";
+    // create a client object object
+    try {
+      $client->save();
+    }
+    catch (SaleskingException $e) {
+      $this->fail("Could not create contact object");
+    }
+
+    // a line item
+    $line_item = $this->object->getObject('line_item');
+    $line_item->type = "LineItem";
+    $line_item->position = 1;
+    $line_item->name = "Stuff";
+    $line_item->price_single = 1;
+
+    // the invoice
+    $doc = $this->object->getObject('invoice');
+    $doc->contact_id = $client->id;
+    $doc->items = array($line_item->getData());
+
+    try{
+      $doc->save();
+    }
+    catch (SaleskingException $e) {
+      // $e->errors->body->errors
+      $this->fail("Could not create invoice object");
+    }
+
+    $data = array(
+        'template_id' => 'aLb3zogCir4BaAabxfpGMl',   // ad default template on the dev server
+        'base64' => '1'
+    );
+    $response = $this->object->request('/api/invoices/' . $doc->id . '/print', 'POST', json_encode($data));
+    $attachment = $response['body']->attachment;
+
+    $this->assertEquals("application/pdf",$attachment->content_type);
+    $this->assertEquals($doc->id, $attachment->related_object_id);
+    // the PDF as base64 encoded string, since we requested it with the data above
+    $this->assertNotNull($attachment->base64);
+
+    // DELETE added data
+    try{
+      $doc->delete();
+      $client->delete();
+    }
+    catch (SaleskingException $e) {
+      $this->fail("Could not delete objects");
+    }
+
+  }
+
 }
 ?>
