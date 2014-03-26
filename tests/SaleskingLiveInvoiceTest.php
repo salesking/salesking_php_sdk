@@ -65,7 +65,70 @@ class SaleskingLiveInvoiceTest extends PHPUnit_Framework_TestCase
         // assign our object for the tests
         $this->object = new Salesking($config);
     }
+  /**
+   * Creates a client + Address + order, copies the order to an invoice and opens the invoices
+   * Watch it all data is beeing deleted at the end of the test!!!
+   * @group live-invoice
+   */
+  public function testCreateInvoiceWithDifferentItemTypes()
+  {
+    // lets create a client
+    $client = $this->object->getObject("contact");
+    $client->type = "Client";
+    $client->organisation = "PHP-SDK-Testing Company";
+    $client->last_name= "Joe";
+    // create a client object object
+    try {
+      $client->save();
+    }
+    catch (SaleskingException $e) {
+      $this->fail("Could not create contact object");
+    }
 
+    // a line item
+    $line_item = $this->object->getObject('line_item');
+    $line_item->type = "LineItem";
+    $line_item->position = 1;
+    $line_item->name = "Stuff";
+    $line_item->price_single = 1;
+    // a divider item
+    $divider_item = $this->object->getObject('divider_item');
+    $divider_item->type = "DividerItem";
+    $divider_item->position = 2;
+    $divider_item->name = "Divider Text";
+    // a subtotal item
+    $sub_total_item = $this->object->getObject('sub_total_item');
+    $sub_total_item->type = "SubTotalItem";
+    $sub_total_item->position = 3;
+    $sub_total_item->name = "Sum of the items above";
+    // the invoice
+    $doc = $this->object->getObject('invoice');
+    $doc->contact_id = $client->id;
+    $doc->items = array($line_item->getData(), $divider_item->getData(), $sub_total_item->getData());
+
+    try{
+      $doc->save();
+    }
+    catch (SaleskingException $e) {
+      // $e->errors->body->errors
+      $this->fail("Could not create invoice object");
+    }
+
+
+    $this->assertEquals("LineItem",$doc->items[0]->line_item->type);
+    $this->assertEquals("DividerItem",$doc->items[1]->divider_item->type);
+    $this->assertEquals("SubTotalItem",$doc->items[2]->sub_total_item->type);
+
+    // DELETE added data
+    try{
+      $doc->delete();
+      $client->delete();
+    }
+    catch (SaleskingException $e) {
+      $this->fail("Could not delete objects");
+    }
+
+  }
 
   /**
    * Creates a client + Address + order, copies the order to an invoice and opens the invoices
@@ -97,20 +160,21 @@ class SaleskingLiveInvoiceTest extends PHPUnit_Framework_TestCase
 
     // a line item
     $item = $this->object->getObject('line_item');
+    $item->type = "LineItem";
     $item->position = 1;
     $item->name = "Stuff";
-    $item->quantity = 1;
-
+    $item->price_single = 1;
     // and an order
     $order = $this->object->getObject('order');
     $order->contact_id = $client->id;
-    $order->line_items = array($item->getData());
+    $order->items = array($item->getData());
     $order->status = "open";
 
     try{
       $order->save();
     }
     catch (SaleskingException $e) {
+      // $e->errors->body->errors
       $this->fail("Could not create order object");
     }
 

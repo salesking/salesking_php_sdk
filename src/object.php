@@ -316,7 +316,7 @@ class SaleskingObject {
                 $object = new stdClass();
 
                 foreach($this->data as $key => $value)
-                {
+                { // TODO autodetect if value is array and recurse for each
                     $object->$key = $value;
                 }
 
