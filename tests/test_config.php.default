@@ -23,6 +23,7 @@ function sk_app_config()
 function sk_basic_auth_config()
 {
     return array(
+        // NO trailing slash, we append /api/ to all requests
         "sk_url" => "https://YOUR-SUB-DOMAIN.dev.salesking.eu",
         "user" => "me@i-want-more-money.com",
         "password" => "LetMeIn"

@@ -41,6 +41,8 @@ Get a list of clients
     $clients->sort("ASC")->sortby("number")->q("salesking")->load();
 ```
 
+The SalesKing URL MUST not have a trailing slash / as we append /api/endpoint to it e.g https://MY-SUBDOMAIN.salesking.eu/api/contacts
+
 More examples e.g. on how to create documents e.g.
 
 https://github.com/salesking/salesking_php_sdk/blob/master/tests/SaleskingLiveInvoiceTest.php#L74
