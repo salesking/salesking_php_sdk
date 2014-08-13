@@ -137,7 +137,7 @@ class SaleskingCollection {
      * @throws SaleskingException
      * @since 1.0.0
      */
-    public function load(int $page = null) {
+    public function load($page = null) {
         // initialize empty query
         $query = array();
 
