@@ -1,4 +1,6 @@
 <?php
+namespace Salesking\PHPSDK;
+
 /**
  * This file brings in the Salesking helper class
  * @version     1.0.0
@@ -8,17 +10,13 @@
  * @link        http://www.salesking.eu
  */
 
-if(!class_exists("SaleskingException")) {
-    throw new Exception("missing salesking.php library file");
-}
-
 /**
  * Salesking SDK file for helper stuff
  * @since 1.0.0
  * @package SalesKing PHP SDK
  */
-class SaleskingHelper {
-
+class Helper
+{
     /**
      * keeps some special pluralization cases
      * @var array special cases for pluralization
@@ -34,13 +32,11 @@ class SaleskingHelper {
      * @param $obj_type object type
      * @return string
      */
-    public static function pluralize($obj_type) {
-        if(array_key_exists($obj_type,self::$plurals))
-        {
+    public static function pluralize($obj_type)
+    {
+        if (array_key_exists($obj_type, self::$plurals)) {
             return self::$plurals[$obj_type];
-        }
-        else
-        {
+        } else {
             return $obj_type . "s";
         }
     }
@@ -48,8 +44,8 @@ class SaleskingHelper {
     /**
      * load object properties from schema file
      * @param string $obj_type object type
-     * @return SaleskingCollection
-     * @throws SaleskingException
+     * @return Collection
+     * @throws Exception
      * @since 1.0.0
      */
     public static function loadSchema($obj_type)
@@ -58,24 +54,20 @@ class SaleskingHelper {
         $file = dirname(__FILE__)."/schemes/".$obj_type.".json";
 
         // check if the schema file exists
-        if(file_exists($file))
-        {
+        if (file_exists($file)) {
             //load schema, decode it and assign it to schema property
             $schema = json_decode(file_get_contents($file));
 
             //set link relation as key name to make it easier to call these
-            foreach($schema->links as $key => $link)
-            {
+            foreach ($schema->links as $key => $link) {
                 $schema->links[$link->rel] = $link;
                 unset($schema->links[$key]);
             }
 
             return $schema;
-        }
-        else
-        {
+        } else {
             //couldn't find file, seems like our object doesn't exist
-            throw new SaleskingException("SCHEMA_NOTFOUND","Could not find schema file.");
+            throw new Exception("SCHEMA_NOTFOUND", "Could not find schema file.");
         }
     }
 }
