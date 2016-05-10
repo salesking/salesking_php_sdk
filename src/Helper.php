@@ -3,7 +3,7 @@ namespace Salesking\PHPSDK;
 
 /**
  * This file brings in the Salesking helper class
- * @version     1.0.0
+ * @version     2.0.0
  * @package     SalesKing PHP SDK
  * @license     MIT License; see LICENSE
  * @copyright   Copyright (C) 2012 David Jardin
@@ -12,7 +12,7 @@ namespace Salesking\PHPSDK;
 
 /**
  * Salesking SDK file for helper stuff
- * @since 1.0.0
+ * @since 2.0.0
  * @package SalesKing PHP SDK
  */
 class Helper
@@ -29,7 +29,7 @@ class Helper
     /**
      * helper method to pluralize object titles
      * @static
-     * @param $obj_type object type
+     * @param string $obj_type object type
      * @return string
      */
     public static function pluralize($obj_type)
@@ -46,7 +46,7 @@ class Helper
      * @param string $obj_type object type
      * @return Collection
      * @throws Exception
-     * @since 1.0.0
+     * @since 2.0.0
      */
     public static function loadSchema($obj_type)
     {
@@ -54,9 +54,14 @@ class Helper
         $file = dirname(__FILE__)."/schemes/".$obj_type.".json";
 
         // check if the schema file exists
-        if (file_exists($file)) {
+        if (file_exists($file) && is_readable($file)) {
             //load schema, decode it and assign it to schema property
             $schema = json_decode(file_get_contents($file));
+
+            // Verify schema was valid JSON
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                throw new Exception("INVALID_SCHEMA", "Schema is invalid JSON");
+            }
 
             //set link relation as key name to make it easier to call these
             foreach ($schema->links as $key => $link) {
