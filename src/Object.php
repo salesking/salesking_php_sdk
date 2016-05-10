@@ -151,8 +151,7 @@ class Object
             if (property_exists($this->schema->properties->$property, "format")) {
                 switch ($this->schema->properties->$property->format) {
                     case "date":
-                        if (
-                            !preg_match('/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/', $value)
+                        if (!preg_match('/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/', $value)
                             && $value != ""
                         ) {
                             return false;
@@ -272,8 +271,7 @@ class Object
     public function getData($format = "array")
     {
         //return object data depending on selected type
-        switch($format)
-        {
+        switch ($format) {
             case "array":
                 return $this->data;
             break;
@@ -292,7 +290,6 @@ class Object
             default:
                 throw new Exception("GETDATA_FORMAT", "Invalid format");
             break;
-
         }
     }
 
@@ -323,7 +320,7 @@ class Object
             );
 
             // let's decide what to do next
-            switch($response['code']) {
+            switch ($response['code']) {
                 case "200":
                     $this->bind($response['body']->$obj_type);
                     return $response;
@@ -333,13 +330,12 @@ class Object
                     throw new Exception("UPDATE_ERROR", "Update failed, an error occured", $response);
                     break;
             }
-
         } else {
             $endpoint = $this->getEndpoint("create");
 
             $response = $this->api->request("/api/" . $endpoint->href, $endpoint->method, json_encode($object));
 
-            switch($response['code']) {
+            switch ($response['code']) {
                 case "201":
                     $this->bind($response['body']->$obj_type);
                     return $response;
@@ -350,7 +346,6 @@ class Object
                     break;
             }
         }
-
     }
 
     /**
@@ -372,7 +367,7 @@ class Object
         if ($this->id) {
             $response = $this->api->request("/api/" . str_ireplace('{id}', $this->id, $endpoint->href));
 
-            switch($response['code']) {
+            switch ($response['code']) {
                 case "200":
                     return $this->bind($response['body']->$obj_type);
                     break;
@@ -403,7 +398,7 @@ class Object
                 $endpoint->method
             );
 
-            switch($response['code']) {
+            switch ($response['code']) {
                 case "200":
                     return $response;
                     break;

@@ -177,7 +177,7 @@ class Collection
         $response = $this->api->request("/api/".$this->schema->links['instances']->href.$query);
 
         // decide what to do next depending on responsecode
-        switch($response['code']) {
+        switch ($response['code']) {
             case "200":
                 // get object type and pluralize it because we need it for decoding our response
                 $obj_type = $this->getObjType();
@@ -336,8 +336,7 @@ class Collection
         if (property_exists($schema, "format")) {
             switch ($schema->format) {
                 case "date":
-                    if (
-                        !preg_match('/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/', $value)
+                    if (!preg_match('/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/', $value)
                         && $value != ""
                     ) {
                         return false;
