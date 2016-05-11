@@ -3,3 +3,5 @@
 app_config.php
 tests/livetest_credentials.php
 tests/test_config.php
+vendor
+src/schemas/invalidjson.json
