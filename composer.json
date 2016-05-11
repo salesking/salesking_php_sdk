@@ -1,5 +1,5 @@
 {
-  "name": "Salesking/PHPSDK",
+  "name": "salesking/phpsdk",
   "type": "library",
   "description": "A php SDK for salesking.eu",
   "license": "MIT",
