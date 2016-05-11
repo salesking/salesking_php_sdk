@@ -1,0 +1,6 @@
+{ "type":"object",
+  "title": "account",
+  "name": "account",
+  "description": "BETA An account to track times, expenses, projects, usages, etc. Those are single entry accounts, opposed to double entry accounting in bookkeeping accounts.",
+  "properties":{
+    "id":{
