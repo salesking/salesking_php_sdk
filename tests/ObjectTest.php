@@ -619,13 +619,4 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     {
         $this->object->getEndpoint("notexisting");
     }
-
-    /**
-     * @covers Object::__construct
-     * @expectedException \PHPUnit_Framework_Error
-     */
-    public function testConstructorRequiresArguments()
-    {
-        new Object();
-    }
 }

@@ -106,15 +106,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Collection::__construct
-     * @expectedException \PHPUnit_Framework_Error
-     */
-    public function testConstuctorRequiresArguments()
-    {
-        new Collection();
-    }
-
-    /**
      * @covers Collection::load
      */
     public function testLoadReturnsCorrectObjects()
