@@ -9,6 +9,10 @@ namespace Salesking\PHPSDK;
  * @copyright   Copyright (C) 2012 David Jardin
  * @link        http://www.salesking.eu
  */
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7;
 
 /**
  * Salesking API interface
@@ -23,20 +27,6 @@ class API
      * @since 2.0.0
      */
     const VERSION = "2.0.0";
-
-    /**
-     * common curl options
-     * @var array some common curl options
-     * @since 2.0.0
-    */
-    public $curl_options = array(
-        CURLOPT_CONNECTTIMEOUT => 10,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_TIMEOUT        => 60,
-        CURLOPT_USERAGENT      => 'salesking-sdk-2.0',
-        CURLOPT_SSL_VERIFYPEER => false,
-        CURLINFO_HEADER_OUT => true
-    );
 
     /**
      * access token
@@ -120,14 +110,6 @@ class API
      */
     public function __construct($config = array())
     {
-        // make sure that curl is available
-        if (!function_exists("curl_init")) {
-            throw new Exception(
-                "INITLIBRARY_MISSINGCURL",
-                "Could not initialize library - missing curl"
-            );
-        }
-
         if (array_key_exists("debug", $config)) {
             $this->debug = $config['debug'];
         }
@@ -311,59 +293,44 @@ class API
      */
     public function request($url, $method = "GET", $data = null)
     {
-        # add base url if not present
-        if (strpos($url, $this->sk_url) !== 0) {
-            $url = $this->sk_url.$url;
+        # remove base url if present
+        if (strpos($url, $this->sk_url) === 0) {
+            str_replace($this->sk_url, '', $url);
         }
 
-        $curl = curl_init();
-        $options = $this->curl_options;
-        $options[CURLOPT_POSTFIELDS] = $data;
-        $options[CURLOPT_URL] = $url;
-        $options[CURLOPT_CUSTOMREQUEST] = $method;
-        $options[CURLOPT_HTTPHEADER] = array("Content-type: application/json");
+        $headers = [
+            'Content-type' => 'application/json'
+        ];
 
         // set accessToken
         if ($this->use_oauth && $this->accessToken) {
-            $options[CURLOPT_HTTPHEADER][] = "Authorization: Bearer ".$this->accessToken;
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
         if ($this->use_basic_auth) {
-            $options[CURLOPT_USERPWD] = $this->user.":".$this->password;
-            $options[CURLOPT_HTTPAUTH] = CURLAUTH_BASIC;
+            $headers['Authorization'] = 'Basic ' . base64_encode($this->user . ':' . $this->password);
         }
 
-        //set options to curl handler
-        curl_setopt_array($curl, $options);
+        $client = new Client(['base_uri' => $this->sk_url, 'timeout' => 60, 'debug' => $this->debug]);
+        $request = new Request($method, $url, $headers, $data);
 
-        //execute curl request
-        $result['body'] = json_decode(curl_exec($curl));
-
-        // output debugging information
-        if ($this->debug == true) {
-            echo "<pre>";
-            print_r(curl_getinfo($curl));  // get error info
-            echo "\n\ncURL error number:" .curl_errno($curl); // print error info
-            echo "\n\ncURL error:" . curl_error($curl);
-            echo "</pre>\n";
-        }
-
-        //a really bad curl error occured
-        if ($result === false || curl_errno($curl)) {
-            $e = new Exception(
-                "REQUEST_CURLERROR",
-                "A curl error occured",
-                array("code" => curl_errno($curl), "message" => curl_error($curl))
+        //execute request
+        try {
+            $response = $client->send($request);
+        } catch (RequestException $e) {
+            throw new Exception(
+                'REQUEST_TRANSFERERROR',
+                'A transfer error occured',
+                array(
+                    $e->getRequest(),
+                    $e->getResponse()
+                )
             );
-
-            curl_close($curl);
-            throw $e;
         }
 
-        //assign return code
-        $result['code'] = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-
-        curl_close($curl);
+        //assign response data
+        $result['body'] = json_decode($response->getBody());
+        $result['code'] = $response->getStatusCode();
 
         return $result;
     }

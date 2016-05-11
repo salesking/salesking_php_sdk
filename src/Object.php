@@ -321,7 +321,7 @@ class Object
 
             // let's decide what to do next
             switch ($response['code']) {
-                case "200":
+                case 200:
                     $this->bind($response['body']->$obj_type);
                     return $response;
                     break;
@@ -336,7 +336,7 @@ class Object
             $response = $this->api->request("/api/" . $endpoint->href, $endpoint->method, json_encode($object));
 
             switch ($response['code']) {
-                case "201":
+                case 201:
                     $this->bind($response['body']->$obj_type);
                     return $response;
                     break;
@@ -368,7 +368,7 @@ class Object
             $response = $this->api->request("/api/" . str_ireplace('{id}', $this->id, $endpoint->href));
 
             switch ($response['code']) {
-                case "200":
+                case 200:
                     return $this->bind($response['body']->$obj_type);
                     break;
 
@@ -399,7 +399,7 @@ class Object
             );
 
             switch ($response['code']) {
-                case "200":
+                case 200:
                     return $response;
                     break;
 

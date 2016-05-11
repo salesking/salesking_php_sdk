@@ -178,7 +178,7 @@ class Collection
 
         // decide what to do next depending on responsecode
         switch ($response['code']) {
-            case "200":
+            case 200:
                 // get object type and pluralize it because we need it for decoding our response
                 $obj_type = $this->getObjType();
                 $types = Helper::pluralize($obj_type);
