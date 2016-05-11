@@ -5,6 +5,14 @@ Automate your workflow's by integrating and connecting your business with SalesK
 This PHP Software-Development-Kit provides solid and handy tools for building
 SalesKing App's
 
+## Installation
+
+The recommended way to install the SDK is through Composer.
+
+```bash
+    php composer.phar require Salesking/PHPSDK
+```
+
 ## Examples
 
 Run doc/examples/* AFTER registering an app on our *free developer* machine at: 
@@ -13,8 +21,10 @@ Run doc/examples/* AFTER registering an app on our *free developer* machine at:
 
 To run them in your checkout directory, use the shiny new PHP build-in webserver.
 
+```bash
     cd salesking_php_sdk/docs/examples
     php -S localhost:8000
+```
 
 [Tutorial: Run a PHP server in any folder on Ubuntu](https://www.salesking.eu/blog/coding/run-php-webserver-in-any-directory-on-ubuntu/)
 
@@ -29,14 +39,14 @@ Create a new client in SalesKing:
     $config = array( "sk_url" => "https://MY-SUBDOMAIN.salesking.eu",
                      "user" => "my-salesking@login-email.eu",
                      "password" => 'yourPass' );
-    $sdk = new Salesking($config);
+    $sdk = new \Salesking\PHPSDK\API($config);
     $client = $sdk->getObject("client");
     $client->organisation = "salesking";
     $response = $client->save();
 ```
 Get a list of clients
 ```php
-    $sdk = new Salesking($config);
+    $sdk = new \Salesking\PHPSDK\API($config);
     $clients = $sdk->getCollection(array("type" => "client","autoload" => true));
     $clients->sort("ASC")->sortby("number")->q("salesking")->load();
 ```
@@ -45,7 +55,7 @@ The SalesKing URL MUST not have a trailing slash / as we append /api/endpoint to
 
 More examples e.g. on how to create documents e.g.
 
-https://github.com/salesking/salesking_php_sdk/blob/master/tests/SaleskingLiveInvoiceTest.php#L74
+https://github.com/salesking/salesking_php_sdk/blob/master/tests/LiveInvoiceTest.php#L74
 
 
 ## Login / Authentication
@@ -80,7 +90,7 @@ No PHP Unit? [See install Guide for Ubuntu](https://www.salesking.eu/blog/coding
 
 Run a single testfile
 
-    phpunit --colors tests/SaleskingCollectionTest.php
+    phpunit --colors tests/CollectionTest.php
 
 Run a group(or single method) of tests (see @group markup in each test-function comments)
 
