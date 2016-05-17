@@ -44,11 +44,11 @@ Create a new client in SalesKing:
     $client->organisation = "salesking";
     $response = $client->save();
 ```
-Get a list of clients
+Get a list of contacts (clients)
 ```php
     $sdk = new \Salesking\PHPSDK\API($config);
-    $clients = $sdk->getCollection(array("type" => "client","autoload" => true));
-    $clients->sort("ASC")->sortby("number")->q("salesking")->load();
+    $contacts = $sdk->getCollection(array("type" => "contact","autoload" => true));
+    $contacts->addFilter("type","client"))->sort("ASC")->sortby("number")->q("salesking")->load();
 ```
 
 The SalesKing URL MUST not have a trailing slash / as we append /api/endpoint to it e.g https://MY-SUBDOMAIN.salesking.eu/api/contacts
@@ -82,9 +82,11 @@ and if you know the app url. If you have a great app please contact the SalesKin
 
 ## Tests
 
-Run all tests with PHPUnit:
+Run all tests with PHPUnit, using vendored phpunit provided by composer
 
-    phpunit tests
+    composer install
+    php vendor/bin/phpunit tests
+
 
 No PHP Unit? [See install Guide for Ubuntu](https://www.salesking.eu/blog/coding/how-to-run-phpunit-tests-on-ubuntu/)
 
