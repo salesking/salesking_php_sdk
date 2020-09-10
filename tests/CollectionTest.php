@@ -2,7 +2,7 @@
 namespace Salesking\Tests\PHPSDK;
 
 use Salesking\PHPSDK\Collection;
-use Salesking\PHPSDK\Object;
+use Salesking\PHPSDK\Entity;
 
 /**
  * @version     2.0.0
@@ -92,7 +92,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      *
      * @param $obj_type
      *
-     * @return Object
+     * @return Entity
      */
     public function getMockGetObject($obj_type)
     {
@@ -102,7 +102,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
         $apiMock = $this->getMock("\\Salesking\\PHPSDK\\API", array(), array(), '', false);
 
-        return new Object($apiMock, $config);
+        return new Entity($apiMock, $config);
     }
 
     /**

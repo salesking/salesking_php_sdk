@@ -254,15 +254,17 @@ class API
 
     /**
      * Returns a new SaleskingObject
+     *
      * @param $obj_type string object type
-     * @return Object
+     *
+     * @return Entity
      * @since 2.0.0
      */
     public function getObject($obj_type)
     {
         $config = array( "obj_type" => $obj_type );
 
-        return new Object($this, $config);
+        return new Entity($this, $config);
     }
 
     /**
