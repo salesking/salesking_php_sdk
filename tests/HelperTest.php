@@ -20,7 +20,6 @@ class HelperTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals("contacts", Helper::pluralize("contact"));
         $this->assertEquals("companies", Helper::pluralize("company"));
-
     }
 
     /**

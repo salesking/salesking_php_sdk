@@ -139,7 +139,6 @@ class API
                 "Could not initialize library - missing authentication params"
             );
         }
-
     }
 
     /**
@@ -357,7 +356,6 @@ class API
         if (array_key_exists("accessToken", $config)) {
             $this->accessToken = $config['accessToken'];
         }
-
     }
 
     /**
@@ -370,8 +368,8 @@ class API
         $this->sk_url = $config['sk_url'];
         $this->user = $config['user'];
         $this->password = $config['password'];
-
     }
+
     /**
     * Generate an Authorization URL
     * @param string|boolean $scope optional scope, if not set uses app_scope

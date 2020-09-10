@@ -48,6 +48,5 @@ class ExceptionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("ERRORS", $exception->getErrors());
         $this->assertEquals("MESSAGE", $exception->getMessage());
         $this->assertEquals("CODE", $exception->getCode());
-
     }
 }
