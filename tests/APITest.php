@@ -243,7 +243,7 @@ class APITest extends \PHPUnit_Framework_TestCase
     public function testValidObjectCanBeRetrieved()
     {
         $this->assertInstanceOf(
-            "Salesking\\PHPSDK\\Object",
+            "Salesking\\PHPSDK\\Entity",
             $this->object->getObject("client")
         );
     }

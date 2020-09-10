@@ -114,7 +114,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
         $items = $this->object->getItems();
 
-        $this->assertInstanceOf("\\Salesking\\PHPSDK\\Object", $items[0]);
+        $this->assertInstanceOf("\\Salesking\\PHPSDK\\Entity", $items[0]);
     }
 
     /**
@@ -206,7 +206,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $this->object->load();
         $items = $this->object->getItems();
 
-        $this->assertInstanceOf("\\Salesking\\PHPSDK\\Object", $items[0]);
+        $this->assertInstanceOf("\\Salesking\\PHPSDK\\Entity", $items[0]);
 
     }
 
