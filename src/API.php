@@ -139,7 +139,6 @@ class API
                 "Could not initialize library - missing authentication params"
             );
         }
-
     }
 
     /**
@@ -254,15 +253,17 @@ class API
 
     /**
      * Returns a new SaleskingObject
+     *
      * @param $obj_type string object type
-     * @return Object
+     *
+     * @return Entity
      * @since 2.0.0
      */
     public function getObject($obj_type)
     {
         $config = array( "obj_type" => $obj_type );
 
-        return new Object($this, $config);
+        return new Entity($this, $config);
     }
 
     /**
@@ -355,7 +356,6 @@ class API
         if (array_key_exists("accessToken", $config)) {
             $this->accessToken = $config['accessToken'];
         }
-
     }
 
     /**
@@ -368,8 +368,8 @@ class API
         $this->sk_url = $config['sk_url'];
         $this->user = $config['user'];
         $this->password = $config['password'];
-
     }
+
     /**
     * Generate an Authorization URL
     * @param string|boolean $scope optional scope, if not set uses app_scope

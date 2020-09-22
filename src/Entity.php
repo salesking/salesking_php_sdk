@@ -15,7 +15,7 @@ namespace Salesking\PHPSDK;
  * @since 2.0.0
  * @package SalesKing PHP SDK
 */
-class Object
+class Entity
 {
 
     /**
@@ -196,9 +196,11 @@ class Object
 
     /**
      * helper function to bind data to object
-     * @param array|object $data
-     * @param array $map array("company" => "organisation") maps value of company to organisation
-     * @return Object
+     *
+     * @param array|Entity $data
+     * @param array        $map array("company" => "organisation") maps value of company to organisation
+     *
+     * @return Entity
      * @throws Exception
      * @since 2.0.0
     */
@@ -262,11 +264,13 @@ class Object
 
     /**
      * Fetch object data
+     *
      * @param string $format data format
-     * @internal param string $type define function return type (array, object)
-     * @since 2.0.0
-     * @return array|object object data
+     *
+     * @return array|Entity object data
      * @throws Exception
+     *@internal param string $type define function return type (array, object)
+     * @since 2.0.0
      */
     public function getData($format = "array")
     {
@@ -350,9 +354,11 @@ class Object
 
     /**
      * load object data from Salesking
-     * @return Object
-     * @throws Exception
+     *
      * @param string $id object id
+     *
+     * @return Entity
+     * @throws Exception
      * @since 2.0.0
      */
     public function load($id = null)
@@ -414,8 +420,10 @@ class Object
 
     /**
      * Get Salesking API endpoint for a specific task
+     *
      * @param string $rel
-     * @return object endpoint information
+     *
+     * @return Entity endpoint information
      * @throws Exception
      * @since 2.0.0
      */
